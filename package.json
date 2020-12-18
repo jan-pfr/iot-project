@@ -1,0 +1,19 @@
+{
+  "name": "iot-project",
+  "version": "1.0.0",
+  "description": "IoT-Project",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jan-pfr/iot-project.git"
+  },
+  "author": "Jan Pfeiffer, Ben Scheffbuch, Alex Hauser, Henrik Alt",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/jan-pfr/iot-project/issues"
+  },
+  "homepage": "https://github.com/jan-pfr/iot-project#readme"
+}
