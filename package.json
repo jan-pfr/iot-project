@@ -15,5 +15,8 @@
   "bugs": {
     "url": "https://github.com/jan-pfr/iot-project/issues"
   },
-  "homepage": "https://github.com/jan-pfr/iot-project#readme"
+  "homepage": "https://github.com/jan-pfr/iot-project#readme",
+  "dependencies": {
+    "node-fetch": "^2.6.1"
+  }
 }
