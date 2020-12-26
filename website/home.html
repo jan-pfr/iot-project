@@ -6,7 +6,8 @@
     <meta name="keywords" content="MQTT, Smart Home, JavaScript, RASP API">
     <meta name="author" content="Benedikt Scheffbuch, Jan Pfeiffer, Alex Hauser, Henrik Alt">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="stylesheet.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/weather-icons.min.css">
     <title>Smart Home Automation</title>
     <script type="text/javascript">
         function uhr() {
@@ -16,7 +17,6 @@
             document.getElementById('uhr').innerHTML = stunden + ':' + minuten + ' Uhr';
             setTimeout(uhr, 500);
         }
-        //]]>
     </script>
 </head>
 <body onload="uhr();">
@@ -27,7 +27,7 @@
     </tr>
     <tr>
         <td>Heater</td>
-        <td class="weather">Current Weather</td>
+        <td class="weather"><i class="wi wi-wmo4680-72"></i></td>
     </tr>
     <tr>
         <td>Blinds</td>

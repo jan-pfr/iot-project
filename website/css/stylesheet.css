@@ -1,6 +1,5 @@
 body{
  background-color: #414141;
-    font-family: 'Lato', sans-serif;
 }
 
 table{
@@ -11,6 +10,7 @@ table{
     margin-top: 1em;
     border-radius: 10px;
     border-collapse: separate;
+    font-family: 'Lato', sans-serif;
 
 
 }
