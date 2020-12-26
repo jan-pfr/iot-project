@@ -1,13 +1,14 @@
 const fetch = require('node-fetch');
 const config = require('../config/config.json');
+const fs = require('fs');
 const owmConfig = config.owm;
 const delay = 600000; //10 min, da OWM sowieso nur alle 10 min ihre daten updated.
-var lastUpdate = 0;
+let lastUpdate = 0;
 
 getData(assembleURL(owmConfig.default_city, owmConfig.owmapikey, owmConfig.default_lang, "metric"));
 
 function assembleURL (city, apiKey, lang, units){
-    var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units="+units+"&lang="+lang+"&appid="+apiKey;
+    let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + units + "&lang=" + lang + "&appid=" + apiKey;
     console.log("url: " + url);
     return url;
 }
@@ -26,11 +27,20 @@ function getData(url){
         });
 }
 function drawData(data){
-    var weather = data.weather[0].description;
-    var weatherID = data.weather[0].id;
-    var celsius = Math.round(parseFloat(data.main.temp))
-    var wind = data.wind.speed;
-    console.log("weather: "+ weather + ", celsius: " + celsius + ", wind: " + wind + " km/h" + ", weatherID: " + weatherID)
+    let currentWeather = {
+        weather: data.weather[0].description,
+        weatherID: data.weather[0].id,
+        celsius: Math.round(parseFloat(data.main.temp)),
+        wind: data.wind.speed
+    };
+    let toString = JSON.stringify(currentWeather);
+    fs.writeFile('../config/weather.json', toString, err => {
+        if (err) {
+            console.log('Error while writing', err)
+        } else {
+            console.log('Successful write')
+        }
+    })
 }
 
 //bsp answer in en
