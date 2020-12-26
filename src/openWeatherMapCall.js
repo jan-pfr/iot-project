@@ -7,7 +7,7 @@ var lastUpdate = 0;
 getData(assembleURL(owmConfig.default_city, owmConfig.owmapikey, owmConfig.default_lang, "metric"));
 
 function assembleURL (city, apiKey, lang, units){
-    var url = "api.openweathermap.org/data/2.5/weather?q="+city+"&units="+units+"&lang="+lang+"&appid="+apiKey;
+    var url = "http://api.openweathermap.org/data/2.5/weather?q="+city+"&units="+units+"&lang="+lang+"&appid="+apiKey;
     console.log("url: " + url);
     return url;
 }
@@ -26,9 +26,11 @@ function getData(url){
         });
 }
 function drawData(data){
-    var weather = data.weather[0].de;
+    var weather = data.weather[0].description;
+    var weatherID = data.weather[0].id;
     var celsius = Math.round(parseFloat(data.main.temp))
-    console.log("weather: "+ weather + ", celsius: " + celsius)
+    var wind = data.wind.speed;
+    console.log("weather: "+ weather + ", celsius: " + celsius + ", wind: " + wind + " km/h" + ", weatherID: " + weatherID)
 }
 
 //bsp answer in en
