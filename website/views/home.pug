@@ -1,0 +1,29 @@
+doctype html
+head
+    meta(charset='UTF-8')
+    meta(name='description' content='Smart Home Automation')
+    meta(name='keywords' content='MQTT, Smart Home, JavaScript, RASP API')
+    meta(name='author' content='Benedikt Scheffbuch, Jan Pfeiffer, Alex Hauser, Henrik Alt')
+    meta(name='viewport' content='width=device-width, initial-scale=1.0')
+    link(rel='stylesheet' href='css/stylesheet.css')
+    link(rel='stylesheet' href='css/weather-icons.min.css')
+    title Smart Home Automation
+    script(type='text/javascript').
+        function uhr() {
+            var jetzt = new Date();
+            var stunden = jetzt.getHours();
+            var minuten = jetzt.getMinutes();
+            document.getElementById('uhr').innerHTML = stunden + ':' + minuten + ' Uhr';
+            setTimeout(uhr, 500);
+        }
+body
+    table
+        tr
+            th.headline Smart Home Automation
+            th#uhr.clock
+        tr
+            td Heater
+            td.weather
+                i.wi.wi-wmo4680-72
+        tr
+            td Blinds
