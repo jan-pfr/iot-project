@@ -1,8 +1,8 @@
 {
   "owm": {
     "owmapikey": "df85738b893855278d6f48eb35250501",
-    "default_lang": "de",
-    "default_city": "Furtwangen"
+    "lang": "de",
+    "city": "Furtwangen"
 
   }
 }

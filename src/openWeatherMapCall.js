@@ -5,7 +5,7 @@ const owmConfig = config.owm;
 const delay = 600000; //10 min, da OWM sowieso nur alle 10 min ihre daten updated.
 let lastUpdate = 0;
 
-getData(assembleURL(owmConfig.default_city, owmConfig.owmapikey, owmConfig.default_lang, "metric"));
+getData(assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
 
 function assembleURL (city, apiKey, lang, units){
     let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + units + "&lang=" + lang + "&appid=" + apiKey;
@@ -42,17 +42,6 @@ function drawData(data){
         }
     })
 }
-
-//bsp answer in en
-//{"coord":{"lon":8.2,"lat":48.05},
-// "weather":[{"id":804,"main":"Clouds","description":"overcast clouds","icon":"04n"}],
-// "base":"stations","main":{"temp":280.86,"feels_like":279.12,"temp_min":279.26,"temp_max":282.59,"pressure":1020,"humidity":87},
-// "visibility":10000,
-// "wind":{"speed":1.08,"deg":245},
-// "clouds":{"all":98},"dt":1608482575,
-// "sys":{"type":3,"id":20163,"country":"DE","sunrise":1608448448,"sunset":1608478545},
-// "timezone":3600,"id":2923521,"name":"Furtwangen im Schwarzwald","cod":200}
-
 //bsp answer in de
 //{"coord":{"lon":8.2,"lat":48.05},
 // "weather":[{"id":804,"main":"Clouds","description":"Bedeckt","icon":"04n"}],

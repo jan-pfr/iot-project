@@ -7,7 +7,7 @@ fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
     }
     try {
         const weatherData = JSON.parse(jsonString)
-        console.log("Customer address is:", weatherData.weatherID)
+        console.log("weatherID", weatherData.weatherID)
     } catch(err) {
         console.log('Error parsing JSON string:', err)
     }
