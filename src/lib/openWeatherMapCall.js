@@ -1,22 +1,15 @@
 const fetch = require('node-fetch');
-const config = require('../config/config.json');
 const fs = require('fs');
-const owmConfig = config.owm;
-const delay = 600000; //10 min, da OWM sowieso nur alle 10 min ihre daten updated.
-let lastUpdate = 0;
-
-getData(assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
-
+/*const config = require('../../config/config.json');
+/*const owmConfig = config.owm;
+/*getData(assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
+ */
 function assembleURL (city, apiKey, lang, units){
     let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + units + "&lang=" + lang + "&appid=" + apiKey;
     console.log("url: " + url);
     return url;
 }
 function getData(url){
-    console.log(lastUpdate);
-    if (lastUpdate >= (Date.now() - delay))
-        return;
-    lastUpdate = Date.now();
     fetch(url)
         .then(function(resp) { return resp.json() }) // Convert data to json
         .then(function(data) {
@@ -42,6 +35,7 @@ function drawData(data){
         }
     })
 }
+module.exports = {assembleURL, getData};
 //bsp answer in de
 //{"coord":{"lon":8.2,"lat":48.05},
 // "weather":[{"id":804,"main":"Clouds","description":"Bedeckt","icon":"04n"}],
