@@ -14,7 +14,7 @@ fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
     }
     try {
         weatherData = JSON.parse(jsonString);
-        console.log("successfull read " + weatherData.weatherID);
+        console.log("successfull read " + weatherData.celsius);
     } catch(err) {
         console.log('Error parsing JSON string:', err)
     }
@@ -22,7 +22,7 @@ fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
 
 setInterval(_ => {
     owm.getData(owm.assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
-    fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
+    fs.readFileSync('../config/weather.json', 'utf8', (err, jsonString) => {
         if (err) {
             console.log(" readFile weather.json failed:", err)
             return
@@ -32,12 +32,12 @@ setInterval(_ => {
         } catch(err) {
             console.log('Error parsing JSON string:', err)
         }
-    })
-    client.publish("local/condition", weatherData.weatherID);
-    console.log('successful publish of wID' + weatherData.weatherID);
-}, 600000); //10 min
+    });
+    client.publish("local/condition", toString(weatherData.weatherID));
+    console.log('successful publish of wID ' + weatherData.weatherID);
+}, 600000); //10 min, 600000
 
 setInterval(_ => {
-    client.publish("local/temperature", weatherData.celsius);
+    client.publish("local/temperature", toString(weatherData.celsius));
     console.log('successful publish of ' + weatherData.celsius + ' celsius');
-    }, 30000); //30 sec
+    }, 30000); //3 sec

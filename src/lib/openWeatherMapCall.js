@@ -17,6 +17,7 @@ function getData(url){
         })
         .catch( err => {
             console.log('caught it!',err);
+
         });
 }
 function drawData(data){
@@ -27,12 +28,9 @@ function drawData(data){
         wind: data.wind.speed
     };
     let toString = JSON.stringify(currentWeather);
-    fs.writeFile('../config/weather.json', toString, err => {
-        if (err) {
-            console.log('Error while writing', err)
-        } else {
+    fs.writeFileSync('../config/weather.json', toString, err => {
+        if (err) {console.log('Error while writing', err)}
             console.log('Successful write')
-        }
     })
 }
 module.exports = {assembleURL, getData};
