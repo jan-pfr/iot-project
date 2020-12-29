@@ -8,6 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/weather-icons.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Smart Home Automation</title>
     <script type="text/javascript">
         function uhr() {
@@ -20,19 +21,93 @@
     </script>
 </head>
 <body onload="uhr();">
-<table>
-    <tr>
-        <th class="headline">Smart Home Automation</th>
-        <th class="clock" id="uhr"></th>
-    </tr>
-    <tr>
-        <td>Heater</td>
-        <td class="weather"><i class="wi wi-wmo4680-72"></i></td>
-    </tr>
-    <tr>
-        <td>Blinds</td>
-
-    </tr>
-</table>
+   
+    <div class="grid-containerUp">
+        <div class="Headline">
+            Smart Home Automation
+            <label for="clock" id="uhr"></label>
+        </div>
+        <div class="Heater">
+            <div class="grid-container">
+                <div class="heating">
+                    Heating
+                </div>
+                <div class="tempHeating"></div>
+                <div class="btnHeating"></div>
+                <div class="tempBath"></div>
+                <div class="btnBath"></div>
+                <div class="tempKitchen"></div>
+                <div class="btnKitchen"></div>
+                <div class="tempBed"></div>
+                <div class="btnBed"></div>
+                <div class="tempLiving"></div>
+                <div class="btnLiving"></div>
+                <div class="lblCH"></div>
+                <div class="lblBath"></div>
+                <div class="lblKitchen"></div>
+                <div class="lblBed"></div>
+                <div class="lblLiving"></div>
+              </div> 
+        </div>
+        <div class="Weather-Overview">
+            Current Weather 
+            <div class="icon">
+            <i class="wi wi-wmo4680-72"></i>
+            </div>
+        </div>
+        <div class="Blinds">
+        
+            <div class="grid-containerDown">
+                <div class="Blinds">
+                    Blinds
+                </div>
+                <div class="percBath">
+                    <label>50%</label>
+                </div>
+                <div class="sliderBath">
+                    <input type="range" min="0" max="100" value="50" id="sliderBathroom"> 
+                </div>
+                <div class="bathroom">
+                    <label>Bathroom</label>
+                </div>
+                <div class="percKitchen">
+                    <label>50%</label>
+                </div>
+                <div class="sliderKitchen">
+                    <input type="range" min="0" max="100" value="50" id="sliderKitchen">
+                </div>
+                <div class="kitchen">
+                    <label>Kitchen</label>
+                </div>                
+                <div class="percBed">
+                    <label>50%</label>
+                </div>
+                <div class="sliderBed">
+                    <input type="range" min="0" max="100" value="50" id="sliderBedroom">
+                </div>
+                <div class="bedroom">
+                    <label>Bedroom</label>
+                </div>
+                <div class="percLiving">
+                    <label>50%</label>
+                </div>
+                <div class="sliderLiving">
+                    <input type="range" min="0" max="100" value="50" id="sliderLivingroom">
+                </div>
+                <div class="livingroom">
+                    <label>Livingroom</label>
+                </div>
+              </div>
+        </div>
+        <div class="systemStatus">
+            Status 
+            <div class="status">
+            Working
+            </div>
+        </div>
+      </div>
+        
+        
+    </div>
 </body>
 </html>

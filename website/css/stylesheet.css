@@ -1,43 +1,280 @@
 body{
  background-color: #414141;
+ font-family: 'Lato', sans-serif;
 }
 
-table{
-    width: 100%;
-    height: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    border-radius: 10px;
-    border-collapse: separate;
-    font-family: 'Lato', sans-serif;
-
-
-}
-th{
-    color: aliceblue;
-    background-color: #01ACE2;
-    border-radius: 10px;
-    border-collapse: separate;
-    padding: 0.5em;
-}
-
-td{
-    color: aliceblue;
-    font-size: 2em;
-    background-color: #01ACE2;
-    border-radius: 10px;
-    padding: 1em;
-}
-.headline{
-    text-align: left;
-    font-size: 3em;
-}
 .clock{
     text-align: right;
-    font-size: 2em;
+    font-size: 3em;
+
+}
+
+#uhr{
+
+    font-size: 80%;
+    padding-top: 0.5%;
 
 }
 .weather{
     text-align: center;
 }
+
+
+.header{
+    border-radius: 10px;
+    
+}
+
+/*Formatierung des Grid-Containers.
+  Festlegung der Schriftfarbe und -größe innerhalb des Containers*/
+  .grid-containerUp {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 70px 300px 300px;
+    gap: 5px 5px;
+    grid-template-areas:
+      'Headline Headline Headline Headline'
+      'Heater Heater Heater Weather-Overview'
+      'Blinds Blinds Blinds systemStatus';
+    color: aliceblue;
+    font-size: 2em;
+  }
+
+  /*Formatierung der verschiedenen Grid-Bereiche  */
+   .Headline { 
+      grid-area: Headline; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 14px;
+      padding-left: 10px;
+    }
+   
+  
+  .Heater { 
+      grid-area: Heater; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "heating heating heating heating heating heating heating heating heating heating"
+          "tempHeating btnHeating tempBath btnBath tempKitchen btnKitchen tempBed btnBed tempLiving btnLiving"
+          "lblCH lblCH lblBath lblBath lblKitchen lblKitchen lblBed lblBed lblLiving lblLiving";
+      }
+      
+      .heating { grid-area: heating; }
+      
+      .tempHeating { grid-area: tempHeating; }
+      
+      .btnHeating { grid-area: btnHeating; }
+      
+      .tempBath { grid-area: tempBath; }
+      
+      .btnBath { grid-area: btnBath; }
+      
+      .tempKitchen { grid-area: tempKitchen; }
+      
+      .btnKitchen { grid-area: btnKitchen; }
+      
+      .tempBed { grid-area: tempBed; }
+      
+      .btnBed { grid-area: btnBed; }
+      
+      .tempLiving { grid-area: tempLiving; }
+      
+      .btnLiving { grid-area: btnLiving; }
+      
+      .lblCH { grid-area: lblCH; }
+      
+      .lblBath { grid-area: lblBath; }
+      
+      .lblKitchen { grid-area: lblKitchen; }
+      
+      .lblBed { grid-area: lblBed; }
+      
+      .lblLiving { grid-area: lblLiving; }
+      
+  
+    /*Formatierung des Bereichs Current Weather.*/
+  .Weather-Overview { 
+      grid-area: Weather-Overview; 
+      background-color: #01ACE2;
+      border-radius: 10px; 
+      padding-left: 10px;
+      padding-top: 10px;
+      display: inline-block;
+      text-align: left;
+    }
+
+    .Weather-Overview { 
+        grid-area: Weather-Overview; 
+        background-color: #01ACE2;
+        border-radius: 10px; 
+        padding-left: 10px;
+        padding-top: 10px;
+        display: inline-block;
+        text-align: left;
+      }
+      .systemStatus { 
+        grid-area: systemStatus; 
+        background-color: #01ACE2;
+        border-radius: 10px; 
+        padding-left: 10px;
+        padding-top: 10px;
+        display: inline-block;
+        text-align: left;
+      }
+    /*Positionierung und Größenanpassung des Icons im Bereich Current Weather*/
+    .icon{
+        
+        padding-left: 40%;
+        padding-top: 10%;
+        font-size: 250%;
+    }
+    .status{
+        display: table-cell;
+        height: 195px;
+        width: 600px;
+        font-size: 100%;
+        vertical-align: middle;
+        text-align: center;
+    }
+    
+  
+  .Blinds { 
+      grid-area: Blinds; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+
+  .sliders{
+      width: 100%;
+  }
+
+    #sliderBathroom{
+        transform: rotate(-90deg);
+        }
+    #sliderKitchen{
+        transform: rotate(-90deg); 
+    }
+    #sliderBedroom{
+        transform: rotate(-90deg);
+    }
+    #sliderLivingroom{
+        transform: rotate(-90deg);
+    }
+  
+    .grid-containerDown {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 0.25fr 0.25fr 1fr 0.25fr;
+        gap: 20px 80px;
+        grid-template-areas:
+          "Blinds Blinds Blinds Blinds"
+          "percBath percKitchen percBed percLiving"
+          "sliderBath sliderKitchen sliderBed sliderLiving"
+          "bathroom kitchen bedroom livingroom";
+      }
+      
+      .Blinds { grid-area: Blinds; }
+      
+      .bathroom { 
+          grid-area: bathroom;
+          font-size: 70%;
+          padding-left: 50px;
+          padding-top: 40px;          
+     }
+      
+      .kitchen { 
+          grid-area: kitchen; 
+          font-size: 70%;
+          padding-left: 50px;
+          padding-top: 40px; 
+        }
+      
+      .bedroom { 
+          grid-area: bedroom; 
+          font-size: 70%;
+          padding-left: 50px;
+          padding-top: 40px;
+        }
+      
+      .livingroom { 
+          grid-area: livingroom; 
+          font-size: 70%;
+          padding-left: 50px;
+          padding-top: 40px;
+        }
+      
+      .sliderBath { 
+          grid-area: sliderBath; 
+          padding-left: 50px; 
+          padding-top: 30px;
+        }
+      
+      .sliderKitchen { 
+          grid-area: sliderKitchen; 
+          padding-left: 50px; 
+          padding-top: 30px;
+        }
+      
+      .sliderBed { 
+          grid-area: sliderBed; 
+          padding-left: 50px; 
+          padding-top: 30px;
+        }
+      
+      .sliderLiving { 
+          grid-area: sliderLiving; 
+          padding-left: 50px; 
+          padding-top: 30px;
+        }
+      
+      .percBath { 
+          grid-area: percBath; 
+          font-size: 70%;
+           padding-left: 50px;
+          position: relative;
+        }
+      
+      .percKitchen { 
+          grid-area: percKitchen; 
+          font-size: 70%;
+          padding-left: 50px;
+          position: relative;
+           
+        }
+      
+      .percBed { 
+          grid-area: percBed; 
+          font-size: 70%;
+          padding-left: 50px;
+           
+        }
+      
+      .percLiving { 
+          grid-area: percLiving; 
+          font-size: 70%;
+          padding-left: 50px; 
+          
+        }
+      
+
+#uhr{
+
+   float: right;
+   padding-right: 20px;
+
+}
+
+
+
