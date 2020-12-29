@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="css/weather-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Smart Home Automation</title>
+    <script type="text/javascript" src="sliders.js"></script>
     <script type="text/javascript">
         function uhr() {
             var jetzt = new Date();
@@ -18,6 +19,12 @@
             document.getElementById('uhr').innerHTML = stunden + ':' + minuten + ' Uhr';
             setTimeout(uhr, 500);
         }
+    </script>
+    <script type="text/javascript">
+    
+    
+
+    
     </script>
 </head>
 <body onload="uhr();">
@@ -32,21 +39,56 @@
                 <div class="heating">
                     Heating
                 </div>
-                <div class="tempHeating"></div>
-                <div class="btnHeating"></div>
-                <div class="tempBath"></div>
-                <div class="btnBath"></div>
-                <div class="tempKitchen"></div>
-                <div class="btnKitchen"></div>
-                <div class="tempBed"></div>
-                <div class="btnBed"></div>
-                <div class="tempLiving"></div>
-                <div class="btnLiving"></div>
-                <div class="lblCH"></div>
-                <div class="lblBath"></div>
-                <div class="lblKitchen"></div>
-                <div class="lblBed"></div>
-                <div class="lblLiving"></div>
+                <div class="tempHeating">
+                    <label>25°C</label>
+                </div>
+                <div class="btnHeating">
+                   <div class="buttonChUp"></div>
+                   <div class="buttonChDown"></div>
+                </div>
+                <div class="tempBath">
+                    <label>25°C</label>
+                </div>
+                <div class="btnBath">
+                    <div class="buttonBathUp"></div>
+                   <div class="buttonBathDown"></div>
+                </div>
+                <div class="tempKitchen">
+                    <label>25°C</label>
+                </div>
+                <div class="btnKitchen">
+                    <div class="buttonKitchenUp"></div>
+                   <div class="buttonKitchenDown"></div>
+                </div>
+                <div class="tempBed">
+                    <label>25°C</label>
+                </div>
+                <div class="btnBed">
+                    <div class="buttonBedUp"></div>
+                   <div class="buttonBedDown"></div>
+                </div>
+                <div class="tempLiving">
+                    <label>25°C</label>
+                </div>
+                <div class="btnLiving">
+                    <div class="buttonLivingUp"></div>
+                   <div class="buttonLivingDown"></div>
+                </div>
+                <div class="lblCH">
+                    <label>Central Heating</label>
+                </div>
+                <div class="lblBath">
+                    <label>Bathroom</label>
+                </div>
+                <div class="lblKitchen">
+                    <label>Kitchen</label>
+                </div>
+                <div class="lblBed">
+                    <label>Bedroom</label>
+                </div>
+                <div class="lblLiving">
+                    <label>Livingroom</label>
+                </div>
               </div> 
         </div>
         <div class="Weather-Overview">
@@ -56,9 +98,8 @@
             </div>
         </div>
         <div class="Blinds">
-        
             <div class="grid-containerDown">
-                <div class="Blinds">
+                <div class="blindsHeadline">
                     Blinds
                 </div>
                 <div class="percBath">
