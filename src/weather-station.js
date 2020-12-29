@@ -6,31 +6,42 @@ const config = require('../config/config.json');
 const owmConfig = config.owm;
 let weatherData = {};
 
-owm.getData(owm.assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
-fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
-    if (err) {
-        console.log(" readFile weather.json failed:", err)
-        return
+//owm.getData(owm.assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
+fs.watch('../config/weather.json', 'utf8', (eventType, filename) => {
+    if (eventType === 'change') {
+        fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
+            if (err) {
+                console.log(" readFile weather.json failed:", err)
+                return
+            }
+            try {
+                weatherData = JSON.parse(jsonString);
+                console.log("successfull read " + weatherData.celsius);
+            } catch(err) {
+                console.log('Error parsing JSON string:', err)
+            }
+        })
     }
-    try {
-        weatherData = JSON.parse(jsonString);
-        console.log("successfull read " + weatherData.celsius);
-    } catch(err) {
-        console.log('Error parsing JSON string:', err)
-    }
-})
+});
 
+/*
+*/
 setInterval(_ => {
     owm.getData(owm.assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
-    fs.readFileSync('../config/weather.json', 'utf8', (err, jsonString) => {
-        if (err) {
-            console.log(" readFile weather.json failed:", err)
-            return
-        }
-        try {
-            weatherData = JSON.parse(jsonString);
-        } catch(err) {
-            console.log('Error parsing JSON string:', err)
+    fs.watch('../config/weather.json', 'utf8', (eventType) => {
+        if (eventType === 'change') {
+            fs.readFile('../config/weather.json', 'utf8', (err, jsonString) => {
+                if (err) {
+                    console.log(" readFile weather.json failed:", err)
+                    return
+                }
+                try {
+                    weatherData = JSON.parse(jsonString);
+                    console.log("successfull read " + weatherData.celsius);
+                } catch(err) {
+                    console.log('Error parsing JSON string:', err)
+                }
+            })
         }
     });
     client.publish("local/condition", toString(weatherData.weatherID));

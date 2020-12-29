@@ -28,10 +28,8 @@ function drawData(data){
         wind: data.wind.speed
     };
     let toString = JSON.stringify(currentWeather);
-    fs.writeFileSync('../config/weather.json', toString, err => {
-        if (err) {console.log('Error while writing', err)}
+    fs.writeFileSync('../config/weather.json', toString);
             console.log('Successful write')
-    })
 }
 module.exports = {assembleURL, getData};
 //bsp answer in de
