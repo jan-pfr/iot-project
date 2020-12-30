@@ -73,6 +73,11 @@ body{
       }
       
       .heating { grid-area: heating; }
+
+      #heatingToggle{
+        float: right;
+        padding-right: 10px;
+      }
       
       .tempHeating { 
               grid-area: tempHeating; 
@@ -282,7 +287,7 @@ body{
     .grid-containerDown {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 5% 20% 50% 20%;
+        grid-template-rows: 10% 20% 40% 25%;
         gap: 20px 80px;
         grid-template-areas:
           "Blinds Blinds Blinds Blinds"
@@ -297,28 +302,28 @@ body{
           grid-area: bathroom;
           font-size: 60%;
           padding-left: 95px;
-          padding-top: 5px;          
+          padding-top: 10px;          
      }
       
       .kitchen { 
           grid-area: kitchen; 
           font-size: 60%;
           padding-left: 108px;
-          padding-top: 5px; 
+          padding-top: 10px; 
         }
       
       .bedroom { 
           grid-area: bedroom; 
           font-size: 60%;
           padding-left: 100px;
-          padding-top: 5px;
+          padding-top: 10px;
         }
       
       .livingroom { 
           grid-area: livingroom; 
           font-size: 60%;
           padding-left: 95px;
-          padding-top: 5px;
+          padding-top: 10px;
         }
       
       .sliderBath { 
@@ -349,6 +354,7 @@ body{
           grid-area: percBath; 
           font-size: 50%;
           padding-left: 120px;
+          
           
         }
       
@@ -382,6 +388,190 @@ body{
    padding-right: 20px;
 
 }
+
+
+
+span.switcher {
+  position: relative;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 20px 20px;
+}
+span.switcher input {
+  appearance: none;
+  position: relative;
+  float: right;
+  margin-top: -10px;
+  
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #414141;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+
+span.switcher input:before, span.switcher input:after {
+  z-index: 2;
+  position: absolute;
+  float: right;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+span.switcher input:before {
+  content: 'Auto';
+  left: 20px;
+}
+
+span.switcher input:after {
+  content: 'Manual';
+  right: 20px;
+}
+
+span.switcher label {
+  z-index: 1;
+  position: absolute;
+  float: right;
+  top: -10px;
+  bottom: 10px;
+  border-radius: 5px;
+}
+
+span.switcher.switcher-1 input {
+  transition: 0.25s -0.1s;
+}
+span.switcher.switcher-1 input:checked {
+  background-color: #fff;
+}
+span.switcher.switcher-1 input:checked:before {
+  color: #fff;
+  transition: color 0.5s 0.2s;
+}
+span.switcher.switcher-1 input:checked:after {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher.switcher-1 input:checked + label {
+  left: -3px;
+  right: 100px;
+  background: #414141;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+span.switcher.switcher-1 input:not(:checked) {
+  background: #414141;
+  transition: background 0.5s -0.1s;
+}
+span.switcher.switcher-1 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher.switcher-1 input:not(:checked):after {
+  color: #414141;
+  transition: color 0.5s 0.2s;
+}
+span.switcher.switcher-1 input:not(:checked) + label {
+  left: 100px;
+  right: 3px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+
+/* Hier der Code für den zweiten Switcher*/
+
+span.switcher2 {
+  position: relative; ;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 10px -1100px;
+}
+span.switcher2 input {
+  appearance: none;
+  position: relative;
+  float: right;
+  margin-top: -10px;
+  
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #414141;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+
+span.switcher2 input:before, span.switcher2 input:after {
+  z-index: 2;
+  position: absolute;
+  float: right;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+span.switcher2 input:before {
+  content: 'Auto';
+  left: 20px;
+}
+
+span.switcher2 input:after {
+  content: 'Manual';
+  right: 20px;
+}
+
+span.switcher2 label {
+  z-index: 1;
+  position: absolute;
+  float: right;
+  top: -10px;
+  bottom: 10px;
+  border-radius: 5px;
+}
+
+span.switcher2.switcher-2 input {
+  transition: 0.25s -0.1s;
+}
+span.switcher2.switcher-2 input:checked {
+  background-color: #fff;
+}
+span.switcher2.switcher-2 input:checked:before {
+  color: #fff;
+  transition: color 0.5s 0.2s;
+}
+span.switcher2.switcher-2 input:checked:after {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher2.switcher-2 input:checked + label {
+  left: -3px;
+  right: 100px;
+  background: #414141;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+span.switcher2.switcher-2 input:not(:checked) {
+  background: #414141;
+  transition: background 0.5s -0.1s;
+}
+span.switcher2.switcher-2 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher2.switcher-2 input:not(:checked):after {
+  color: #414141;
+  transition: color 0.5s 0.2s;
+}
+span.switcher2.switcher-2 input:not(:checked) + label {
+  left: 100px;
+  right: 3px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+
+
 
 
 
