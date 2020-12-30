@@ -25,7 +25,7 @@ body{
     
 }
 
-/*Formatierung des Grid-Containers.
+/*Formatierung des übergeordneten Grid-Containers. Wie in grid-template-areas zu sehen werden die einzelnen übergeordneten Bereich im Grid festgelegt.
   Festlegung der Schriftfarbe und -größe innerhalb des Containers*/
   .grid-containerUp {
     display: grid;
@@ -60,7 +60,7 @@ body{
     .Heater:hover{
       transform: scale(1.0080);
     }
-
+  /*Formatierung des grid-containers für den Bereich Heating. Zum besseren Handling der Formatierung werden für die einzelnen Elemente eigene grid-Bereich erstellt.*/
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -83,29 +83,28 @@ body{
       .btnHeating { 
           grid-area: btnHeating;
         }
-        .buttonChUp{
+        .buttonUp{
           width: 0;
           height: 0;
           border-left: 30px solid transparent;
           border-right: 30px solid transparent; 
           border-bottom: 30px solid  #414141;
-          
-          margin-bottom: 5px;
+          margin-bottom: 8px;
           cursor: pointer;
           
         }
-        .buttonChUp:hover{
+        .buttonUp:hover{
           width: 0;
           height: 0;
           border-left: 30px solid transparent;
           border-right: 30px solid transparent; 
-          border-bottom: 30px solid  rgb(8, 8, 8);
-          margin-bottom: 5px;
+          border-bottom: 30px solid  #2b2b2b;
+          margin-bottom: 8px;
           transform: scale(1.08);
           cursor: pointer;
         }
         
-        .buttonChDown{
+        .buttonDown{
             width: 0;
             height: 0;
             border-left: 30px solid transparent;
@@ -113,13 +112,12 @@ body{
             border-top: 30px solid #414141;
             cursor: pointer;
         }
-        .buttonChDown:hover{
+        .buttonDown:hover{
           width: 0;
           height: 0;
           border-left: 30px solid transparent;
           border-right: 30px solid transparent; 
-          border-top: 30px solid  rgb(8, 8, 8);
-          margin-bottom: 5px;
+          border-top: 30px solid  #2b2b2b;
           transform: scale(1.08);
           cursor: pointer;
         }
@@ -130,44 +128,7 @@ body{
       
       .btnBath { grid-area: btnBath; }
 
-      .buttonBathUp{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  #414141;
-        margin-bottom: 5px;
-        cursor: pointer;
-      }
-      .buttonBathUp:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
-      
-      .buttonBathDown{
-          width: 0;
-          height: 0;
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent; 
-          border-top: 30px solid #414141;
-          cursor: pointer;
-      }
-      .buttonBathDown:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-top: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
+     
       
       .tempKitchen { 
           grid-area: tempKitchen; 
@@ -176,43 +137,7 @@ body{
       
       .btnKitchen { grid-area: btnKitchen; }
 
-      .buttonKitchenUp{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  #414141;
-        margin-bottom: 5px;
-        cursor: pointer;
-      }
-      .buttonKitchenUp:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
-      .buttonKitchenDown{
-          width: 0;
-          height: 0;
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent; 
-          border-top: 30px solid #414141;
-          cursor: pointer;
-      }
-      .buttonKitchenDown:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-top: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
+     
       
       .tempBed { 
           grid-area: tempBed; 
@@ -221,43 +146,7 @@ body{
       
       .btnBed { grid-area: btnBed; }
 
-      .buttonBedUp{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  #414141;
-        margin-bottom: 5px;
-        cursor: pointer;
-      }
-      .buttonBedUp:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
-      .buttonBedDown{
-          width: 0;
-          height: 0;
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent; 
-          border-top: 30px solid #414141;
-          cursor: pointer;
-      }
-      .buttonBedDown:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-top: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
+   
       
       .tempLiving { 
           grid-area: tempLiving; 
@@ -266,43 +155,7 @@ body{
       
       .btnLiving { grid-area: btnLiving; }
 
-      .buttonLivingUp{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  #414141;
-        margin-bottom: 5px;
-        cursor: pointer;
-      }
-      .buttonLivingUp:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-bottom: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
-      .buttonLivingDown{
-          width: 0;
-          height: 0;
-          border-left: 30px solid transparent;
-          border-right: 30px solid transparent; 
-          border-top: 30px solid #414141;
-          cursor: pointer;
-      }
-      .buttonLivingDown:hover{
-        width: 0;
-        height: 0;
-        border-left: 30px solid transparent;
-        border-right: 30px solid transparent; 
-        border-top: 30px solid  rgb(8, 8, 8);
-        margin-bottom: 5px;
-        transform: scale(1.08);
-        cursor: pointer;
-      }
+   
       
       .lblCH { grid-area: lblCH;
                 padding-top: 62px;
@@ -400,103 +253,36 @@ body{
       width: 100%;
   }
 
-    #sliderBathroom{
-      appearance: none;  
-      transform: rotate(-90deg); 
-      height: 3px;
-      width: 55%;
-        border-radius: 0.5px;
-        background-color: black ;
-        opacity: 0.7;
-        outline: none;
-        }
-    #sliderBathroom::-webkit-slider-thumb{
-      appearance: none;
-      border: 3px solid black;
-      width: 20px;
-      max-width: 80px;
-      height: 20px;
-      border-radius: 50%;
-      bottom: 11px;
-      background-color:#01ACE2;
-      opacity: 0.9;
-      cursor: -webkit-grab;
-      
-    }
-
+  input[type=range]{
     
+    appearance: none;  
+    transform: rotate(-90deg); 
+    height: 3px;
+    width: 70%;
+      border-radius: 0.5px;
+      background-color: black ;
+      opacity: 0.7;
+      outline: none;
+      scroll-behavior: inherit;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    appearance: none;
+      border: 3px solid black;
+      width: 20px;
+      max-width: 80px;
+      height: 20px;
+      border-radius: 50%;
+      bottom: 11px;
+      background-color:#01ACE2;
+      opacity: 0.9;
+      cursor: -webkit-grab;
+  }
 
-    #sliderKitchen{
-      appearance: none;  
-      transform: rotate(-90deg); 
-      height: 3px;
-      width: 55%;
-        border-radius: 0.5px;
-        background-color: black ;
-        opacity: 0.7;
-        outline: none;
-        }
-    #sliderKitchen::-webkit-slider-thumb{
-      appearance: none;
-      border: 3px solid black;
-      width: 20px;
-      max-width: 80px;
-      height: 20px;
-      border-radius: 50%;
-      bottom: 11px;
-      background-color:#01ACE2;
-      opacity: 0.9;
-      cursor: -webkit-grab;
-    }
-    #sliderBedroom{
-      appearance: none;  
-      transform: rotate(-90deg); 
-      height: 3px;
-      width: 55%;
-        border-radius: 0.5px;
-        background-color: black ;
-        opacity: 0.7;
-        outline: none;
-        }
-    #sliderBedroom::-webkit-slider-thumb{
-      appearance: none;
-      border: 3px solid black;
-      width: 20px;
-      max-width: 80px;
-      height: 20px;
-      border-radius: 50%;
-      bottom: 11px;
-      background-color:#01ACE2;
-      opacity: 0.9;
-      cursor: -webkit-grab;
-    }
-    #sliderLivingroom{
-      appearance: none;  
-      transform: rotate(-90deg); 
-      height: 3px;
-      width: 55%;
-        border-radius: 0.5px;
-        background-color: black ;
-        opacity: 0.7;
-        outline: none;
-        }
-    #sliderLivingroom::-webkit-slider-thumb{
-      appearance: none;
-      border: 3px solid black;
-      width: 20px;
-      max-width: 80px;
-      height: 20px;
-      border-radius: 50%;
-      bottom: 11px;
-      background-color:#01ACE2;
-      opacity: 0.9;
-      cursor: -webkit-grab;
-    }
   
     .grid-containerDown {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 0.25fr 0.25fr 1fr 0.25fr;
+        grid-template-rows: 5% 20% 50% 20%;
         gap: 20px 80px;
         grid-template-areas:
           "Blinds Blinds Blinds Blinds"
@@ -510,82 +296,83 @@ body{
       .bathroom { 
           grid-area: bathroom;
           font-size: 60%;
-          padding-left: 75px;
-          padding-top: 50px;          
+          padding-left: 95px;
+          padding-top: 5px;          
      }
       
       .kitchen { 
           grid-area: kitchen; 
           font-size: 60%;
-          padding-left: 88px;
-          padding-top: 50px; 
+          padding-left: 108px;
+          padding-top: 5px; 
         }
       
       .bedroom { 
           grid-area: bedroom; 
           font-size: 60%;
-          padding-left: 80px;
-          padding-top: 50px;
+          padding-left: 100px;
+          padding-top: 5px;
         }
       
       .livingroom { 
           grid-area: livingroom; 
           font-size: 60%;
-          padding-left: 75px;
-          padding-top: 50px;
+          padding-left: 95px;
+          padding-top: 5px;
         }
       
       .sliderBath { 
           grid-area: sliderBath; 
           padding-left: 50px; 
-          padding-top: 30px;
+          padding-top: 25px;
         }
       
       .sliderKitchen { 
           grid-area: sliderKitchen; 
           padding-left: 50px; 
-          padding-top: 30px;
+          padding-top: 25px;
         }
       
       .sliderBed { 
           grid-area: sliderBed; 
           padding-left: 50px; 
-          padding-top: 30px;
+          padding-top: 25px;
         }
       
       .sliderLiving { 
           grid-area: sliderLiving; 
           padding-left: 50px; 
-          padding-top: 30px;
+          padding-top: 25px;
         }
       
       .percBath { 
           grid-area: percBath; 
-          font-size: 60%;
-           padding-left: 97px;
-          position: relative;
+          font-size: 50%;
+          padding-left: 120px;
+          
         }
       
       .percKitchen { 
           grid-area: percKitchen; 
-          font-size: 60%;
-          padding-left: 97px;
-          position: relative;
+          font-size: 50%;
+          padding-left: 120px;
+          padding-bottom: 10px;
            
         }
       
       .percBed { 
           grid-area: percBed; 
-          font-size: 60%;
-          padding-left: 97px;
+          font-size: 50%;
+          padding-left: 120px;
+          padding-bottom: 10px;
            
         }
       
       .percLiving { 
           grid-area: percLiving; 
-          font-size: 60%;
-          padding-left: 97px; 
-          
+          font-size: 50%;
+          padding-left: 120px; 
+          padding-bottom: 10px;
         }
       
 
