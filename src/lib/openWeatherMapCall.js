@@ -1,37 +1,41 @@
 const fetch = require('node-fetch');
 const fs = require('fs');
-/*const config = require('../../config/config.json');
-/*const owmConfig = config.owm;
-/*getData(assembleURL(owmConfig.city, owmConfig.owmapikey, owmConfig.lang, "metric"));
- */
+
 function assembleURL (city, apiKey, lang, units){
     let url = "http://api.openweathermap.org/data/2.5/weather?q=" + city + "&units=" + units + "&lang=" + lang + "&appid=" + apiKey;
     console.log("url: " + url);
     return url;
 }
-function getData(url){
-    fetch(url)
+function getData(city, apiKey, lang, units){
+let url = assembleURL(city, apiKey, lang, units )
+     return fetch(url)
         .then(function(resp) { return resp.json() }) // Convert data to json
         .then(function(data) {
-            drawData(data);
+            var currentWeather = {
+                weather: data.weather[0].description,
+                weatherID: data.weather[0].id,
+                celsius: Math.round(parseFloat(data.main.temp)),
+                wind: data.wind.speed,
+                location: data.name
+            };
+            let toString = JSON.stringify(currentWeather);
+            fs.writeFile('../config/weather.json', toString, err => {
+                if (err) {
+                    console.log('Error while writing', err)
+                } else {
+                    console.log('Successful write')
+                }
+            })
+           return currentWeather;
         })
         .catch( err => {
             console.log('caught it!',err);
 
         });
 }
-function drawData(data){
-    let currentWeather = {
-        weather: data.weather[0].description,
-        weatherID: data.weather[0].id,
-        celsius: Math.round(parseFloat(data.main.temp)),
-        wind: data.wind.speed
-    };
-    let toString = JSON.stringify(currentWeather);
-    fs.writeFileSync('../config/weather.json', toString);
-            console.log('Successful write')
-}
-module.exports = {assembleURL, getData};
+module.exports = {getData};
+
+
 //bsp answer in de
 //{"coord":{"lon":8.2,"lat":48.05},
 // "weather":[{"id":804,"main":"Clouds","description":"Bedeckt","icon":"04n"}],

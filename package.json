@@ -18,6 +18,7 @@
   "homepage": "https://github.com/jan-pfr/iot-project#readme",
   "dependencies": {
     "express": "^4.17.1",
+    "mqtt": "^4.2.6",
     "node-fetch": "^2.6.1",
     "pug": "^3.0.0"
   }
