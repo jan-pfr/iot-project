@@ -2,10 +2,10 @@
 ##  Final Project of the Internet of Things WPV
 
 ###Our Contributors
-..* Alexander Hauser
-..* Jan Pfeiffer
-..* Benedikt Scheffbuch
-..* Henrik Alt
+.. Alexander Hauser
+.. Jan Pfeiffer
+.. Benedikt Scheffbuch
+.. Henrik Alt
 
-Our Projectmanagement
+Our Projectmanagement-Tool
 [Trello Board](https://trello.com/b/pqIZ0MPW/features)
