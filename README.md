@@ -1,7 +1,7 @@
 # Smart Home Automation
-##  Final Project of the Internet of Things WPV
+###  Final Project of the Internet of Things WPV
 
-### Our Contributors
+#### Our Contributors
 * Alexander Hauser
 * Jan Pfeiffer
 * Benedikt Scheffbuch
