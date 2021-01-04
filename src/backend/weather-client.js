@@ -1,7 +1,7 @@
 const mqtt = require('mqtt');
-const owm = require('./lib/openWeatherMapCall');
+const owm = require('./openWeatherMapCall');
 const client = mqtt.connect('mqtt://localhost:1885');
-const config = require('../config/config.json');
+const config = require('../../config/config.json');
 const owmConfig = config.owm;
 let weatherData = {};
 
