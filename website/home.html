@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="description" content="Smart Home Automation">
@@ -10,11 +11,12 @@
     <link rel="stylesheet" href="css/weather-icons.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <title>Smart Home Automation</title>
-    <script src="D:\WPV Final Projekt\iot-project\src\htmlFunctionality.js"></script>
-    <script src="D:\WPV Final Projekt\iot-project\src\updateWeather.js"></script>    
+    <script src="../src/htmlFunctionality.js"></script>
+    <script src="../src/updateWeather.js"></script>
 </head>
+
 <body onload="uhr(), heaterTemperature()">
-   
+
     <div class="grid-containerUp">
         <div class="Headline">
             Smart Home Automation
@@ -27,42 +29,42 @@
                     <span class="switcher switcher-1">
                         <input type="checkbox" id="switcher-1">
                         <label for="switcher-1"></label>
-                     </span>
+                    </span>
                 </div>
-                <div class="tempHeating" >
+                <div class="tempHeating">
                     <label id="tempH"></label>
                 </div>
                 <div class="btnHeating">
-                   <div class="buttonUp" id="btnUpH"></div>
-                   <div class="buttonDown" id="btnDownH"></div>
+                    <div class="buttonUp" id="btnUpH"></div>
+                    <div class="buttonDown" id="btnDownH"></div>
                 </div>
                 <div class="tempBath">
                     <label id="tempBath"></label>
                 </div>
                 <div class="btnBath">
                     <div class="buttonUp" id="btnUpBath"></div>
-                   <div class="buttonDown" id="btnDownBath"></div>
+                    <div class="buttonDown" id="btnDownBath"></div>
                 </div>
                 <div class="tempKitchen">
                     <label id="tempKitchen"></label>
                 </div>
                 <div class="btnKitchen">
                     <div class="buttonUp" id="btnUpKitchen"></div>
-                   <div class="buttonDown" id="btnDownKitchen"></div>
+                    <div class="buttonDown" id="btnDownKitchen"></div>
                 </div>
                 <div class="tempBed">
                     <label id="tempBed"></label>
                 </div>
                 <div class="btnBed">
                     <div class="buttonUp" id="btnUpBed"></div>
-                   <div class="buttonDown" id="btnDownBed"></div>
+                    <div class="buttonDown" id="btnDownBed"></div>
                 </div>
                 <div class="tempLiving">
                     <label id="tempLiv"></label>
                 </div>
                 <div class="btnLiving">
                     <div class="buttonUp" id="btnUpLiv"></div>
-                   <div class="buttonDown" id="btnDownLiv"></div>
+                    <div class="buttonDown" id="btnDownLiv"></div>
                 </div>
                 <div class="lblCH">
                     <label>Central Heating</label>
@@ -79,12 +81,12 @@
                 <div class="lblLiving">
                     <label>Livingroom</label>
                 </div>
-              </div> 
+            </div>
         </div>
         <div class="Weather-Overview">
-            Current Weather 
+            Current Weather
             <div class="icon">
-            <i class="wi wi-wmo4680-72" id="weatherIcon"></i>
+                <i class="wi wi-wmo4680-72" id="weatherIcon"></i>
             </div>
         </div>
         <div class="Blinds">
@@ -94,13 +96,13 @@
                     <span class="switcher2 switcher-2">
                         <input type="checkbox" id="switcher-2">
                         <label for="switcher-2"></label>
-                     </span>
+                    </span>
                 </div>
                 <div class="percBath">
                     <p><span id="lbl0"></span>%</p>
                 </div>
                 <div class="sliderBath">
-                    <input type="range" min="0" max="100" step="5" value="50" id="slider0"> 
+                    <input type="range" min="0" max="100" step="5" value="50" id="slider0">
                 </div>
                 <div class="bathroom">
                     <label>Bathroom</label>
@@ -113,7 +115,7 @@
                 </div>
                 <div class="kitchen">
                     <label>Kitchen</label>
-                </div>                
+                </div>
                 <div class="percBed">
                     <p><span id="lbl2"></span>%</p>
                 </div>
@@ -132,17 +134,18 @@
                 <div class="livingroom">
                     <label>Livingroom</label>
                 </div>
-              </div>
-        </div>
-        <div class="systemStatus">
-            Status 
-            <div class="status">
-            Working
             </div>
         </div>
-      </div>
-        
-        
+        <div class="systemStatus">
+            Status
+            <div class="status">
+                Working
+            </div>
+        </div>
+    </div>
+
+
     </div>
 </body>
+
 </html>
