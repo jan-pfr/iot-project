@@ -11,8 +11,6 @@ var mqtt_status = {
 };
 
 const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
-const app = express();
-const router = express.Router();
 
 //On connecting to the broker subscribe to topic
 mqtt_client.on("connect", function () {
@@ -24,6 +22,7 @@ mqtt_client.on("connect", function () {
 
 //Printing incoming messages to topic
 mqtt_client.on("message", function (topic, message) {
+  message = parseInt(message.toString());
   console.log("%s : %s", topic, message);
 
   if (topic == "local/temperature") {
@@ -31,28 +30,29 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
-router.get("/status/all", (req, res) => {
-  res.status(200).json({
-    weather: mqtt_status.weather.toString(),
-  });
+const app = express();
+const router = express.Router();
+
+// Setting CORS headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  // res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+  // res.header("Access-Control-Allow-Headers", "Content-Type");
+  next();
 });
 
-router.get("/settemperature/:id/:degrees", (req, res) => {
-  id = req.params.id;
-  degrees = req.params.degrees;
+router.get("/status/all", (req, res, next) => {
+  res.status(200).send(mqtt_status);
+});
 
-  if (roomExists(id)) {
-    oldTemperature = roomTemperatures[id];
+router.get("/status/:device/", (req, res) => {
+  device = req.params.device;
+  value = mqtt_status[device].toString();
 
-    roomTemperatures[id] = degrees;
-
-    res.status(200).json({
-      RoomId: id,
-      "Old temperature": oldTemperature,
-      "New temperature": degrees,
-    });
+  if (isSet(device)) {
+    res.status(200).send(value);
   } else {
-    return404();
+    send404();
   }
 });
 
@@ -64,8 +64,14 @@ const http_server = http.createServer(app);
 
 http_server.listen(http_port);
 
-function return404(res) {
-  return res.status(404).json({
-    message: "Room does not exist",
-  });
+function isSet(of) {
+  for (const [device, value] of Object.entries(mqtt_status)) {
+    if (device == of) {
+      return value != null;
+    }
+  }
+}
+
+function send404() {
+  return res.status(404).json();
 }

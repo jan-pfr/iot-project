@@ -18,6 +18,7 @@
   "homepage": "https://github.com/jan-pfr/iot-project#readme",
   "dependencies": {
     "aedes": "^0.44.1",
+    "cors": "^2.8.5",
     "express": "^4.17.1",
     "mqtt": "^4.2.6",
     "node-fetch": "^2.6.1",

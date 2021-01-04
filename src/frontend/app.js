@@ -1,3 +1,14 @@
+$(document).ready(() => {
+  const url = "http://localhost:3000/status/all";
+  $.ajax({
+    url,
+    type: "GET",
+    success: (result) => {
+      $("div.temperature").html(result.weather);
+    },
+  });
+});
+
 //Function uhr() initiates Date() in a variable and extracts hours and minutes in two more variables that are set into label uhr.
 function uhr() {
   var jetzt = new Date();
