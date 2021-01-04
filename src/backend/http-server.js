@@ -1,61 +1,71 @@
-const http = require('http');
-const express = require('express');
+const express = require("express");
+const http = require("http");
+const mqtt = require("mqtt");
 
+var client_options = {
+  clientId: "http-server",
+};
+
+var mqtt_status = {
+  weather: null,
+};
+
+const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
 const app = express();
 const router = express.Router();
 
-roomTemperatures = {
-    1: '22C',
-    2: '17C',
-    3: '25C',
-}
-
-router.get('/gettemperature/:id', (req, res) => {
-    id = req.params.id;
-
-    if (roomExists(id)) {
-        res.status(200).json({
-            RoomId: id,
-            Temperature: roomTemperatures[id]
-        })
-    } else {
-        return404(res);
-    }
+//On connecting to the broker subscribe to topic
+mqtt_client.on("connect", function () {
+  topic = "local/temperature";
+  mqtt_client.subscribe(topic, () => {
+    console.log("Subscribed on %s", topic);
+  });
 });
 
-router.get('/settemperature/:id/:degrees', (req, res) => {
-    id = req.params.id;
-    degrees = req.params.degrees;
+//Printing incoming messages to topic
+mqtt_client.on("message", function (topic, message) {
+  console.log("%s : %s", topic, message);
 
-    if (roomExists(id)) {
-        oldTemperature = roomTemperatures[id];
+  if (topic == "local/temperature") {
+    mqtt_status.weather = message;
+  }
+});
 
-        roomTemperatures[id] = degrees;
+router.get("/status/all", (req, res) => {
+  res.status(200).json({
+    weather: mqtt_status.weather.toString(),
+  });
+});
 
-        res.status(200).json({
-            RoomId: id,
-            'Old temperature': oldTemperature,
-            'New temperature': degrees 
-        })
-    } else {
-        return404();
-    }
+router.get("/settemperature/:id/:degrees", (req, res) => {
+  id = req.params.id;
+  degrees = req.params.degrees;
+
+  if (roomExists(id)) {
+    oldTemperature = roomTemperatures[id];
+
+    roomTemperatures[id] = degrees;
+
+    res.status(200).json({
+      RoomId: id,
+      "Old temperature": oldTemperature,
+      "New temperature": degrees,
+    });
+  } else {
+    return404();
+  }
 });
 
 app.use(router);
 
-const port = process.env.PORT || 3000;
+const http_port = process.env.PORT || 3000;
 
-const server = http.createServer(app);
+const http_server = http.createServer(app);
 
-server.listen(port);
-
-function roomExists(roomId) {
-    return Object.keys(roomTemperatures).indexOf(String(roomId)) > -1;
-}
+http_server.listen(http_port);
 
 function return404(res) {
-    return res.status(404).json({
-        message: "Room does not exist"
-    });
+  return res.status(404).json({
+    message: "Room does not exist",
+  });
 }

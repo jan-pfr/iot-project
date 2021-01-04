@@ -11,6 +11,17 @@
     <link rel="stylesheet" href="./css/weather-icons.min.css">
     <title>Smart Home Automation</title>
     <script src="./app.js"></script>
+    <script>
+        const fetch = require("node-fetch");
+
+        weather = null;
+
+        fetch("http://localhost:3000/status/all")
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+
+        console.log("Test");
+    </script>
 </head>
 
 <body onload="uhr(), heaterTemperature()">
@@ -23,7 +34,7 @@
         <div class="Heater">
             <div class="grid-container">
                 <div class="heating">
-                    Heating         
+                    Heating
                 </div>
                 <div class="toggleHeater">
                     <span class="switcher switcher-1">
@@ -110,10 +121,10 @@
                     Blinds
                 </div>
                 <div class="toggleBlinds">
-                <span class="switcher2 switcher-2">
-                    <input type="checkbox" id="switcher-2">
-                    <label for="switcher-2"></label>
-                </span>
+                    <span class="switcher2 switcher-2">
+                        <input type="checkbox" id="switcher-2">
+                        <label for="switcher-2"></label>
+                    </span>
                 </div>
                 <div class="percBath">
                     <p><span id="lbl0"></span>%</p>
