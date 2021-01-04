@@ -1,6 +1,8 @@
 body{
  background-color: #414141;
  font-family: 'Lato', sans-serif;
+ box-sizing: border-box;
+ min-width: 1750px;
 }
 
 .clock{
@@ -8,6 +10,10 @@ body{
     font-size: 3em;
 
 }
+
+/*{
+  box-sizing: border-box;
+}*/
 
 #uhr{
 
