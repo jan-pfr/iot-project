@@ -1,43 +1,577 @@
 body{
  background-color: #414141;
+ font-family: 'Lato', sans-serif;
 }
 
-table{
-    width: 100%;
-    height: 75%;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 1em;
-    border-radius: 10px;
-    border-collapse: separate;
-    font-family: 'Lato', sans-serif;
-
-
-}
-th{
-    color: aliceblue;
-    background-color: #01ACE2;
-    border-radius: 10px;
-    border-collapse: separate;
-    padding: 0.5em;
-}
-
-td{
-    color: aliceblue;
-    font-size: 2em;
-    background-color: #01ACE2;
-    border-radius: 10px;
-    padding: 1em;
-}
-.headline{
-    text-align: left;
-    font-size: 3em;
-}
 .clock{
     text-align: right;
-    font-size: 2em;
+    font-size: 3em;
+
+}
+
+#uhr{
+
+    font-size: 80%;
+    padding-top: 0.5%;
 
 }
 .weather{
     text-align: center;
 }
+
+
+.header{
+    border-radius: 10px;
+    
+}
+
+/*Formatierung des übergeordneten Grid-Containers. Wie in grid-template-areas zu sehen werden die einzelnen übergeordneten Bereich im Grid festgelegt.
+  Festlegung der Schriftfarbe und -größe innerhalb des Containers*/
+  .grid-containerUp {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 70px 300px 300px;
+    gap: 12px 12px;
+    grid-template-areas:
+      'Headline Headline Headline Headline'
+      'Heater Heater Heater Weather-Overview'
+      'Blinds Blinds Blinds systemStatus';
+    color: aliceblue;
+    font-size: 2em;
+  }
+
+  /*Formatierung der verschiedenen Grid-Bereiche  */
+   .Headline { 
+      grid-area: Headline; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 14px;
+      padding-left: 10px;
+    }
+    
+  
+  .Heater { 
+      grid-area: Heater; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+    .Heater:hover{
+      transform: scale(1.0080);
+    }
+  /*Formatierung des grid-containers für den Bereich Heating. Zum besseren Handling der Formatierung werden für die einzelnen Elemente eigene grid-Bereich erstellt.*/
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        gap: 0px 0px;
+        grid-template-areas:
+          "heating heating heating heating heating heating heating heating heating heating"
+          "tempHeating btnHeating tempBath btnBath tempKitchen btnKitchen tempBed btnBed tempLiving btnLiving"
+          "lblCH lblCH lblBath lblBath lblKitchen lblKitchen lblBed lblBed lblLiving lblLiving";
+      }
+      
+      .heating { grid-area: heating; }
+
+      #heatingToggle{
+        float: right;
+        padding-right: 10px;
+      }
+      
+      .tempHeating { 
+              grid-area: tempHeating; 
+              font-size: 165%;   
+        
+        }
+      
+      .btnHeating { 
+          grid-area: btnHeating;
+        }
+        .buttonUp{
+          width: 0;
+          height: 0;
+          border-left: 30px solid transparent;
+          border-right: 30px solid transparent; 
+          border-bottom: 30px solid  #414141;
+          margin-bottom: 8px;
+          cursor: pointer;
+          
+        }
+        .buttonUp:hover{
+          width: 0;
+          height: 0;
+          border-left: 30px solid transparent;
+          border-right: 30px solid transparent; 
+          border-bottom: 30px solid  #2b2b2b;
+          margin-bottom: 8px;
+          transform: scale(1.08);
+          cursor: pointer;
+        }
+        
+        .buttonDown{
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent; 
+            border-top: 30px solid #414141;
+            cursor: pointer;
+        }
+        .buttonDown:hover{
+          width: 0;
+          height: 0;
+          border-left: 30px solid transparent;
+          border-right: 30px solid transparent; 
+          border-top: 30px solid  #2b2b2b;
+          transform: scale(1.08);
+          cursor: pointer;
+        }
+      .tempBath { 
+          grid-area: tempBath; 
+          font-size: 165%;
+        }
+      
+      .btnBath { grid-area: btnBath; }
+
+     
+      
+      .tempKitchen { 
+          grid-area: tempKitchen; 
+          font-size: 165%;
+        }
+      
+      .btnKitchen { grid-area: btnKitchen; }
+
+     
+      
+      .tempBed { 
+          grid-area: tempBed; 
+          font-size: 165%;
+        }
+      
+      .btnBed { grid-area: btnBed; }
+
+   
+      
+      .tempLiving { 
+          grid-area: tempLiving; 
+          font-size: 165%;
+        }
+      
+      .btnLiving { grid-area: btnLiving; }
+
+   
+      
+      .lblCH { grid-area: lblCH;
+                padding-top: 62px;
+                font-size: 70%;
+    }
+      
+      .lblBath { 
+          grid-area: lblBath;
+          padding-top: 62px;
+          font-size: 70%;
+    }
+      
+      .lblKitchen {
+          grid-area: lblKitchen;
+          padding-top: 62px;
+          font-size: 70%;
+    }
+      
+      .lblBed { 
+          grid-area: lblBed;
+          padding-top: 62px;
+          font-size: 70%;
+    }
+      
+      .lblLiving { 
+          grid-area: lblLiving;
+          padding-top: 62px;
+          font-size: 70%;
+    }
+      
+  
+    /*Formatierung des Bereichs Current Weather.*/
+  .Weather-Overview { 
+      grid-area: Weather-Overview; 
+      background-color: #01ACE2;
+      border-radius: 10px; 
+      padding-left: 10px;
+      padding-top: 10px;
+      display: inline-block;
+      text-align: left;
+    }
+    .Weather-Overview:hover{
+      transform: scale(1.0080);
+    }
+
+    .Weather-Overview { 
+        grid-area: Weather-Overview; 
+        background-color: #01ACE2;
+        border-radius: 10px; 
+        padding-left: 10px;
+        padding-top: 10px;
+        display: inline-block;
+        text-align: left;
+      }
+      .systemStatus { 
+        grid-area: systemStatus; 
+        background-color: #01ACE2;
+        border-radius: 10px; 
+        padding-left: 10px;
+        padding-top: 10px;
+        display: inline-block;
+        text-align: left;
+      }
+      .systemStatus:hover{
+        transform: scale(1.0080);
+      }
+    /*Positionierung und Größenanpassung des Icons im Bereich Current Weather*/
+    .icon{
+        
+        text-align: center;
+        font-size: 500%;
+    }
+    .status{
+        display: table-cell;
+        height: 195px;
+        width: 600px;
+        font-size: 100%;
+        vertical-align: middle;
+        text-align: center;
+    }
+    
+  
+  .Blinds { 
+      grid-area: Blinds; 
+      background-color: #01ACE2; 
+      border-radius: 10px;
+      padding-top: 10px;
+      padding-left: 10px;
+    }
+    .Blinds:hover{
+      transform: scale(1.0080);
+    }
+
+  .sliders{
+      width: 100%;
+  }
+
+  input[type=range]{
+    
+    appearance: none;  
+    transform: rotate(-90deg); 
+    height: 3px;
+    width: 70%;
+      border-radius: 0.5px;
+      background-color: black ;
+      opacity: 0.7;
+      outline: none;
+      scroll-behavior: inherit;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    appearance: none;
+      border: 3px solid black;
+      width: 20px;
+      max-width: 80px;
+      height: 20px;
+      border-radius: 50%;
+      bottom: 11px;
+      background-color:#01ACE2;
+      opacity: 0.9;
+      cursor: -webkit-grab;
+  }
+
+  
+    .grid-containerDown {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 10% 20% 40% 25%;
+        gap: 20px 80px;
+        grid-template-areas:
+          "Blinds Blinds Blinds Blinds"
+          "percBath percKitchen percBed percLiving"
+          "sliderBath sliderKitchen sliderBed sliderLiving"
+          "bathroom kitchen bedroom livingroom";
+      }
+      
+      .Blinds { grid-area: Blinds; }
+      
+      .bathroom { 
+          grid-area: bathroom;
+          font-size: 60%;
+          padding-left: 95px;
+          padding-top: 10px;          
+     }
+      
+      .kitchen { 
+          grid-area: kitchen; 
+          font-size: 60%;
+          padding-left: 108px;
+          padding-top: 10px; 
+        }
+      
+      .bedroom { 
+          grid-area: bedroom; 
+          font-size: 60%;
+          padding-left: 100px;
+          padding-top: 10px;
+        }
+      
+      .livingroom { 
+          grid-area: livingroom; 
+          font-size: 60%;
+          padding-left: 95px;
+          padding-top: 10px;
+        }
+      
+      .sliderBath { 
+          grid-area: sliderBath; 
+          padding-left: 50px; 
+          padding-top: 25px;
+        }
+      
+      .sliderKitchen { 
+          grid-area: sliderKitchen; 
+          padding-left: 50px; 
+          padding-top: 25px;
+        }
+      
+      .sliderBed { 
+          grid-area: sliderBed; 
+          padding-left: 50px; 
+          padding-top: 25px;
+        }
+      
+      .sliderLiving { 
+          grid-area: sliderLiving; 
+          padding-left: 50px; 
+          padding-top: 25px;
+        }
+      
+      .percBath { 
+          grid-area: percBath; 
+          font-size: 50%;
+          padding-left: 120px;
+          
+          
+        }
+      
+      .percKitchen { 
+          grid-area: percKitchen; 
+          font-size: 50%;
+          padding-left: 120px;
+          padding-bottom: 10px;
+           
+        }
+      
+      .percBed { 
+          grid-area: percBed; 
+          font-size: 50%;
+          padding-left: 120px;
+          padding-bottom: 10px;
+           
+        }
+      
+      .percLiving { 
+          grid-area: percLiving; 
+          font-size: 50%;
+          padding-left: 120px; 
+          padding-bottom: 10px;
+        }
+      
+
+#uhr{
+
+   float: right;
+   padding-right: 20px;
+
+}
+
+
+
+span.switcher {
+  position: relative;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 20px 20px;
+}
+span.switcher input {
+  appearance: none;
+  position: relative;
+  float: right;
+  margin-top: -10px;
+  
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #414141;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+
+span.switcher input:before, span.switcher input:after {
+  z-index: 2;
+  position: absolute;
+  float: right;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+span.switcher input:before {
+  content: 'Auto';
+  left: 20px;
+}
+
+span.switcher input:after {
+  content: 'Manual';
+  right: 20px;
+}
+
+span.switcher label {
+  z-index: 1;
+  position: absolute;
+  float: right;
+  top: -10px;
+  bottom: 10px;
+  border-radius: 5px;
+}
+
+span.switcher.switcher-1 input {
+  transition: 0.25s -0.1s;
+}
+span.switcher.switcher-1 input:checked {
+  background-color: #fff;
+}
+span.switcher.switcher-1 input:checked:before {
+  color: #fff;
+  transition: color 0.5s 0.2s;
+}
+span.switcher.switcher-1 input:checked:after {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher.switcher-1 input:checked + label {
+  left: -3px;
+  right: 100px;
+  background: #414141;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+span.switcher.switcher-1 input:not(:checked) {
+  background: #414141;
+  transition: background 0.5s -0.1s;
+}
+span.switcher.switcher-1 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher.switcher-1 input:not(:checked):after {
+  color: #414141;
+  transition: color 0.5s 0.2s;
+}
+span.switcher.switcher-1 input:not(:checked) + label {
+  left: 100px;
+  right: 3px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+
+/* Hier der Code für den zweiten Switcher*/
+
+span.switcher2 {
+  position: relative; ;
+  float: right;
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  margin: 10px -1100px;
+}
+span.switcher2 input {
+  appearance: none;
+  position: relative;
+  float: right;
+  margin-top: -10px;
+  
+  width: 200px;
+  height: 40px;
+  border-radius: 5px;
+  background-color: #414141;
+  outline: none;
+  font-family: 'Oswald', sans-serif;
+}
+
+span.switcher2 input:before, span.switcher2 input:after {
+  z-index: 2;
+  position: absolute;
+  float: right;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #fff;
+}
+
+span.switcher2 input:before {
+  content: 'Auto';
+  left: 20px;
+}
+
+span.switcher2 input:after {
+  content: 'Manual';
+  right: 20px;
+}
+
+span.switcher2 label {
+  z-index: 1;
+  position: absolute;
+  float: right;
+  top: -10px;
+  bottom: 10px;
+  border-radius: 5px;
+}
+
+span.switcher2.switcher-2 input {
+  transition: 0.25s -0.1s;
+}
+span.switcher2.switcher-2 input:checked {
+  background-color: #fff;
+}
+span.switcher2.switcher-2 input:checked:before {
+  color: #fff;
+  transition: color 0.5s 0.2s;
+}
+span.switcher2.switcher-2 input:checked:after {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher2.switcher-2 input:checked + label {
+  left: -3px;
+  right: 100px;
+  background: #414141;
+  transition: left 0.5s, right 0.4s 0.2s;
+}
+span.switcher2.switcher-2 input:not(:checked) {
+  background: #414141;
+  transition: background 0.5s -0.1s;
+}
+span.switcher2.switcher-2 input:not(:checked):before {
+  color: #ccc;
+  transition: color 0.5s;
+}
+span.switcher2.switcher-2 input:not(:checked):after {
+  color: #414141;
+  transition: color 0.5s 0.2s;
+}
+span.switcher2.switcher-2 input:not(:checked) + label {
+  left: 100px;
+  right: 3px;
+  background: #fff;
+  transition: left 0.4s 0.2s, right 0.5s, background 0.35s -0.1s;
+}
+
+
+
+
+
