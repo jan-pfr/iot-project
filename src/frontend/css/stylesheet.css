@@ -36,7 +36,7 @@ body{
   .grid-containerUp {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 70px 300px 300px;
+    grid-template-rows: 70px 320px 300px;
     gap: 12px 12px;
     grid-template-areas:
       'Headline Headline Headline Headline'
@@ -70,15 +70,34 @@ body{
     .grid-container {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
-        grid-template-rows: 1fr 1fr 1fr;
+        grid-template-rows: 10% 60% 10% 10% ;
         gap: 0px 0px;
         grid-template-areas:
-          "heating heating heating heating heating heating heating heating heating heating"
+          "heating heating heating heating heating heating heating toggleHeater toggleHeater toggleHeater"
           "tempHeating btnHeating tempBath btnBath tempKitchen btnKitchen tempBed btnBed tempLiving btnLiving"
+          "currHeating currHeating currBath currBath currKitchen currKitchen currBed currBed currLiving currLiving"
           "lblCH lblCH lblBath lblBath lblKitchen lblKitchen lblBed lblBed lblLiving lblLiving";
       }
       
       .heating { grid-area: heating; }
+      .toggleHeater{ grid-area: toggleHeater;}
+      
+      
+      .currHeating{ grid-area: currHeating;
+                    margin-top: -40px;
+      }
+      .currBath{ grid-area: currBath;
+      margin-top: -40px;
+      }
+      .currKitchen{ grid-area: currKitchen;
+      margin-top: -40px;
+      }
+      .currBed{ grid-area: currBed;
+      margin-top: -40px;
+      }
+      .currLiving{ grid-area: currLiving;
+      margin-top: -40px;
+      }
 
       #heatingToggle{
         float: right;
@@ -88,11 +107,12 @@ body{
       .tempHeating { 
               grid-area: tempHeating; 
               font-size: 165%;   
-        
+              margin-top: 60px;
         }
       
       .btnHeating { 
           grid-area: btnHeating;
+          margin-top: 60px;
         }
         .buttonUp{
           width: 0;
@@ -135,65 +155,78 @@ body{
       .tempBath { 
           grid-area: tempBath; 
           font-size: 165%;
+          margin-top: 60px;
         }
       
-      .btnBath { grid-area: btnBath; }
+      .btnBath { grid-area: btnBath; 
+      margin-top: 60px;
+    }
 
      
       
       .tempKitchen { 
           grid-area: tempKitchen; 
           font-size: 165%;
+          margin-top: 60px;
         }
       
-      .btnKitchen { grid-area: btnKitchen; }
+      .btnKitchen { grid-area: btnKitchen;
+                    margin-top: 60px; 
+        }
 
      
       
       .tempBed { 
           grid-area: tempBed; 
           font-size: 165%;
+          margin-top: 60px;
         }
       
-      .btnBed { grid-area: btnBed; }
+      .btnBed { grid-area: btnBed;
+                margin-top: 60px;
+      }
 
    
       
       .tempLiving { 
           grid-area: tempLiving; 
           font-size: 165%;
+          margin-top: 60px;
         }
       
-      .btnLiving { grid-area: btnLiving; }
+      .btnLiving { grid-area: btnLiving;
+                   margin-top: 55px;
+      
+      }
 
    
       
       .lblCH { grid-area: lblCH;
-                padding-top: 62px;
+                margin-top: 50px;
                 font-size: 70%;
     }
       
       .lblBath { 
           grid-area: lblBath;
-          padding-top: 62px;
+          margin-top: 50px;
           font-size: 70%;
     }
       
       .lblKitchen {
           grid-area: lblKitchen;
-          padding-top: 62px;
+          margin-top: 50px;
           font-size: 70%;
     }
       
       .lblBed { 
           grid-area: lblBed;
-          padding-top: 62px;
+          margin-top: 50px;
           font-size: 70%;
     }
       
       .lblLiving { 
           grid-area: lblLiving;
-          padding-top: 62px;
+          margin-top: 50px;
           font-size: 70%;
     }
       
@@ -293,16 +326,17 @@ body{
     .grid-containerDown {
         display: grid;
         grid-template-columns: 1fr 1fr 1fr 1fr;
-        grid-template-rows: 10% 20% 40% 25%;
+        grid-template-rows: 5% 20% 40% 25%;
         gap: 20px 80px;
         grid-template-areas:
-          "Blinds Blinds Blinds Blinds"
+          "blindsHeadline blindsHeadline blindsHeadline toggleBlinds"
           "percBath percKitchen percBed percLiving"
           "sliderBath sliderKitchen sliderBed sliderLiving"
           "bathroom kitchen bedroom livingroom";
       }
       
-      .Blinds { grid-area: Blinds; }
+      .blindHeadline { grid-area: blindsHeadline; }
+      .toggleBlinds { grid-area: toggleBlinds; }
       
       .bathroom { 
           grid-area: bathroom;
@@ -403,7 +437,7 @@ span.switcher {
   width: 200px;
   height: 40px;
   border-radius: 5px;
-  margin: 20px 20px;
+  margin: 10px 20px;
 }
 span.switcher input {
   appearance: none;
@@ -494,7 +528,7 @@ span.switcher2 {
   width: 200px;
   height: 40px;
   border-radius: 5px;
-  margin: 10px -1100px;
+  margin: 10px 20px;
 }
 span.switcher2 input {
   appearance: none;
