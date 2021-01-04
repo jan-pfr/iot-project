@@ -1,20 +1,25 @@
 const express = require("express");
 const http = require("http");
 const mqtt = require("mqtt");
+const config = require("./config.json");
 
 var client_options = {
   clientId: "http-server",
 };
 
 var mqtt_status = {
-  weather: null,
+  weather: {
+    temperature: null,
+    city: config.city,
+  },
+  blinds: null,
 };
 
 const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
 
 //On connecting to the broker subscribe to topic
 mqtt_client.on("connect", function () {
-  topic = "local/temperature";
+  topic = "local/weather";
   mqtt_client.subscribe(topic, () => {
     console.log("Subscribed on %s", topic);
   });
@@ -22,10 +27,10 @@ mqtt_client.on("connect", function () {
 
 //Printing incoming messages to topic
 mqtt_client.on("message", function (topic, message) {
-  message = parseInt(message.toString());
+  message = message.toString();
   console.log("%s : %s", topic, message);
 
-  if (topic == "local/temperature") {
+  if (topic == "local/weather") {
     mqtt_status.weather = message;
   }
 });
@@ -47,7 +52,7 @@ router.get("/status/all", (req, res, next) => {
 
 router.get("/status/:device/", (req, res) => {
   device = req.params.device;
-  value = mqtt_status[device].toString();
+  value = mqtt_status[device];
 
   if (isSet(device)) {
     res.status(200).send(value);

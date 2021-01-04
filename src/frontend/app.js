@@ -1,10 +1,23 @@
 $(document).ready(() => {
-  const url = "http://localhost:3000/status/all";
+  const url = "http://localhost:3000/status/weather";
   $.ajax({
     url,
     type: "GET",
-    success: (result) => {
-      $("div.temperature").html(result.weather);
+    success: (weather) => {
+      weather = JSON.parse(weather);
+      console.log("GET status/weather", weather);
+      $("div.temperature").html(weather.temperature);
+      $("span.city").html(
+        weather.city + ` (${weather.description.toLowerCase()})`
+      );
+
+      //Calculating whether current time is daytime or nighttime and setting the corresponding icon class
+      var sunrise = weather.sunrise;
+      var sunset = weather.sunset;
+      var now = Math.floor(new Date().valueOf() / 1000);
+      isDay = now > sunrise && now < sunset;
+      timeOfDay = isDay ? "day" : "night";
+      $("#weather-icon").addClass(`wi wi-owm-${timeOfDay}-${weather.id}`);
     },
   });
 });
