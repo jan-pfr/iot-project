@@ -10,6 +10,7 @@ let initialised = false;
 const weather_topic = "local/weather";
 const heating_values_topic = "appliances/heating";
 const heating_status_topic = "appliances/status";
+const heating_status_change_topic = "appliances/status/change";
 
 var outside_temperature = null;
 const ideal_temperature = 23;
@@ -39,6 +40,9 @@ mqtt_client.on("connect", function () {
   mqtt_client.subscribe(weather_topic, () => {
     console.log("Subscribed on %s", weather_topic);
   });
+  mqtt_client.subscribe(heating_status_change_topic, () => {
+    console.log("Subscribed on %s", heating_status_change_topic);
+  });
 });
 
 //Printing incoming messages to topic
@@ -52,21 +56,19 @@ mqtt_client.on("message", function (topic, message) {
     //Initialise heating_elements with calculated temperature only ONCE
     !initialised ? initialise() : undefined;
   }
+  if (topic == heating_status_change_topic) {
+    message = JSON.parse(message);
+  }
 });
 
 setInterval(() => {
   publishTemperatures();
   publishStatus();
-}, 1000);
-
-// setInterval(() => {
-//   publishTemperatures();
-//   publishStatus();
-// }, 1000);
+}, 2000);
 
 setInterval(() => {
   updateHeatingValues();
-}, 1000);
+}, 10000);
 
 //Helper function for publishing current heating temperature data
 function publishTemperatures() {
