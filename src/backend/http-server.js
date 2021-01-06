@@ -15,13 +15,14 @@ var mqtt_status = {
   blinds: null,
 };
 
+weather_topic = "local/weather";
+
 const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
 
 //On connecting to the broker subscribe to topic
 mqtt_client.on("connect", function () {
-  topic = "local/weather";
-  mqtt_client.subscribe(topic, () => {
-    console.log("Subscribed on %s", topic);
+  mqtt_client.subscribe(weather_topic, () => {
+    console.log("Subscribed on %s", weather_topic);
   });
 });
 
@@ -30,7 +31,7 @@ mqtt_client.on("message", function (topic, message) {
   message = message.toString();
   console.log("%s : %s", topic, message);
 
-  if (topic == "local/weather") {
+  if (topic == weather_topic) {
     mqtt_status.weather = message;
   }
 });

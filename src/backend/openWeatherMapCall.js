@@ -1,15 +1,9 @@
 const fetch = require("node-fetch");
 const config = require("./config.json");
 
-const URL =
-  "http://api.openweathermap.org/data/2.5/weather?q=" +
-  config.city +
-  "&units=" +
-  config.unit +
-  "&lang=" +
-  config.lang +
-  "&appid=" +
-  config.apikey;
+const hotLocation = false;
+
+const URL = getURL();
 
 function getWeatherData() {
   console.log("Getting weather data from: " + URL);
@@ -25,11 +19,32 @@ function getWeatherData() {
         id: data.weather[0].id,
         temperature,
         description: data.weather[0].description,
-        city: config.city,
+        city: data.name,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
       };
       return JSON.stringify(weatherData);
     });
+}
+
+//Assembles API URL based on hot/cold location
+function getURL() {
+  let url = "http://api.openweathermap.org/data/2.5/weather?";
+  if (hotLocation) {
+    //Get data for hot location (Brazil)
+    url += "id=" + config.test_id;
+  } else {
+    //Get data for cold location (Furtwangen)
+    url += "q=" + config.city;
+  }
+  return (
+    url +
+    "&units=" +
+    config.unit +
+    "&lang=" +
+    config.lang +
+    "&appid=" +
+    config.apikey
+  );
 }
 module.exports = { getWeatherData };

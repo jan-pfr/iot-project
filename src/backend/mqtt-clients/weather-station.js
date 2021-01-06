@@ -14,7 +14,7 @@ initialize();
 
 //Update weather data every 10 minutes (= OW API refresh cycle)
 setInterval(() => {
-  owm.updateWeatherData().then((data) => (weatherData = data));
+  owm.getWeatherData().then((data) => (weatherData = data));
 }, 600000);
 
 //Publish current weather data every 2 seconds
