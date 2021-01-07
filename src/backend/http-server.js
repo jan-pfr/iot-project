@@ -1,83 +1,56 @@
 const express = require("express");
 const http = require("http");
-const mqtt = require("mqtt");
-const config = require("./config.json");
 
-var client_options = {
-  clientId: "http-server",
-};
+class HTTPServerWrapper {
+  port = process.env.PORT || 3000;
 
-var mqtt_status = {
-  weather: {
-    temperature: null,
-    city: config.city,
-  },
-  blinds: null,
-};
+  constructor(cache) {
+    this.cache = cache;
+    this.app = express();
+    this.router = express.Router();
 
-weather_topic = "local/weather";
+    this.router.get("/status/all", (req, res) => {
+      res.status(200).send(cache);
+    });
 
-const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
+    this.router.get("/status/:device/", (req, res) => {
+      var device = req.params.device;
 
-//On connecting to the broker subscribe to topic
-mqtt_client.on("connect", function () {
-  mqtt_client.subscribe(weather_topic, () => {
-    console.log("Subscribed on %s", weather_topic);
-  });
-});
+      if (device == "weather") {
+        if (this.isSet("local/weather")) {
+          res.status(200).send(cache["local/weather"]);
+        } else {
+          this.send404(res);
+        }
+      }
+    });
 
-//Printing incoming messages to topic
-mqtt_client.on("message", function (topic, message) {
-  message = message.toString();
-  console.log("%s : %s", topic, message);
+    // Setting CORS headers
+    this.app.use((req, res, next) => {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
+      res.header("Access-Control-Allow-Headers", "Content-Type");
+      next();
+    });
 
-  if (topic == weather_topic) {
-    mqtt_status.weather = message;
+    this.app.use(this.router);
+
+    this.server = http.createServer(this.app);
+
+    this.server.listen(this.port);
   }
-});
 
-const app = express();
-const router = express.Router();
-
-// Setting CORS headers
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "*");
-  res.header("Access-Control-Allow-Methods", "GET, PUT, POST, DELETE");
-  res.header("Access-Control-Allow-Headers", "Content-Type");
-  next();
-});
-
-router.get("/status/all", (req, res, next) => {
-  res.status(200).send(mqtt_status);
-});
-
-router.get("/status/:device/", (req, res) => {
-  device = req.params.device;
-  value = mqtt_status[device];
-
-  if (isSet(device)) {
-    res.status(200).send(value);
-  } else {
-    send404();
-  }
-});
-
-app.use(router);
-
-const http_port = process.env.PORT || 3000;
-
-const http_server = http.createServer(app);
-
-http_server.listen(http_port);
-
-function isSet(of) {
-  for (const [device, value] of Object.entries(mqtt_status)) {
-    if (device == of) {
-      return value != null;
+  isSet(of) {
+    for (const [device, value] of Object.entries(this.cache)) {
+      if (device == of) {
+        return value != null;
+      }
     }
   }
+
+  send404(res) {
+    return res.status(404).json();
+  }
 }
 
-function send404() {
-  return res.status(404).json();
-}
+module.exports = HTTPServerWrapper;

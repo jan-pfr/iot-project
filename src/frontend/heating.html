@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heating</title>
+    <script src="./jquery-3.5.1.min.js"></script>
+    <script src="./../../node_modules/socket.io-client/dist/socket.io.js"></script>
+    <script type="text/javascript" src="./heating.js"></script>
+
+    <style>
+        .heating {
+            display: flex;
+
+
+        }
+
+        .heating .bathroom {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="heating">
+        <div class="bathroom">
+            <div class="title"></div>
+            <div class="target"></div>
+            <div class="actual"></div>
+            <button class="up">+</button>
+            <button class="down">-</button>
+        </div>
+    </div>
+
+</body>
+
+</html>

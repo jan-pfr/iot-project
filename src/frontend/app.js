@@ -1,10 +1,10 @@
 $(document).ready(() => {
+  // MANDATORY: GET status/weather call
   const url = "http://localhost:3000/status/weather";
   $.ajax({
     url,
     type: "GET",
     success: (weather) => {
-      weather = JSON.parse(weather);
       console.log("GET status/weather", weather);
       $("div.temperature").html(weather.temperature);
       $("span.city").html(
@@ -20,7 +20,57 @@ $(document).ready(() => {
       $("#weather-icon").addClass(`wi wi-owm-${timeOfDay}-${weather.id}`);
     },
   });
+  // End GET status/weather
+
+  // Updating appliances/heating/status
+  const url2 = "http://localhost:3000/appliances/status";
+
+  var socket = io("ws://localhost:3000");
+  socket.emit("test", "Hello, World!");
+
+  socket.on("appliances/heating", function (data) {
+    for (const key in data) {
+      updateHeatingValues(key, data[key]);
+    }
+  });
+
+  // WebSocket Connection
+  // webSocketURL = "ws://localhost:1333";
+  // webSocket = new WebSocket(webSocketURL);
+  // webSocket.onopen = function (openEvent) {
+  //   console.log("WebSocket opened");
+  // };
+  // webSocket.onclose = function (closeEvent) {};
+  // webSocket.onerror = function (errorEvent) {
+  //   console.log("WebSocket ERROR: " + JSON.stringify(errorEvent, null, 4));
+  // };
+  // webSocket.onmessage = function (messageEvent) {
+  //   var wsMsg = messageEvent.data;
+  //   // console.log("WebSocket MESSAGE: " + wsMsg);
+  //   console.log("Message");
+  //   if (wsMsg.indexOf("error") > 0) {
+  //     document.getElementById("incomingMsgOutput").value +=
+  //       "error: " + wsMsg.error + "\r\n";
+  //   } else {
+  //     document.getElementById("incomingMsgOutput").value +=
+  //       "message: " + wsMsg + "\r\n";
+  //   }
+  // };
+  // bath_target = $("#tempBath");
+  // $("#btnUpBath").click(() => {
+  //   // $("#tempBath").html($("#tempBath").html + 1);
+  //   data = {
+  //     topic: "appliances/heating/bathroom",
+  //     message: "Hello, World",
+  //   };
+  //   webSocket.send(JSON.stringify(data));
+  // });
 });
+
+function updateHeatingValues(room, value) {
+  $(`.heating .${room} .title`).html(room);
+  $(`.heating .${room} .actual`).html(value);
+}
 
 //Function uhr() initiates Date() in a variable and extracts hours and minutes in two more variables that are set into label uhr.
 function uhr() {
