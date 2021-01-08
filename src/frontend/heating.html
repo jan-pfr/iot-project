@@ -12,8 +12,12 @@
     <style>
         .heating {
             display: flex;
+            justify-content: space-between;
 
+        }
 
+        button.active {
+            background-color: aliceblue;
         }
 
         .heating .bathroom {
@@ -43,6 +47,14 @@
             <div class="actual_temperature"></div>
             <button class="up">+</button>
             <button class="down">-</button>
+        </div>
+        <div>
+            <div> Simulation Speed </div>
+            <button class="speed" data-value=0.25>0,25x</button>
+            <button class="speed" data-value=0.5>0,5x</button>
+            <button class="speed active" data-value=1>1x</button>
+            <button class="speed" data-value=2>2x</button>
+            <button class="speed" data-value=5>5x</button>
         </div>
     </div>
 

@@ -11,16 +11,15 @@ const weather_topic = "local/temperature";
 const heating_topic = "appliances/heating";
 const heating_inbound = heating_topic + "/inbound";
 const heating_outbound = heating_topic + "/outbound";
+const simulation_speed_topic = "speed";
 
 // Simulation values
 var simulation_interval = 16.66;
 var simulation_speed = 1;
 var publish_interval = 500;
 var heating_power = 1;
-var heating_increase =
-  ((0.005 * heating_power) / simulation_interval) * simulation_speed;
-var rate_of_temperature_decay =
-  (0.00125 / simulation_interval) * simulation_speed;
+var heating_increase = 0.005;
+var temperature_decay = 0.00125;
 
 var outside_temperature = null;
 
@@ -63,6 +62,9 @@ mqtt_client.on("connect", () => {
   mqtt_client.subscribe(heating_inbound, () => {
     console.log("Subscribed on %s", heating_inbound);
   });
+  mqtt_client.subscribe(simulation_speed_topic, () => {
+    console.log("Subscribed on %s", simulation_speed_topic);
+  });
 });
 
 //Printing incoming messages to topic
@@ -82,6 +84,10 @@ mqtt_client.on("message", function (topic, message) {
       }
     }
     publishData();
+  }
+  if (topic == simulation_speed_topic) {
+    simulation_speed = +message;
+    setSimulationVariables();
   }
 });
 
@@ -122,9 +128,9 @@ function simulateCycle() {
         !isColderOutside);
     if (doesNotExceedOutsideTemperature) {
       if (isColderOutside) {
-        delta_temperature -= rate_of_temperature_decay;
+        delta_temperature -= temperature_decay;
       } else {
-        delta_temperature += rate_of_temperature_decay;
+        delta_temperature += temperature_decay;
       }
     }
     heating_elements[key].actual_temperature += delta_temperature;
@@ -133,6 +139,7 @@ function simulateCycle() {
 
 //Setting default values for heating device initialization
 function initialise() {
+  setSimulationVariables();
   //Calculating the maximum possible difference from the ideal temperature;
   range = ideal_temperature - outside_temperature;
 
@@ -150,4 +157,18 @@ function initialise() {
   setInterval(() => {
     simulateCycle();
   }, simulation_interval);
+}
+
+function setHeatingIncrease() {
+  heating_increase =
+    ((0.005 * heating_power) / simulation_interval) * simulation_speed;
+}
+
+function setTemperatureDecay() {
+  temperature_decay = (0.00125 / simulation_interval) * simulation_speed;
+}
+
+function setSimulationVariables() {
+  setHeatingIncrease();
+  setTemperatureDecay();
 }

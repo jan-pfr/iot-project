@@ -4,6 +4,7 @@ $(() => {
   const heating_topic = "appliances/heating";
   const heating_inbound = heating_topic + "/inbound";
   const heating_outbound = heating_topic + "/outbound";
+  const simulation_speed_topic = "speed";
   var initialised = false;
 
   socket.on(heating_outbound, (message) => {
@@ -13,15 +14,16 @@ $(() => {
 
     if (!initialised) {
       for (const room in message) {
-        initialiseToggles(room, heating_inbound);
-        initialiseButtons(room, heating_inbound);
+        initToggles(room, heating_inbound);
+        initTempChangeButtons(room, heating_inbound);
       }
+      initSpeedButtons(simulation_speed_topic);
       initialised = !initialised;
     }
   });
 });
 
-function initialiseToggles(room, heating_topic) {
+function initToggles(room, heating_topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
     let property = $toggle.attr("class").replace("toggle ", "");
@@ -30,7 +32,7 @@ function initialiseToggles(room, heating_topic) {
   });
 }
 
-function initialiseButtons(room, heating_topic) {
+function initTempChangeButtons(room, heating_topic) {
   $(`.heating .${room} button:not(.toggle)`).on("click", (event) => {
     let $button = $(event.target);
     let target_temperature = +$(`.heating .${room} .target_temperature`).html();
@@ -44,6 +46,17 @@ function initialiseButtons(room, heating_topic) {
       "target_temperature",
       target_temperature
     );
+  });
+}
+
+function initSpeedButtons(topic) {
+  $(`button.speed`).on("click", (event) => {
+    let $button = $(event.target);
+    $button.addClass("active");
+    $button.siblings().removeClass("active");
+    let value = $button.data("value");
+    console.log(value);
+    socket.emit(topic, value);
   });
 }
 
@@ -72,7 +85,7 @@ function updateHeatingValues(room, properties) {
   $(`.heating .${room} .power`).attr("data-value", properties.power);
   $(`.heating .${room} .power`).html(properties.power ? "On" : "Off");
   $(`.heating .${room} .actual_temperature`).html(
-    properties.actual_temperature
+    properties.actual_temperature.toFixed(2)
   );
   $(`.heating .${room} .target_temperature`).html(
     properties.target_temperature

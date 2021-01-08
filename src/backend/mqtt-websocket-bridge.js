@@ -6,6 +6,7 @@ class MQTTWebSocketBridge {
   heating_topic = "appliances/heating";
   heating_inbound = this.heating_topic + "/inbound";
   heating_outbound = this.heating_topic + "/outbound";
+  simulation_speed_topic = "speed";
 
   constructor(cache, http_server) {
     this.cache = cache;
@@ -22,6 +23,12 @@ class MQTTWebSocketBridge {
       console.log("WebSocket client connected");
       socket.on(this.heating_inbound, (message) => {
         this.mqtt_client.publish(this.heating_inbound, JSON.stringify(message));
+      });
+      socket.on(this.simulation_speed_topic, (message) => {
+        this.mqtt_client.publish(
+          this.simulation_speed_topic,
+          message.toString()
+        );
       });
     });
   }
