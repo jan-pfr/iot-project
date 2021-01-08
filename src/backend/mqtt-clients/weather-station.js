@@ -7,10 +7,10 @@ const client_options = {
 
 const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
 
-const topic = "local/weather";
+const topic = "local/temperature";
 var weatherData = "";
 
-initialize();
+initialise();
 
 //Update weather data every 10 minutes (= OW API refresh cycle)
 setInterval(() => {
@@ -23,7 +23,7 @@ setInterval(() => {
 }, 2000);
 
 //Initialize with current data then publish
-function initialize() {
+function initialise() {
   owm.getWeatherData().then((data) => {
     weatherData = data;
     publish();

@@ -3,6 +3,7 @@ const http = require("http");
 
 class HTTPServerWrapper {
   port = process.env.PORT || 3000;
+  weather_topic = "local/temperature";
 
   constructor(cache) {
     this.cache = cache;
@@ -17,8 +18,8 @@ class HTTPServerWrapper {
       var device = req.params.device;
 
       if (device == "weather") {
-        if (this.isSet("local/weather")) {
-          res.status(200).send(cache["local/weather"]);
+        if (this.isSet(this.weather_topic)) {
+          res.status(200).send(cache[this.weather_topic]);
         } else {
           this.send404(res);
         }

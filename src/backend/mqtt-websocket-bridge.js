@@ -3,6 +3,7 @@ const mqtt = require("mqtt");
 
 class MQTTWebSocketBridge {
   mqtt_clientId = "websocket-server";
+  heating_topic = "appliances/heating";
 
   constructor(cache, http_server) {
     this.cache = cache;
@@ -17,41 +18,25 @@ class MQTTWebSocketBridge {
   setupWebSocketServer() {
     this.io.on("connection", (socket) => {
       console.log("WebSocket client connected");
-      socket.on("test", (msg) => {
-        console.log("message: " + msg);
-        // data = JSON.parse(data);
-        // const topic = data.topic;
-        // const message = data.message;
-        // this.publish(topic, message);
+      socket.on(this.heating_topic, (message) => {
+        console.log("Received WS: ", message);
+        this.mqtt_client.publish(this.heating_topic, JSON.stringify(message));
       });
-
-      this.emit("server", "Hello, world!");
     });
   }
 
   setupMQTTClient() {
-    let heating_actual_topic = "appliances/heating";
     this.mqtt_client.on("connect", () => {
-      this.mqtt_client.subscribe(heating_actual_topic, () => {
-        console.log("Subscribed on %s", heating_actual_topic);
+      this.mqtt_client.subscribe(this.heating_topic, () => {
+        console.log("Subscribed on %s", this.heating_topic);
       });
     });
 
     this.mqtt_client.on("message", (topic, message) => {
       message = JSON.parse(message);
-      if (topic == heating_actual_topic) {
-        this.emit(topic, message);
-      }
+      console.log("Received MQTT: ", topic);
+      this.io.emit(topic, message);
     });
-  }
-
-  publish(topic, message) {
-    this.mqtt_client.publish(topic, message);
-    console.log("%s : %s", topic, message);
-  }
-
-  emit(event, message) {
-    this.io.emit(event, message);
   }
 }
 

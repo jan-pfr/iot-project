@@ -17,7 +17,7 @@ class MQTTServerWrapper {
     this.aedes.on("publish", (packet, client) => {
       if (client) {
         // console.log("%s : %s : %s", client.id, packet.topic, packet.payload);
-        this.cache[packet.topic] = JSON.parse(packet.payload.toString());
+        this.cache[packet.topic] = JSON.parse(packet.payload);
       }
     });
 

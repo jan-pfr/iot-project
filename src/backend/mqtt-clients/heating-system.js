@@ -7,48 +7,62 @@ const client_options = {
 const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
 let initialised = false;
 
-const weather_topic = "local/weather";
-const heating_values_topic = "appliances/heating";
-const heating_status_topic = "appliances/status";
-const heating_status_change_topic = "appliances/status/change";
+const weather_topic = "local/temperature";
+const heating_topic = "appliances/heating";
 
 var outside_temperature = null;
+
+// Initial values
 const ideal_temperature = 23;
-var isAutomatic = true;
+const isAutomatic = true;
 
 var heating_elements = {
   bathroom: {
-    temperature: null,
+    target_temperature: ideal_temperature,
+    actual_temperature: null,
     isTurnedOn: false,
+    isAutomatic: isAutomatic,
   },
   kitchen: {
-    temperature: null,
+    target_temperature: ideal_temperature,
+    actual_temperature: null,
     isTurnedOn: false,
+    isAutomatic: isAutomatic,
   },
   bedroom: {
-    temperature: null,
+    target_temperature: ideal_temperature,
+    actual_temperature: null,
     isTurnedOn: false,
+    isAutomatic: isAutomatic,
   },
   livingroom: {
-    temperature: null,
+    target_temperature: ideal_temperature,
+    actual_temperature: null,
     isTurnedOn: false,
+    isAutomatic: isAutomatic,
   },
 };
+
+// function getModes() {
+//   let modes = {};
+//   for (const key in heating_elements) {
+//     modes[key] = heating_elements[key].isAutomatic;
+//   }
+//   return JSON.stringify(modes);
+// }
 
 //On connecting to the broker subscribe to topic
 mqtt_client.on("connect", function () {
   mqtt_client.subscribe(weather_topic, () => {
     console.log("Subscribed on %s", weather_topic);
   });
-  mqtt_client.subscribe(heating_status_change_topic, () => {
-    console.log("Subscribed on %s", heating_status_change_topic);
+  mqtt_client.subscribe(heating_topic, () => {
+    console.log("Subscribed on %s", heating_topic);
   });
 });
 
 //Printing incoming messages to topic
 mqtt_client.on("message", function (topic, message) {
-  //   console.log("%s : %s", topic, message);
-
   if (topic == weather_topic) {
     message = JSON.parse(message);
     outside_temperature = message.temperature;
@@ -56,32 +70,19 @@ mqtt_client.on("message", function (topic, message) {
     //Initialise heating_elements with calculated temperature only ONCE
     !initialised ? initialise() : undefined;
   }
-  if (topic == heating_status_change_topic) {
+  if (topic == heating_topic && initialised) {
     message = JSON.parse(message);
+    for (const room in message) {
+      for (const property in message[room]) {
+        heating_elements[room][property] = message[room][property];
+      }
+    }
   }
 });
 
-setInterval(() => {
-  publishTemperatures();
-  publishStatus();
-}, 2000);
-
-setInterval(() => {
-  updateHeatingValues();
-}, 10000);
-
-//Helper function for publishing current heating temperature data
-function publishTemperatures() {
-  let temperatures = getCurrentTemperatures();
-  mqtt_client.publish(heating_values_topic, temperatures);
-  console.log("%s : %s", heating_values_topic, temperatures);
-}
-
-//Helper function for publishing current appliance state data
-function publishStatus() {
-  let status = getCurrentStatus();
-  mqtt_client.publish(heating_status_topic, status);
-  console.log("%s : %s", heating_status_topic, status);
+//Helper function for publishing current heating data
+function publishData() {
+  mqtt_client.publish(heating_topic, JSON.stringify(heating_elements));
 }
 
 function updateHeatingValues() {
@@ -91,7 +92,7 @@ function updateHeatingValues() {
       //If heating element has not reached ideal temperature and its cold outside => turn on
       //Else => turn off
       shouldBeOn =
-        heating_elements[key].temperature <= ideal_temperature - 0.75 &&
+        heating_elements[key].actual_temperature <= ideal_temperature - 0.75 &&
         outside_temperature < ideal_temperature;
       shouldBeOn
         ? (heating_elements[key].isTurnedOn = true)
@@ -101,35 +102,27 @@ function updateHeatingValues() {
 
   //Update temperature based on heating element on/off state and outside temperature
   for (const key in heating_elements) {
-    delta_temperature = 0;
+    let delta_temperature = 0;
 
     if (heating_elements[key].isTurnedOn) {
       delta_temperature += 1;
     }
 
-    if (outside_temperature < ideal_temperature) {
-      delta_temperature -= 0.25;
-    } else if (outside_temperature > ideal_temperature) {
-      delta_temperature += 0.25;
+    let isColderOutside = ideal_temperature > outside_temperature;
+    let doesNotExceedOutsideTemperature =
+      (heating_elements[key].actual_temperature > outside_temperature &&
+        isColderOutside) ||
+      (heating_elements[key].actual_temperature < outside_temperature &&
+        !isColderOutside);
+    if (doesNotExceedOutsideTemperature) {
+      if (isColderOutside) {
+        delta_temperature -= 0.25;
+      } else {
+        delta_temperature += 0.25;
+      }
     }
-    heating_elements[key].temperature += delta_temperature;
+    heating_elements[key].actual_temperature += delta_temperature;
   }
-}
-
-function getCurrentTemperatures() {
-  temperatures = {};
-  for (const key in heating_elements) {
-    temperatures[key] = heating_elements[key].temperature;
-  }
-  return JSON.stringify(temperatures);
-}
-
-function getCurrentStatus() {
-  status = {};
-  for (const key in heating_elements) {
-    status[key] = heating_elements[key].isTurnedOn;
-  }
-  return JSON.stringify(status);
 }
 
 //Setting default values for heating device initialization
@@ -140,10 +133,13 @@ function initialise() {
   for (const key in heating_elements) {
     initial_temperature =
       outside_temperature + Math.floor(Math.random() * range);
-    heating_elements[key].temperature = initial_temperature;
+    heating_elements[key].actual_temperature = initial_temperature;
   }
 
-  console.log(heating_elements);
-
   initialised = true;
+  publishData();
+  setInterval(() => {
+    updateHeatingValues();
+    publishData();
+  }, 2000);
 }
