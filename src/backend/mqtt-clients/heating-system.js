@@ -12,6 +12,16 @@ const heating_topic = "appliances/heating";
 const heating_inbound = heating_topic + "/inbound";
 const heating_outbound = heating_topic + "/outbound";
 
+// Simulation values
+var simulation_interval = 16.66;
+var simulation_speed = 1;
+var publish_interval = 500;
+var heating_power = 1;
+var heating_increase =
+  ((0.005 * heating_power) / simulation_interval) * simulation_speed;
+var rate_of_temperature_decay =
+  (0.00125 / simulation_interval) * simulation_speed;
+
 var outside_temperature = null;
 
 // Initial values
@@ -66,12 +76,12 @@ mqtt_client.on("message", function (topic, message) {
   }
   if (topic == heating_inbound && initialised) {
     message = JSON.parse(message);
-    console.log(message);
     for (const room in message) {
       for (const property in message[room]) {
         heating_elements[room][property] = message[room][property];
       }
     }
+    publishData();
   }
 });
 
@@ -88,7 +98,7 @@ function simulateCycle() {
     if (heating_elements[room].mode) {
       shouldBeOn =
         heating_elements[room].actual_temperature <=
-          heating_elements[room].target_temperature - 0.75 &&
+          heating_elements[room].target_temperature &&
         outside_temperature < heating_elements[room].target_temperature;
       shouldBeOn
         ? (heating_elements[room].power = true)
@@ -101,7 +111,7 @@ function simulateCycle() {
     let delta_temperature = 0;
 
     if (heating_elements[key].power) {
-      delta_temperature += 1;
+      delta_temperature += heating_increase;
     }
 
     let isColderOutside = ideal_temperature > outside_temperature;
@@ -112,9 +122,9 @@ function simulateCycle() {
         !isColderOutside);
     if (doesNotExceedOutsideTemperature) {
       if (isColderOutside) {
-        delta_temperature -= 0.25;
+        delta_temperature -= rate_of_temperature_decay;
       } else {
-        delta_temperature += 0.25;
+        delta_temperature += rate_of_temperature_decay;
       }
     }
     heating_elements[key].actual_temperature += delta_temperature;
@@ -135,7 +145,9 @@ function initialise() {
   initialised = true;
   publishData();
   setInterval(() => {
-    simulateCycle();
     publishData();
-  }, 2000);
+  }, publish_interval);
+  setInterval(() => {
+    simulateCycle();
+  }, simulation_interval);
 }

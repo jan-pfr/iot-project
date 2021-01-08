@@ -52,7 +52,6 @@ function toggle(topic, room, property, value) {
   message[room] = {};
   message[room][property] = !value;
   if (property == "power") {
-    console.log("Switching to manual");
     message[room]["mode"] = false;
   }
 
@@ -63,7 +62,6 @@ function changeTargetTemperature(topic, room, property, value) {
   let message = {};
   message[room] = {};
   message[room][property] = value;
-  console.log("Emitting", JSON.stringify(message));
   socket.emit(topic, message);
 }
 

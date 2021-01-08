@@ -21,7 +21,6 @@ class MQTTWebSocketBridge {
     this.io.on("connection", (socket) => {
       console.log("WebSocket client connected");
       socket.on(this.heating_inbound, (message) => {
-        console.log("Received WS: ", message);
         this.mqtt_client.publish(this.heating_inbound, JSON.stringify(message));
       });
     });
