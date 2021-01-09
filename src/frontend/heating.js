@@ -55,7 +55,6 @@ function initSpeedButtons(topic) {
     $button.addClass("active");
     $button.siblings().removeClass("active");
     let value = $button.data("value");
-    console.log(value);
     socket.emit(topic, value);
   });
 }

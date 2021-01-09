@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/jan-pfr/iot-project.git"
   },
-  "author": "Jan Pfeiffer, Ben Scheffbuch, Alex Hauser, Henrik Alt",
+  "author": "Jan Pfeiffer, Benedikt Scheffbuch, Alex Hauser, Henrik Alt",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/jan-pfr/iot-project/issues"
