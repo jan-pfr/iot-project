@@ -1,4 +1,6 @@
+// import io from "socket.io-client";
 var socket = io("ws://localhost:3000");
+// import $ from "jquery";
 
 $(() => {
   const heating_topic = "appliances/heating";

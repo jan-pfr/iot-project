@@ -24,5 +24,10 @@
     "node-fetch": "^2.6.1",
     "pug": "^3.0.0",
     "socketio": "^1.0.0"
+  },
+  "devDependencies": {
+    "jquery": "^3.5.1",
+    "webpack": "^5.12.2",
+    "webpack-cli": "^4.3.1"
   }
 }
