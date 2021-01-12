@@ -27,6 +27,7 @@ var outside_temperature = null;
 const ideal_temperature = 23;
 const isAutomatic = true;
 
+// Data
 var heating_elements = {
   bathroom: {
     target_temperature: ideal_temperature,
@@ -67,13 +68,13 @@ mqtt_client.on("connect", () => {
   });
 });
 
-//Printing incoming messages to topic
+// Event handlers on incoming messages
 mqtt_client.on("message", function (topic, message) {
   if (topic == weather_topic) {
     message = JSON.parse(message);
     outside_temperature = message.temperature;
 
-    //Initialise heating_elements with calculated temperature
+    // Initialise heating_elements at first message from weather station
     !initialised ? initialise() : undefined;
   }
   if (topic == heating_inbound && initialised) {
@@ -91,16 +92,17 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
-//Helper function for publishing current heating data
+// Helper function for publishing current heating data
 function publishData() {
   mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
 }
 
 function simulateCycle() {
-  //Update heating element on/off state based on mode (auto/manual)
+  // Update heating element on/off state based on mode (auto/manual)
   for (const room in heating_elements) {
-    //If heating element has not reached ideal temperature and its cold outside => turn on
-    //Else => turn off
+    // If heating element has not reached target temperature and its colder outside => turn on
+    // Else => turn off
+    // But only if heating element is automatic
     if (heating_elements[room].mode) {
       shouldBeOn =
         heating_elements[room].actual_temperature <=
@@ -112,7 +114,7 @@ function simulateCycle() {
     }
   }
 
-  //Update temperature based on heating element on/off state and outside temperature
+  // Update temperature based on heating element on/off state and outside temperature
   for (const key in heating_elements) {
     let delta_temperature = 0;
 
@@ -137,19 +139,21 @@ function simulateCycle() {
   }
 }
 
-//Setting default values for heating device initialization
+// Setting randomised values for heating element initialization
 function initialise() {
   setSimulationVariables();
-  //Calculating the maximum possible difference from the ideal temperature;
-  range = ideal_temperature - outside_temperature;
+  // Calculating the maximum possible difference from the ideal temperature;
+  let max_range = ideal_temperature - outside_temperature;
 
   for (const key in heating_elements) {
     initial_temperature =
-      outside_temperature + Math.floor(Math.random() * range);
+      outside_temperature + Math.floor(Math.random() * max_range);
     heating_elements[key].actual_temperature = initial_temperature;
   }
 
   initialised = true;
+
+  // Publish once and set intervals for publishing and simulation
   publishData();
   setInterval(() => {
     publishData();

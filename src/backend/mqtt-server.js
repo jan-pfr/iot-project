@@ -21,10 +21,6 @@ class MQTTServerWrapper {
       }
     });
 
-    // this.aedes.on("subscribe", (subscriptions, client) => {
-    //   console.log(subscriptions);
-    // });
-
     //Printing connects
     this.aedes.on("client", (client) => {
       console.log("%s has connected", client.id);
@@ -34,11 +30,6 @@ class MQTTServerWrapper {
     this.aedes.on("clientDisconnect", (client) => {
       console.log("%s has disconnected", client.id);
     });
-  }
-
-  publish(topic, message) {
-    console.log("%s : %s", topic, message);
-    this.aedes.publish();
   }
 }
 

@@ -2,7 +2,7 @@ const express = require("express");
 const http = require("http");
 
 class HTTPServerWrapper {
-  port = process.env.PORT || 3000;
+  port = 3000;
   weather_topic = "local/temperature";
 
   constructor(cache) {
