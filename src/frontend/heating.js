@@ -3,21 +3,19 @@ var socket = io("ws://localhost:3000");
 // import $ from "jquery";
 
 $(() => {
-  const heating_topic = "appliances/heating";
-  const heating_inbound = heating_topic + "/inbound";
-  const heating_outbound = heating_topic + "/outbound";
+  const heating_topic = "heating";
   const simulation_speed_topic = "speed";
   var initialised = false;
 
-  socket.on(heating_outbound, (message) => {
+  socket.on(heating_topic, (message) => {
     for (const room in message) {
       updateHeatingValues(room, message[room]);
     }
 
     if (!initialised) {
       for (const room in message) {
-        initToggles(room, heating_inbound);
-        initTempChangeButtons(room, heating_inbound);
+        initToggles(room, heating_topic);
+        initTempChangeButtons(room, heating_topic);
       }
       initSpeedButtons(simulation_speed_topic);
       initialised = !initialised;
@@ -25,16 +23,16 @@ $(() => {
   });
 });
 
-function initToggles(room, heating_topic) {
+function initToggles(room, topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
     let property = $toggle.attr("class").replace("toggle ", "");
     let value = $toggle.attr("data-value") == "true";
-    toggle(heating_topic, room, property, value);
+    toggle(topic, room, property, value);
   });
 }
 
-function initTempChangeButtons(room, heating_topic) {
+function initTempChangeButtons(room, topic) {
   $(`.heating .${room} button:not(.toggle)`).on("click", (event) => {
     let $button = $(event.target);
     let target_temperature = +$(`.heating .${room} .target_temperature`).html();
@@ -43,7 +41,7 @@ function initTempChangeButtons(room, heating_topic) {
         ? target_temperature + 1
         : target_temperature - 1;
     changeTargetTemperature(
-      heating_topic,
+      topic,
       room,
       "target_temperature",
       target_temperature
@@ -68,7 +66,7 @@ function toggle(topic, room, property, value) {
   if (property == "power") {
     message[room]["mode"] = false;
   }
-
+  console.log("Emitting %s", JSON.stringify(message));
   socket.emit(topic, message);
 }
 

@@ -1,14 +1,12 @@
 const HTTPServerWrapper = require("./http-server");
-const MQTTServerWrapper = require("./mqtt-server");
+const MQTTServerWrapper = require("./mqtt-broker");
 const MQTTWebSocketBridge = require("./mqtt-websocket-bridge");
-
-const httpPort = 3000;
-const mqttPort = 1885;
+const config = require("./../config.json");
 
 var cache = {};
 
-const http = new HTTPServerWrapper(cache, httpPort);
+const http = new HTTPServerWrapper(cache, config.http_port);
 
-new MQTTServerWrapper(cache, mqttPort);
+new MQTTServerWrapper(cache, config.mqtt_port);
 
-new MQTTWebSocketBridge(cache, http.server);
+new MQTTWebSocketBridge(http.server);

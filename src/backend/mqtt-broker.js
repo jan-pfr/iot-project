@@ -1,7 +1,7 @@
 const aedes = require("aedes");
 const net = require("net");
 
-class MQTTServerWrapper {
+class MQTTBrokerWrapper {
   constructor(cache, port) {
     this.cache = cache;
     this.mqtt_port = port;
@@ -20,15 +20,15 @@ class MQTTServerWrapper {
     });
 
     // Printing (dis-)connects
-    this.subscribe("client");
-    this.subscribe("clientDisconnect");
+    this.on("client");
+    this.on("clientDisconnect");
   }
 
-  subscribe(topic) {
+  on(topic) {
     this.aedes.on(topic, (client) => {
       console.log("%s : %s", client.id, topic);
     });
   }
 }
 
-module.exports = MQTTServerWrapper;
+module.exports = MQTTBrokerWrapper;

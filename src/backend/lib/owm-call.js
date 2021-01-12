@@ -13,6 +13,7 @@ const URL = getURL();
 
 function getWeatherData() {
   console.log("Getting weather data from: " + URL);
+
   return fetch(URL)
     .then(function (response) {
       return response.json();

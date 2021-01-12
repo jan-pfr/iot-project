@@ -1,21 +1,16 @@
 const mqtt = require("mqtt");
+const config = require("./../../config.json");
+const paths = config.paths;
 
-const mqtt_client = mqtt.connect("mqtt://localhost:1885", {
+const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
   clientId: "heating-system",
 });
 
 var initialised;
 
-const weather_topic = "local/temperature";
-const heating_topic = "appliances/heating";
-const heating_inbound = heating_topic + "/inbound";
-const heating_outbound = heating_topic + "/outbound";
-const simulation_speed_topic = "speed";
-
 // Simulation values
-var simulation_interval = 16.66;
+var simulation_interval = 33.33;
 var simulation_speed = 1;
-var publish_interval = 500;
 var heating_power = 1;
 var heating_increase = 0.005;
 var temperature_decay = 0.00125;
@@ -56,30 +51,29 @@ var heating_elements = {
 
 // Subscribing to topics
 mqtt_client.on("connect", () => {
-  subscribe(weather_topic);
-  subscribe(heating_inbound);
-  subscribe(simulation_speed_topic);
+  subscribe(paths.weather);
+  subscribe(paths.heating + "/in");
+  subscribe(paths.simulation_speed);
 });
 
 // Event handlers on incoming messages
 mqtt_client.on("message", function (topic, message) {
-  if (topic == weather_topic) {
-    message = JSON.parse(message);
+  message = JSON.parse(message);
+
+  if (topic == paths.weather) {
     outside_temperature = message.temperature;
 
     // Initialise heating_elements at first message from weather station
     !initialised ? initialise() : undefined;
   }
-  if (topic == heating_inbound && initialised) {
-    message = JSON.parse(message);
+  if (topic == paths.heating + "/in" && initialised) {
     for (const room in message) {
       for (const property in message[room]) {
         heating_elements[room][property] = message[room][property];
       }
     }
-    publishData();
   }
-  if (topic == simulation_speed_topic) {
+  if (topic == paths.simulation_speed) {
     simulation_speed = +message;
     setSimulationVariables();
   }
@@ -143,18 +137,15 @@ function initialise() {
   initialised = true;
 
   // Publish once and set intervals for publishing and simulation
-  publishData();
   setInterval(() => {
     publishData();
-  }, publish_interval);
-  setInterval(() => {
     simulateCycle();
   }, simulation_interval);
 }
 
 // Helper function
 function publishData() {
-  mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
+  mqtt_client.publish(paths.heating, JSON.stringify(heating_elements));
 }
 
 function subscribe(topic) {

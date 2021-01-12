@@ -1,9 +1,8 @@
 const express = require("express");
 const http = require("http");
+const paths = require("./../config.json").paths;
 
 class HTTPServerWrapper {
-  weather_topic = "local/temperature";
-
   constructor(cache, port) {
     this.cache = cache;
     this.port = port;
@@ -19,9 +18,9 @@ class HTTPServerWrapper {
     this.router.get("/status/:device/", (req, res) => {
       var device = req.params.device;
 
-      if (device == "weather") {
-        if (this.isSet(this.weather_topic)) {
-          res.status(200).send(cache[this.weather_topic]);
+      if (device == paths.weather) {
+        if (this.isSet(paths.weather)) {
+          res.status(200).send(cache[paths.weather]);
         } else {
           this.send404(res);
         }
