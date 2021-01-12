@@ -7,13 +7,6 @@ $(document).ready(() => {
 });
 
 //Function uhr() initiates Date() in a variable and extracts hours and minutes in two more variables that are set into label uhr.
-function uhr() {
-  var jetzt = new Date();
-  var stunden = jetzt.getHours();
-  var minuten = jetzt.getMinutes();
-  document.getElementById("uhr").innerHTML = stunden + ":" + minuten + " Uhr";
-  setTimeout(uhr, 500);
-}
 
 //Interval starts function sliderValue() ever 50ms. sliderValue() writes the current value of the blind sliders into labels.
 setInterval(function () {

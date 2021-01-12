@@ -1,10 +1,9 @@
-function setWeather() {
+$(() => {
   const url = "http://localhost:3000/status/weather";
   $.ajax({
     url,
     type: "GET",
     success: (weather) => {
-      console.log("GET status/weather", weather);
       $("div.temperature").html(weather.temperature);
       $("span.city").html(
         weather.city + ` (${weather.description.toLowerCase()})`
@@ -19,4 +18,4 @@ function setWeather() {
       $("#weather-icon").addClass(`wi wi-owm-${timeOfDay}-${weather.id}`);
     },
   });
-}
+});
