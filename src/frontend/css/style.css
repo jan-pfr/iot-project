@@ -1,0 +1,126 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: "Lato", sans-serif;
+    background-color: #414141;
+    color: white;
+}
+
+.headBox{
+    display: flex;
+    background-color: #01ace2;
+    height: 50px;
+    align-items: center;
+    font-size: 2em;
+    margin-bottom: 10px;
+}
+
+div{
+    border-radius: 10px;
+}
+p{
+    font-size: large;
+}
+
+.headline{
+    flex-grow: 2;
+    margin-left: 10px;
+    
+}
+
+
+.clock{
+    margin-right: 10px;
+}
+
+.heating  {
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    vertical-align: middle;
+    background-color: #01ace2;
+    padding: 10px;
+    flex-grow: 2;
+}
+.sectionHeadline{
+    font-size: 200%;
+}
+.title{
+    margin-top: 10px;
+    font-size: 150%;
+}
+.target_temperature{
+    margin-top: 10px;
+    font-size: 150%;
+}
+
+
+.actual_temperature{
+    margin-top: 10px;
+    font-size: 150%;
+}
+.toggle{
+    border-radius: 5px;
+    background-color: #414141;
+    border: 0.5px solid white;
+    height: 30px;
+    color: white;
+}
+.toggle:hover{
+    transform: scale(1.04);
+    cursor: pointer;
+}
+.mode{
+    
+}
+.currWeather{  
+   padding-left: 10px;
+   background-color: #01ace2;
+    margin-left: 10px;
+}
+
+.middleRow{
+    display: flex;
+}
+.icon{
+    font-size: 400%;
+    margin-top: 30px;
+    text-align: center;
+}
+.temperature{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.controlsHeating{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+
+button.active {
+    background-color: aliceblue;
+}
+
+.bottomRow{
+    display: flex;
+    margin-top: 10px;
+}
+.blinds{
+    display: flex;
+    flex-direction: column;
+    height: 250px;
+    vertical-align: middle;
+    background-color: #01ace2;
+    padding: 10px;
+    flex-grow: 2;
+}
+.systemStatus{
+   background-color: #01ace2;
+   margin-left: 10px;
+}
+
