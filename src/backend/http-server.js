@@ -2,12 +2,14 @@ const express = require("express");
 const http = require("http");
 
 class HTTPServerWrapper {
-  port = 3000;
   weather_topic = "local/temperature";
 
-  constructor(cache) {
+  constructor(cache, port) {
     this.cache = cache;
+    this.port = port;
     this.app = express();
+
+    // Setting up the router and paths
     this.router = express.Router();
 
     this.router.get("/status/all", (req, res) => {
@@ -41,6 +43,8 @@ class HTTPServerWrapper {
     this.server.listen(this.port);
   }
 
+  // Helper functions
+  // isSet checks whether cache has been initialized with the requested resource
   isSet(of) {
     for (const [device, value] of Object.entries(this.cache)) {
       if (device == of) {
@@ -49,6 +53,7 @@ class HTTPServerWrapper {
     }
   }
 
+  // send404 returns a HTTP 404 Not Found error
   send404(res) {
     return res.status(404).json();
   }

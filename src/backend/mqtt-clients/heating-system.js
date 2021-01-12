@@ -1,11 +1,10 @@
 const mqtt = require("mqtt");
 
-const client_options = {
+const mqtt_client = mqtt.connect("mqtt://localhost:1885", {
   clientId: "heating-system",
-};
+});
 
-const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
-let initialised = false;
+var initialised;
 
 const weather_topic = "local/temperature";
 const heating_topic = "appliances/heating";
@@ -21,7 +20,7 @@ var heating_power = 1;
 var heating_increase = 0.005;
 var temperature_decay = 0.00125;
 
-var outside_temperature = null;
+var outside_temperature;
 
 // Initial values
 const ideal_temperature = 23;
@@ -31,25 +30,25 @@ const isAutomatic = true;
 var heating_elements = {
   bathroom: {
     target_temperature: ideal_temperature,
-    actual_temperature: null,
+    actual_temperature: undefined,
     power: false,
     mode: isAutomatic,
   },
   kitchen: {
     target_temperature: ideal_temperature,
-    actual_temperature: null,
+    actual_temperature: undefined,
     power: false,
     mode: isAutomatic,
   },
   bedroom: {
     target_temperature: ideal_temperature,
-    actual_temperature: null,
+    actual_temperature: undefined,
     power: false,
     mode: isAutomatic,
   },
   livingroom: {
     target_temperature: ideal_temperature,
-    actual_temperature: null,
+    actual_temperature: undefined,
     power: false,
     mode: isAutomatic,
   },
@@ -57,15 +56,9 @@ var heating_elements = {
 
 // Subscribing to topics
 mqtt_client.on("connect", () => {
-  mqtt_client.subscribe(weather_topic, () => {
-    console.log("Subscribed on %s", weather_topic);
-  });
-  mqtt_client.subscribe(heating_inbound, () => {
-    console.log("Subscribed on %s", heating_inbound);
-  });
-  mqtt_client.subscribe(simulation_speed_topic, () => {
-    console.log("Subscribed on %s", simulation_speed_topic);
-  });
+  subscribe(weather_topic);
+  subscribe(heating_inbound);
+  subscribe(simulation_speed_topic);
 });
 
 // Event handlers on incoming messages
@@ -92,11 +85,7 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
-// Helper function for publishing current heating data
-function publishData() {
-  mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
-}
-
+// Main functions
 function simulateCycle() {
   // Update heating element on/off state based on mode (auto/manual)
   for (const room in heating_elements) {
@@ -163,16 +152,19 @@ function initialise() {
   }, simulation_interval);
 }
 
-function setHeatingIncrease() {
-  heating_increase =
-    ((0.005 * heating_power) / simulation_interval) * simulation_speed;
+// Helper function
+function publishData() {
+  mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
 }
 
-function setTemperatureDecay() {
-  temperature_decay = (0.00125 / simulation_interval) * simulation_speed;
+function subscribe(topic) {
+  mqtt_client.subscribe(topic, () => {
+    console.log("Subscribed on %s", topic);
+  });
 }
 
 function setSimulationVariables() {
-  setHeatingIncrease();
-  setTemperatureDecay();
+  heating_increase =
+    ((0.005 * heating_power) / simulation_interval) * simulation_speed;
+  temperature_decay = (0.00125 / simulation_interval) * simulation_speed;
 }
