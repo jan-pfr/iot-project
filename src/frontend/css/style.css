@@ -36,6 +36,17 @@ p{
     margin-right: 10px;
 }
 
+input[type="range"]{
+    -webkit-appearance: none;
+    width: 100px;
+    transform: rotate(-90deg);
+    
+    
+}
+
+
+
+
 /* Layout der unteren beiden Reihen */
 
 .middleRow{
@@ -73,7 +84,7 @@ p{
  .blinds{
     display: flex;
     flex-direction: column;
-    height: 250px;
+    height: 350px;
     vertical-align: middle;
     background-color: #002C54;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
@@ -130,7 +141,7 @@ p{
     font-weight: 100;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 12%;
-    height: auto;
+    height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
@@ -179,7 +190,7 @@ p{
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 12%;
-    height: auto;
+    height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
@@ -192,7 +203,7 @@ p{
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 12%;
-    height: auto;
+    height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
@@ -205,12 +216,13 @@ p{
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     width: 12%;
-    height: auto;
+    height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
     padding: 5px;
     font-weight: 100;
+  
 }
 
 
@@ -233,12 +245,28 @@ p{
     margin-top: 30px;
     justify-content: space-around;
 }
+.controlBlinds{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
 
 
 button.active {
     background-color: aliceblue;
 }
 
+
+
+#sldLivingroom{
+
+    
+    
+    width: 115px;
+    height: 10px;
+    
+}
 
 
 
