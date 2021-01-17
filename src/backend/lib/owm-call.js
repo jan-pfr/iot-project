@@ -32,11 +32,11 @@ function getWeatherData() {
         lat: data.coord.lat,
         lon: data.coord.lon
       };
-      return JSON.stringify(weatherData);
+      return weatherData;
     });
 }
 function getAlerts(lat, lon){
-  let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + lat + "&lon=" + lon + "&units=" + config.unit + "&lang=" + config.lang + "&appid=" + config.apikey;
+  let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + lat + "&lon=" + lon + "&units=" + config.unit + "&lang=" + config.lang + "&appid=" + config.apikey + "&exclude=minutely,hourly,daily";
   console.log("Getting alert from: " + alertUrl);
   return fetch(alertUrl)
       .then(function (response) {
@@ -45,16 +45,18 @@ function getAlerts(lat, lon){
       .then(function (data) {
         try {
           var alertData ={
-            sender: data.alerts[0].sender_name,
+            sender_name: data.alerts[0].sender_name,
             event: data.alerts[0].event,
             start: data.alerts[0].start,
             end: data.alerts[0].end,
-            description: alerts[0].description
+            description: data.alerts[0].description
           }
         }catch (e) {
+          console.log(e);
           return;
         }
-        return JSON.stringify(alertData);
+        console.log(alertData);
+        return alertData;
       });
 }
 
