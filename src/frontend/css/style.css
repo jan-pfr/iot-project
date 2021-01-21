@@ -16,7 +16,7 @@ body{
     align-items: center;
     font-size: 2em;
     padding: 10px 10px 10px 10px;
-   
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
 div{
@@ -100,15 +100,47 @@ input[type="range"]{
     background-color: #002C54;
     box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     padding: 10px;
+    margin-right: 11px;
     flex: 1;
 }
 
 .systemStatus{
     background-color: #002C54;
-   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
    margin-left: 10px;
-   flex: 0.25;
+   flex: 0.265;
 }
+
+.controlsHeating{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+.controlBlinds{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+/*Styling of the Room-Containers*/
+
+.bathroom, .kitchen, .bedroom, .livingroom{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+    border-radius: 10px;
+}
+
+/*Styling of the Heating Elements*/
 
 
 .sectionHeadline{
@@ -123,11 +155,19 @@ input[type="range"]{
     font-size: 150%;
 }
 
+.target_temperature::after{
+    content: "°C" ;
+}
+
 
 .actual_temperature{
     margin-top: 10px;
     font-size: 150%;
 }
+.actual_temperature::after{
+    content: "°C";
+}
+
 .toggle{
     border-radius: 5px;
     background-color: white;
@@ -148,19 +188,7 @@ input[type="range"]{
 }
 
 
-.bathroom{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 11%;
-    height: 225px;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-weight: 100;
-    border-radius: 10px;
-}
+
 
 .btn{
     display: flex;
@@ -201,62 +229,7 @@ input[type="range"]{
     background-color: #ffcc32;
 }
 
-
-
-.kitchen{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 11%;
-    height: 225px;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-weight: 100;
-}
-
-.bedroom{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 11%;
-    height: 225px;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-weight: 100;
-}
-
-.livingroom{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 11%;
-    height: 225px;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-weight: 100;
-  
-}
-
-.blndBathroom{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 11%;
-    height: 225px;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-weight: 100;
-    border-radius: 10px;
-}
-
+/*Styling of Current Weather Elements*/
 
 .icon{
     font-size: 400%;
@@ -269,23 +242,16 @@ input[type="range"]{
     font-size: 2em;
 }
 
-.controlsHeating{
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    justify-content: space-around;
-}
-.controlBlinds{
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    justify-content: space-around;
+.temperature::after{
+    content: "°C";
 }
 
 
 button.active {
     background-color: aliceblue;
 }
+
+/*Styling of the Blinds Elements*/
 
 input[type=range]{
     -webkit-appearance: none;
@@ -295,6 +261,9 @@ input[type=range]{
     height: 10px;
     outline: none;
     border-radius: 5px;
+    background-color:#8b96ad;
+    box-shadow: 0 1px 0px rgba(255,255,255,0.25),
+    inset 0 0 4px rgba(0,0,0,0.9);
 }
 
 input[type=range]::-webkit-slider-thumb{
@@ -310,6 +279,8 @@ input[type=range]::-webkit-slider-thumb{
   cursor: -webkit-grab;
 }
 
+
+
 .sldContainer{
     flex-direction: column;
     margin-left: -50px;
@@ -317,8 +288,37 @@ input[type=range]::-webkit-slider-thumb{
     font-weight: 100;
 }
 
+#valBathroom::after, #valKitchen::after, #valBedroom::after, #valLivingroom::after{
+    content: "%";
+}
 
 
+/*Styling of SystemStatus Elements*/
+
+.sysHeadline{
+    margin-top: 20px;
+    margin-left: 20px;
+    font-size: 150%;
+}
+
+.simSpeed{
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    margin-left: 20px;
+}
+
+.speed{
+    width: 13%;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 80%;
+    border-radius: 5px;
+    background-color:#EFB509;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    outline: none;
+    border: none;
+}
 
 
 
