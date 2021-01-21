@@ -17,6 +17,12 @@ var temperature_decay = 0.00125;
 
 var outside_temperature;
 
+//Buffertank
+var buffertank = {
+  max_temperature: 40,
+  actual_temperature: undefined
+};
+
 // Initial values
 const ideal_temperature = 23;
 const isAutomatic = true;
@@ -86,22 +92,23 @@ function simulateCycle() {
     // If heating element has not reached target temperature and its colder outside => turn on
     // Else => turn off
     // But only if heating element is automatic
-    if (heating_elements[room].mode) {
-      shouldBeOn =
-        heating_elements[room].actual_temperature <=
-          heating_elements[room].target_temperature &&
-        outside_temperature < heating_elements[room].target_temperature;
-      shouldBeOn
-        ? (heating_elements[room].power = true)
-        : (heating_elements[room].power = false);
-    }
+      if (heating_elements[room].mode) {
+        shouldBeOn =
+            heating_elements[room].actual_temperature <=
+            heating_elements[room].target_temperature &&
+            outside_temperature < heating_elements[room].target_temperature &&
+            buffertank.actual_temperature < buffertank.max_temperature;
+        shouldBeOn
+            ? (heating_elements[room].power = true)
+            : (heating_elements[room].power = false);
+      }
   }
 
   // Update temperature based on heating element on/off state and outside temperature
   for (const key in heating_elements) {
     let delta_temperature = 0;
 
-    if (heating_elements[key].power) {
+    if (heating_elements[key].power || buffertank.actual_temperature >=  40) {
       delta_temperature += heating_increase;
     }
 
@@ -119,6 +126,10 @@ function simulateCycle() {
       }
     }
     heating_elements[key].actual_temperature += delta_temperature;
+    if(heating_elements[key].actual_temperature >= heating_elements[key].target_temperature){
+      buffertank.actual_temperature += delta_temperature + temperature_decay;
+      console.log("Buffertank: ", buffertank.actual_temperature);
+    }
   }
 }
 
@@ -133,6 +144,7 @@ function initialise() {
       outside_temperature + Math.floor(Math.random() * max_range);
     heating_elements[key].actual_temperature = initial_temperature;
   }
+  buffertank.actual_temperature = initial_temperature;
 
   initialised = true;
 
