@@ -19,22 +19,22 @@ const hot_temperature = 23;
 
 var roller_blinds = {
     bathroom: {
-      status: 0.0,
+      status: 0,
       power: false,
       mode: isAutomatic,
     },
     kitchen: {
-      status: 0.0,
+      status: 0,
       power: false,
       mode: isAutomatic,
     },
     bedroom: {
-      status: 0.0,
+      status: 0,
       power: false,
       mode: isAutomatic,
     },
     livingroom: {
-      status: 0.0,
+      status: 0,
       power: false,
       mode: isAutomatic,
     },
@@ -50,6 +50,23 @@ var roller_blinds = {
   });
  
  
+
+  mqtt_client.on("message", function (topic, message) {
+    if (topic == weather_topic) {
+      message = JSON.parse(message);
+      outside_temperature = message.temperature;
+  
+
+
+
+
+  function publishData() {
+    mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
+  }
+
+
+
+
   for (const key in roller_blinds) {
     
     if(roller_blinds[key].mode=isAutomatic)
@@ -57,7 +74,7 @@ var roller_blinds = {
     let isHotOutside = hot_temperature < outside_temperature;
    
     if (isHotOutside) {
-      roller_blinds[key].status = 1.0;
+      roller_blinds[key].status = 100;
       
       }
     
@@ -65,10 +82,10 @@ var roller_blinds = {
   let isDarkOutside = bedTime = hours ;
   let isntDarkOutside = wakeUp = hours;
   if(isDarkOutside){
-    roller_blinds[key].status = 1.0;
+    roller_blinds[key].status = 100;
   }
   if(isntDarkOutside){
-    roller_blinds[key].status = 0.0;
+    roller_blinds[key].status = 0;
   }
   }
 }
