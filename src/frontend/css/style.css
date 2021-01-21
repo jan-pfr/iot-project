@@ -3,7 +3,7 @@ body{
     flex-direction: column;
     justify-content: space-around;
     font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    background-color: #525f7a;
+    background-color: #8b96ad;
     font-weight: 300;
     color: white;
 }
@@ -15,12 +15,15 @@ body{
     height: 50px;
     align-items: center;
     font-size: 2em;
-    margin-bottom: 10px;
+    padding: 10px 10px 10px 10px;
+   
 }
 
 div{
     border-radius: 10px;
+
 }
+
 p{
     font-size: 150%;
 }
@@ -51,11 +54,12 @@ input[type="range"]{
 
 .middleRow{
     display: flex;
+    margin-top: 20px;
 }
 
 .bottomRow{
     display: flex;
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 /*Obere Hierarchieebene*/
@@ -66,19 +70,30 @@ input[type="range"]{
     height: 350px;
     background-color: #002C54;
     vertical-align: middle;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     padding: 10px;
+    margin-right: 11px;
     flex: 1;
     
 }
 
-.currWeather{  
+.heating:hover{
+    transform: scale(1.004);
+}
+.sectionHeadline{
     padding-left: 10px;
+}
+
+.currWeather{  
+    padding-left: 30px;
     background-color: #002C54;
     
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
      margin-left: 10px;
      flex: 0.245;
+ }
+ .currWeather:hover{
+     transform: scale(1.005);
  }
 
  .blinds{
@@ -87,15 +102,21 @@ input[type="range"]{
     height: 350px;
     vertical-align: middle;
     background-color: #002C54;
-    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
     padding: 10px;
     flex: 1;
+}
+.blinds:hover{
+    transform: scale(1.005);
 }
 .systemStatus{
     background-color: #002C54;
    box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
    margin-left: 10px;
    flex: 0.25;
+}
+.systemStatus:hover{
+    transform: scale(1.005);
 }
 
 
@@ -124,28 +145,30 @@ input[type="range"]{
     color: black;
     font-weight: 600;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    
+    color: #c9a330;
+    font-size:medium; 
 }
 .toggle:hover{
     transform: scale(1.005);
     cursor: pointer;
 }
 .mode{
-    
+    margin-bottom: 5px;
 }
 
 
 .bathroom{
     display: flex;
     flex-direction: column;
-    font-weight: 100;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 12%;
+    width: 11%;
     height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
-    padding: 5px;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+    border-radius: 10px;
 }
 
 .btn{
@@ -159,21 +182,24 @@ input[type="range"]{
     margin-top: 10px;
     font-size: 120%;
     border-radius: 5px;
-    background-color: white;
+    background-color:#EFB509;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
     outline: none;
     border: none;
 }
+
+
 .up:hover{
     cursor: pointer;
     transform: scale(1.015);
+    background-color: #ffcc32;
 }
 .down{
     width: 48%;
     margin-top: 10px;
     font-size: 120%;
     border-radius: 5px;
-    background-color:white;
+    background-color:#EFB509;
     border: none;
     outline: none;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -181,6 +207,7 @@ input[type="range"]{
 .down:hover{
     cursor: pointer;
     transform: scale(1.01);
+    background-color: #ffcc32;
 }
 
 
@@ -189,12 +216,12 @@ input[type="range"]{
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 12%;
+    width: 11%;
     height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
-    padding: 5px;
+    padding: 15px 15px 5px 15px;
     font-weight: 100;
 }
 
@@ -202,12 +229,12 @@ input[type="range"]{
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 12%;
+    width: 11%;
     height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
-    padding: 5px;
+    padding: 15px 15px 5px 15px;
     font-weight: 100;
 }
 
@@ -215,12 +242,12 @@ input[type="range"]{
     display: flex;
     flex-direction: column;
     box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 12%;
+    width: 11%;
     height: 225px;
     background-color: #E2E8E4;
     color: black;
     border: none;
-    padding: 5px;
+    padding: 15px 15px 5px 15px;
     font-weight: 100;
   
 }
@@ -230,7 +257,7 @@ input[type="range"]{
 
 .icon{
     font-size: 400%;
-    margin-top: 30px;
+    margin-top: 50px;
     text-align: center;
 }
 .temperature{
@@ -257,6 +284,9 @@ button.active {
     background-color: aliceblue;
 }
 
+#sldBathroom::-webkit-slider-thumb{
+    background-color:#EFB509;
+}
 
 
 #sldLivingroom{
