@@ -13,13 +13,11 @@
     
 </head>
 
-<body>
-
+<body onload="getSldValue()">
     <div class="headBox">
         <div class="headline">Smart Home Automation</div>
         <div class="clock"><label for="clock" id="uhr"></label></div>
     </div>
-
     <div class="middleRow">
         <div class="heating">
             <div class="sectionHeadline">
@@ -105,29 +103,45 @@
                 Blinds
             </div>
             <div class="controlBlinds">
-                <div class="bathroom">
+                <div class="blndBathroom">
                     <button class="toggle mode" data-value=""></button>
-                    <button class="toggle power" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldBathroom" value="50" step="5" min="0" max="100">
+                        <output for="sldBathroom" id="valBathroom"></output>
+                    </div>
+                    <br><br><br>
                     <div class="title">Bathroom</div>
-                    <input type="range" id="sldBathroom" value="50" min="0" max="100">
                 </div>
                 <div class="kitchen">
                     <button class="toggle mode" data-value=""></button>
-                    <button class="toggle power" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldKitchen" value="50" step="5" min="0" max="100">
+                        <output for="sldKitchen" id="valKitchen"></output>
+                    </div>
+                    <br><br><br>
                     <div class="title">Kitchen</div>
-                    <input type="range" id="sldKitchen" value="50" min="0" max="100">
                 </div>
                 <div class="bedroom">
                     <button class="toggle mode" data-value=""></button>
-                    <button class="toggle power" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldBedroom" value="50" step="5" min="0" max="100">
+                        <output for="sldBedroom" id="valBedroom"></output>
+                    </div>
+                    <br><br><br>
                     <div class="title">Bedroom</div>
-                    <input type="range" id="sldBedroom" value="50" min="0" max="100">
                 </div>
                 <div class="livingroom">
                     <button class="toggle mode" data-value=""></button>
-                    <button class="toggle power" data-value=""></button>
-                    <input type="range" id="sldLivingroom" value="50" min="0" max="100">
-                    <div class="title2">Livingroom</div>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldLivingroom" value="50" step="5" min="0" max="100">
+                        <output for="sldLivingroom" id="valLivingroom"></output>
+                    </div>
+                    <br><br><br>
+                    <div class="title">Livingroom</div>
                 </div>
             </div>
         </div>
