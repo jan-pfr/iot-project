@@ -79,6 +79,8 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
+//hello world
+
 // Main functions
 function simulateCycle() {
   // Update heating element on/off state based on mode (auto/manual)
