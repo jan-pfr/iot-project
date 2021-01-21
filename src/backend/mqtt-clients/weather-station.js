@@ -1,16 +1,19 @@
 const mqtt = require("mqtt");
-const owm = require("../openWeatherMapCall");
+const owm = require("../lib/owm-call");
+const config = require("../../config.json");
+const paths = config.paths;
 
-const client_options = {
+const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
   clientId: "weather-station",
-};
+});
 
-const mqtt_client = mqtt.connect("mqtt://localhost:1885", client_options);
+var weatherData;
 
-const topic = "local/temperature";
-var weatherData = "";
-
-initialise();
+//Initialize with current data then publish
+owm.getWeatherData().then((data) => {
+  weatherData = data;
+  mqtt_client.publish(paths.weather, weatherData);
+});
 
 //Update weather data every 10 minutes (= OW API refresh cycle)
 setInterval(() => {
@@ -19,19 +22,5 @@ setInterval(() => {
 
 //Publish current weather data every 2 seconds
 setInterval(() => {
-  publish();
+  mqtt_client.publish(paths.weather, weatherData);
 }, 2000);
-
-//Initialize with current data then publish
-function initialise() {
-  owm.getWeatherData().then((data) => {
-    weatherData = data;
-    publish();
-  });
-}
-
-//Helper function for publishing current weather data
-function publish() {
-  mqtt_client.publish(topic, weatherData);
-  console.log("%s : %s", topic, weatherData);
-}

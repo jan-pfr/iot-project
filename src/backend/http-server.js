@@ -1,13 +1,14 @@
 const express = require("express");
 const http = require("http");
+const paths = require("./../config.json").paths;
 
 class HTTPServerWrapper {
-  port = process.env.PORT || 3000;
-  weather_topic = "local/temperature";
-
-  constructor(cache) {
+  constructor(cache, port) {
     this.cache = cache;
+    this.port = port;
     this.app = express();
+
+    // Setting up the router and paths
     this.router = express.Router();
 
     this.router.get("/status/all", (req, res) => {
@@ -17,9 +18,9 @@ class HTTPServerWrapper {
     this.router.get("/status/:device/", (req, res) => {
       var device = req.params.device;
 
-      if (device == "weather") {
-        if (this.isSet(this.weather_topic)) {
-          res.status(200).send(cache[this.weather_topic]);
+      if (device == paths.weather) {
+        if (this.isSet(paths.weather)) {
+          res.status(200).send(cache[paths.weather]);
         } else {
           this.send404(res);
         }
@@ -41,6 +42,8 @@ class HTTPServerWrapper {
     this.server.listen(this.port);
   }
 
+  // Helper functions
+  // isSet checks whether cache has been initialized with the requested resource
   isSet(of) {
     for (const [device, value] of Object.entries(this.cache)) {
       if (device == of) {
@@ -49,6 +52,7 @@ class HTTPServerWrapper {
     }
   }
 
+  // send404 returns a HTTP 404 Not Found error
   send404(res) {
     return res.status(404).json();
   }

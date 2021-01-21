@@ -1,0 +1,324 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    background-color: #8b96ad;
+    font-weight: 300;
+    color: white;
+}
+
+.headBox{
+    display: flex;
+    background-color: #002C54;
+    color: white;
+    height: 50px;
+    align-items: center;
+    font-size: 2em;
+    padding: 10px 10px 10px 10px;
+   
+}
+
+div{
+    border-radius: 10px;
+
+}
+
+p{
+    font-size: 150%;
+}
+
+.headline{
+    flex-grow: 2;
+    margin-left: 10px;
+   
+}
+
+
+.clock{
+    margin-right: 10px;
+}
+
+input[type="range"]{
+    -webkit-appearance: none;
+    width: 100px;
+    transform: rotate(-90deg);
+    
+    
+}
+
+
+
+
+/* Layout der unteren beiden Reihen */
+
+.middleRow{
+    display: flex;
+    margin-top: 20px;
+}
+
+.bottomRow{
+    display: flex;
+    margin-top: 20px;
+}
+
+/*Obere Hierarchieebene*/
+
+.heating  {
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    background-color: #002C54;
+    vertical-align: middle;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    padding: 10px;
+    margin-right: 11px;
+    flex: 1;
+    
+}
+
+
+.sectionHeadline{
+    padding-left: 10px;
+}
+
+.currWeather{  
+    padding-left: 30px;
+    background-color: #002C54;
+    
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+     margin-left: 10px;
+     flex: 0.245;
+ }
+ 
+
+ .blinds{
+    display: flex;
+    flex-direction: column;
+    height: 350px;
+    vertical-align: middle;
+    background-color: #002C54;
+    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+    padding: 10px;
+    flex: 1;
+}
+
+.systemStatus{
+    background-color: #002C54;
+   box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+   margin-left: 10px;
+   flex: 0.25;
+}
+
+
+.sectionHeadline{
+    font-size: 200%;
+}
+.title{
+    margin-top: 10px;
+    font-size: 150%;
+}
+.target_temperature{
+    margin-top: 10px;
+    font-size: 150%;
+}
+
+
+.actual_temperature{
+    margin-top: 10px;
+    font-size: 150%;
+}
+.toggle{
+    border-radius: 5px;
+    background-color: white;
+    border: none;
+    height: 30px;
+    color: black;
+    font-weight: 600;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    color: #c9a330;
+    font-size:medium; 
+}
+.toggle:hover{
+    transform: scale(1.005);
+    cursor: pointer;
+}
+.mode{
+    margin-bottom: 5px;
+}
+
+
+.bathroom{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+    border-radius: 10px;
+}
+
+.btn{
+    display: flex;
+    flex-direction: row;
+}
+
+.up{
+    width: 48%;
+    margin-right: 5px;
+    margin-top: 10px;
+    font-size: 120%;
+    border-radius: 5px;
+    background-color:#EFB509;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    outline: none;
+    border: none;
+}
+
+
+.up:hover{
+    cursor: pointer;
+    transform: scale(1.015);
+    background-color: #ffcc32;
+}
+.down{
+    width: 48%;
+    margin-top: 10px;
+    font-size: 120%;
+    border-radius: 5px;
+    background-color:#EFB509;
+    border: none;
+    outline: none;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+.down:hover{
+    cursor: pointer;
+    transform: scale(1.01);
+    background-color: #ffcc32;
+}
+
+
+
+.kitchen{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+}
+
+.bedroom{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+}
+
+.livingroom{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+  
+}
+
+.blndBathroom{
+    display: flex;
+    flex-direction: column;
+    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+    width: 11%;
+    height: 225px;
+    background-color: #E2E8E4;
+    color: black;
+    border: none;
+    padding: 15px 15px 5px 15px;
+    font-weight: 100;
+    border-radius: 10px;
+}
+
+
+.icon{
+    font-size: 400%;
+    margin-top: 50px;
+    text-align: center;
+}
+.temperature{
+    margin-top: 20px;
+    text-align: center;
+    font-size: 2em;
+}
+
+.controlsHeating{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+.controlBlinds{
+    display: flex;
+    flex-direction: row;
+    margin-top: 30px;
+    justify-content: space-around;
+}
+
+
+button.active {
+    background-color: aliceblue;
+}
+
+input[type=range]{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    width: 55%;
+    height: 10px;
+    outline: none;
+    border-radius: 5px;
+}
+
+input[type=range]::-webkit-slider-thumb{
+    appearance: none;
+  border: 1px solid black;
+  width: 17px;
+  max-width: 80px;
+  height: 17px;
+  border-radius: 50%;
+  bottom: 11px;
+  background-color: #EFB509;
+  opacity: 0.9;
+  cursor: -webkit-grab;
+}
+
+.sldContainer{
+    flex-direction: column;
+    margin-left: -50px;
+    font-size: 150%;
+    font-weight: 100;
+}
+
+
+
+
+
+

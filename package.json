@@ -27,6 +27,7 @@
   },
   "devDependencies": {
     "jquery": "^3.5.1",
+    "sass": "^1.32.4",
     "webpack": "^5.12.2",
     "webpack-cli": "^4.3.1"
   }

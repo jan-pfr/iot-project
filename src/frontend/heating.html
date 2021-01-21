@@ -5,59 +5,157 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Heating</title>
-
-    <style>
-        .heating {
-            display: flex;
-            justify-content: space-between;
-
-        }
-
-        button.active {
-            background-color: aliceblue;
-        }
-
-        .heating .bathroom {
-            display: flex;
-            flex-direction: column;
-        }
-    </style>
+    <link rel="stylesheet" href="./css/style.css">
+    <link rel="stylesheet" href="./css/weather-icons.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="./../../node_modules/socket.io-client/dist/socket.io.js"></script>
+    
 </head>
 
-<body>
+<body onload="getSldValue()">
+    <div class="headBox">
+        <div class="headline">Smart Home Automation</div>
+        <div class="clock"><label for="clock" id="uhr"></label></div>
+    </div>
+    <div class="middleRow">
+        <div class="heating">
+            <div class="sectionHeadline">
+                <label>Heating System</label>
+            </div>
+            <div class="controlsHeating">
+                <!-- <div class="centralHeating">
+                    <button class="toggle mode" data-value=""></button>
+                    <button class="toggle power" data-value=""></button>
+                    <div class="title"></div>
+                    <div class="target_temperature"></div>
+                    <div class="actual_temperature"></div>
+                    <button value class="up">+</button>
+                    <button value class="down">-</button>
+                </div> -->
+                <div class="bathroom">
+                    <button class="toggle mode" data-value=""></button>
+                    <button class="toggle power" data-value=""></button>
+                    <div class="title"></div>
+                    <div class="target_temperature"></div>
+                    <div class="actual_temperature"></div>
+                    <div class="btn">
+                        <button value class="up">+</button>
+                        <button value class="down">-</button>
+                    </div>
+                </div>
+                <div class="kitchen">
+                    <button class="toggle mode" value="">-</button>
+                    <button class="toggle power" value="">-</button>
+                    <div class="title"></div>
+                    <div class="target_temperature"></div>
+                    <div class="actual_temperature"></div>
+                    <div class="btn">
+                        <button value class="up">+</button>
+                        <button value class="down">-</button>
+                    </div>
+                </div>
+                <div class="bedroom">
+                    <button class="toggle mode" value="">-</button>
+                    <button class="toggle power" value="">-</button>
+                    <div class="title"></div>
+                    <div class="target_temperature"></div>
+                    <div class="actual_temperature"></div>
+                    <div class="btn">
+                        <button value class="up">+</button>
+                        <button value class="down">-</button>
+                    </div>
+                </div>
+                <div class="livingroom">
+                    <button class="toggle mode" value="">-</button>
+                    <button class="toggle power" value="">-</button>
+                    <div class="title"></div>
+                    <div class="target_temperature"></div>
+                    <div class="actual_temperature"></div>
+                    <div class="btn">
+                        <button value class="up">+</button>
+                        <button value class="down">-</button>
+                    </div>
+                </div>
+                <div>
+                    <div> Simulation Speed </div>
+                    <button class="speed" data-value=0.25>0,25x</button>
+                    <button class="speed" data-value=0.5>0,5x</button>
+                    <button class="speed active" data-value=1>1x</button>
+                    <button class="speed" data-value=2>2x</button>
+                    <button class="speed" data-value=5>5x</button>
+                </div>
 
-    <div class="heating">
-        <div class="bathroom">
-            <button class="toggle mode" data-value=""></button>
-            <button class="toggle power" data-value=""></button>
-            <div class="title"></div>
-            <div class="target_temperature"></div>
-            <div class="actual_temperature"></div>
-            <button value class="up">+</button>
-            <button value class="down">-</button>
+            </div>
         </div>
-        <div class="bedroom">
-            <button class="toggle mode" value="">-</button>
-            <button class="toggle power" value="">-</button>
-            <div class="title"></div>
-            <div class="target_temperature"></div>
-            <div class="actual_temperature"></div>
-            <button class="up">+</button>
-            <button class="down">-</button>
-        </div>
-        <div>
-            <div> Simulation Speed </div>
-            <button class="speed" data-value=0.25>0,25x</button>
-            <button class="speed" data-value=0.5>0,5x</button>
-            <button class="speed active" data-value=1>1x</button>
-            <button class="speed" data-value=2>2x</button>
-            <button class="speed" data-value=5>5x</button>
+        <div class="currWeather">
+            <p>Current Weather in</p>
+            <span class="city"></span>
+            <div class="icon">
+                <i id="weather-icon"></i>
+            </div>
+            <div class="temperature"></div>
         </div>
     </div>
+    <div class="bottomRow">
+        <div class="blinds">
+            <div class="sectionHeadline">
+                Blinds
+            </div>
+            <div class="controlBlinds">
+                <div class="blndBathroom">
+                    <button class="toggle mode" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldBathroom" value="50" step="5" min="0" max="100">
+                        <output for="sldBathroom" id="valBathroom"></output>
+                    </div>
+                    <br><br><br>
+                    <div class="title">Bathroom</div>
+                </div>
+                <div class="kitchen">
+                    <button class="toggle mode" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldKitchen" value="50" step="5" min="0" max="100">
+                        <output for="sldKitchen" id="valKitchen"></output>
+                    </div>
+                    <br><br><br>
+                    <div class="title">Kitchen</div>
+                </div>
+                <div class="bedroom">
+                    <button class="toggle mode" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldBedroom" value="50" step="5" min="0" max="100">
+                        <output for="sldBedroom" id="valBedroom"></output>
+                    </div>
+                    <br><br><br>
+                    <div class="title">Bedroom</div>
+                </div>
+                <div class="livingroom">
+                    <button class="toggle mode" data-value=""></button>
+                    <br><br><br>
+                    <div class="sldContainer">
+                        <input type="range" id="sldLivingroom" value="50" step="5" min="0" max="100">
+                        <output for="sldLivingroom" id="valLivingroom"></output>
+                    </div>
+                    <br><br><br>
+                    <div class="title">Livingroom</div>
+                </div>
+            </div>
+        </div>
+        <div class="systemStatus">
+            Working
+        </div>
+    </div>
+
+    <script type="text/javascript" src="./helper-functions.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"
         integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <script src="./../../node_modules/socket.io-client/dist/socket.io.js"></script>
     <script type="text/javascript" src="./heating.js"></script>
+    <script type="text/javascript" src="./weather.js"></script>
 </body>
 
 </html>

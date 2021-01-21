@@ -1,0 +1,11 @@
+{
+    "paths": {
+        "simulation_speed": "speed",
+        "weather": "weather",
+        "heating": "heating",
+        "blinds": "blinds",
+        "status": "status"
+    },
+    "mqtt_port": 1885,
+    "http_port": 3000
+}
