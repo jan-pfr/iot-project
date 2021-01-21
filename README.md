@@ -8,7 +8,7 @@ The goal of this project is to create a virtual smart home automation system sim
 The following students have worked on this project:
 
 - Alexander Hauser (hauserCode)
-- Jan Pfeiffer (jan.pfr)
+- Jan Pfeiffer (jan-pfr)
 - Benedikt Scheffbuch (BingeCode)
 - Henrik Alt (henrikKar)
 
