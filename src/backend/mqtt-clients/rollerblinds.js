@@ -89,4 +89,3 @@ var roller_blinds = {
   }
   }
 }
-
