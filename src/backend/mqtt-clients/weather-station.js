@@ -13,6 +13,14 @@ var alert;
 //Initialize with current data then publish
 owm.getWeatherData().then((data) => {
   weatherData = data;
+  owm.getAlerts(weatherData.lat, weatherData.lon).then((data) =>{
+    alert = data;
+    try{
+      mqtt_client.publish(paths.alert, JSON.stringify(alert));
+    }catch (e) {
+      console.log("No alerts in this region: ", e)
+    }
+  });
   mqtt_client.publish(paths.weather, JSON.stringify(weatherData));
 });
 

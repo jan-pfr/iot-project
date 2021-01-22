@@ -60,7 +60,7 @@ function getAlerts(lat, lon){
           }
         }catch (e) {
           console.log(e);
-          return "No Alert in your region";
+          return;
         }
         console.log(alertData);
         return alertData;
