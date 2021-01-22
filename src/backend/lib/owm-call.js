@@ -22,7 +22,7 @@ function getWeatherData() {
       var temperature = Math.floor(
         parseFloat((data.main.temp + data.main.feels_like) / 2)
       );
-      var weatherData = {
+      return {
         id: data.weather[0].id,
         temperature,
         description: data.weather[0].description,
@@ -32,11 +32,18 @@ function getWeatherData() {
         lat: data.coord.lat,
         lon: data.coord.lon
       };
-      return weatherData;
     });
 }
+
+//Get allerts of the current location
 function getAlerts(lat, lon){
-  let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" + lat + "&lon=" + lon + "&units=" + config.unit + "&lang=" + config.lang + "&appid=" + config.apikey + "&exclude=minutely,hourly,daily";
+  let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" +
+      lat + "&lon=" +
+      lon + "&units=" +
+      config.unit + "&lang=" +
+      config.lang + "&appid=" +
+      config.apikey +
+      "&exclude=minutely,hourly,daily";
   console.log("Getting alert from: " + alertUrl);
   return fetch(alertUrl)
       .then(function (response) {
@@ -53,7 +60,7 @@ function getAlerts(lat, lon){
           }
         }catch (e) {
           console.log(e);
-          return;
+          return "No Alert in your region";
         }
         console.log(alertData);
         return alertData;
