@@ -2,7 +2,7 @@ const fetch = require("node-fetch");
 const config = {
   apikey: "df85738b893855278d6f48eb35250501",
   lang: "de",
-  city: "Furtwangen",
+  city:"Furtwangen",
   unit: "metric",
   test_id: 3384868,
 };
@@ -22,16 +22,49 @@ function getWeatherData() {
       var temperature = Math.floor(
         parseFloat((data.main.temp + data.main.feels_like) / 2)
       );
-      var weatherData = {
+      return {
         id: data.weather[0].id,
         temperature,
         description: data.weather[0].description,
         city: data.name,
         sunrise: data.sys.sunrise,
         sunset: data.sys.sunset,
+        lat: data.coord.lat,
+        lon: data.coord.lon
       };
-      return JSON.stringify(weatherData);
     });
+}
+
+//Get allerts of the current location
+function getAlerts(lat, lon){
+  let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" +
+      lat + "&lon=" +
+      lon + "&units=" +
+      config.unit + "&lang=" +
+      config.lang + "&appid=" +
+      config.apikey +
+      "&exclude=minutely,hourly,daily";
+  console.log("Getting alert from: " + alertUrl);
+  return fetch(alertUrl)
+      .then(function (response) {
+        return response.json();
+      })
+      .then(function (data) {
+        try {
+          var alertData ={
+            sender_name: data.alerts[0].sender_name,
+            event: data.alerts[0].event,
+            start: data.alerts[0].start,
+            end: data.alerts[0].end,
+            description: data.alerts[0].description
+          }
+        }catch (e) {
+          console.log(e);
+          return;
+        }
+        console.log(alertData);
+        return alertData;
+      });
 }
 
 //Assembles API URL based on hot/cold location
@@ -54,4 +87,9 @@ function getURL() {
     config.apikey
   );
 }
-module.exports = { getWeatherData };
+module.exports = { getWeatherData, getAlerts };
+
+// fuwa_lon: 8.2,
+//   fuwa_lat: 48.05,
+//   braz_lon: -35.6833,
+//   braz_lat: -7.1,
