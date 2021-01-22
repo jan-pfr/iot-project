@@ -79,7 +79,6 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
-//hello world
 
 // Main functions
 function simulateCycle() {
