@@ -117,7 +117,7 @@ var roller_blinds = {
       
         setInterval(() => {
           publishData();
-          
+          simulateBlinds();
         }, publish_interval);
       }
 
