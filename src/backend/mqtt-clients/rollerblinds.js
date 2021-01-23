@@ -6,7 +6,6 @@ const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
 });
 
 
-let initialised = false;
 
 
 var sunrise;
@@ -17,8 +16,7 @@ const blinds_topic = "appliances/blinds";
 const blinds_inbound = blinds_topic + "/inbound";
 const blinds_outbound = blinds_topic + "/outbound";
 
-const bedTime;
-const wakeUp;
+
 const isAutomatic = true;
 const hot_temperature = 28;
 var initialised;
