@@ -1,329 +1,310 @@
-body{
-    display: flex;
-    flex-direction: column;
-    min-width: 1100px;
-    justify-content: space-around;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    font-weight: 300;
-    font-size: 100%;
-    background-color: #8b96ad;
-    color: white;
+body {
+  display: flex;
+  flex-direction: column;
+  min-width: 1100px;
+  justify-content: space-around;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  font-weight: 300;
+  font-size: 100%;
+  background-color: #8b96ad;
+  color: white;
 }
 
-.headBox{
-    display: flex;
-    background-color: #002C54;
-    color: white;
-    height: 50px;
-    align-items: center;
-    font-size: 1.8vw;
-    padding: 10px 10px 10px 10px;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+.header {
+  background-color: #002c54;
+  color: white;
+  height: 50px;
+  align-items: center;
+  font-size: 1.8vw;
+  padding: 10px 10px 10px 10px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
 }
 
-div{
-    border-radius: 10px;
-
+div {
+  border-radius: 10px;
 }
 
-.headline{
-    flex-grow: 2;
-    margin-left: 10px;
-   
+.headline {
+  flex-grow: 2;
+  margin-left: 10px;
 }
 
-
-.clock{
-    margin-right: 10px;
+.clock {
+  margin-right: 10px;
 }
 
-input[type="range"]{
-    -webkit-appearance: none;
-    width: 100px;
-    transform: rotate(-90deg);
-    
-    
+input[type="range"] {
+  -webkit-appearance: none;
+  width: 100px;
+  transform: rotate(-90deg);
 }
-
-
-
 
 /* Layout der unteren beiden Reihen */
 
-.middleRow{
-    display: flex;
-    margin-top: 20px;
-}
-
-.bottomRow{
-    display: flex;
-    margin-top: 20px;
+.row {
+  display: flex;
+  margin-top: 20px;
 }
 
 /*Obere Hierarchieebene*/
 
-.heating  {
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    background-color: #002C54;
-    vertical-align: middle;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    padding: 10px;
-    margin-right: 11px;
-    flex: 1;
-    
+.heating {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  background-color: #002c54;
+  vertical-align: middle;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  padding: 10px;
+  margin-right: 11px;
+  flex: 1;
 }
 
-
-.sectionHeadline{
-    padding-left: 10px;
+.sectionHeadline {
+  padding-left: 10px;
 }
 
-.currWeather{  
-    padding-left: 30px;
-    background-color: #002C54;
-    
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-     margin-left: 10px;
-     flex: 0.245;
- }
- 
+.currWeather {
+  padding-left: 30px;
+  background-color: #002c54;
 
- .blinds{
-    display: flex;
-    flex-direction: column;
-    height: 350px;
-    vertical-align: middle;
-    background-color: #002C54;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    padding: 10px;
-    margin-right: 11px;
-    flex: 1;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  margin-left: 10px;
+  flex: 0.245;
 }
 
-.systemStatus{
-    background-color: #002C54;
-    box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-    margin-left: 10px;
-    flex: 0.265;
+.blinds {
+  display: flex;
+  flex-direction: column;
+  height: 350px;
+  vertical-align: middle;
+  background-color: #002c54;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  padding: 10px;
+  margin-right: 11px;
+  flex: 1;
 }
 
-.controlsHeating{
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    justify-content: space-around;
+.systemStatus {
+  background-color: #002c54;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  margin-left: 10px;
+  flex: 0.265;
 }
-.controlBlinds{
-    display: flex;
-    flex-direction: row;
-    margin-top: 30px;
-    justify-content: space-around;
+
+.controlsHeating {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  justify-content: space-around;
+}
+.controlBlinds {
+  display: flex;
+  flex-direction: row;
+  margin-top: 30px;
+  justify-content: space-around;
 }
 
 /*Styling of the Room-Containers*/
 
-.centralHeating, .bathroom, .kitchen, .bedroom, .livingroom{
-    display: flex;
-    flex-direction: column;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    width: 9vw;
-    height: 22vh;
-    background-color: #E2E8E4;
-    color: black;
-    border: none;
-    padding: 15px 15px 5px 15px;
-    font-size: 0.8vw;
-    font-weight: 100;
-    border-radius: 10px;
+.centralHeating,
+.bathroom,
+.kitchen,
+.bedroom,
+.livingroom {
+  display: flex;
+  flex-direction: column;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  width: 9vw;
+  height: 22vh;
+  background-color: #e2e8e4;
+  color: black;
+  border: none;
+  padding: 15px 15px 5px 15px;
+  font-size: 0.8vw;
+  font-weight: 100;
+  border-radius: 10px;
 }
 
 /*Styling of the Heating Elements*/
 
-
-.sectionHeadline{
-    font-size: 1.7vw;
+.sectionHeadline {
+  font-size: 1.7vw;
 }
-.title{
-    margin-top: 10px;
-    font-size: 150%;
+.title {
+  margin-top: 10px;
+  font-size: 150%;
 }
-.target_temperature{
-    margin-top: 10px;
-    font-size: 150%;
-}
-
-.target_temperature::after{
-    content: "°C" ;
+.target_temperature {
+  margin-top: 10px;
+  font-size: 150%;
 }
 
-
-.actual_temperature{
-    margin-top: 10px;
-    font-size: 150%;
-}
-.actual_temperature::after{
-    content: "°C";
+.target_temperature::after {
+  content: "°C";
 }
 
-.toggle{
-    border-radius: 5px;
-    background-color: white;
-    border: none;
-    height: 3.25vh;
-    color: black;
-    font-size: 0.7vw;
-    font-weight: 600;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    color: #c9a330;
-     
+.actual_temperature {
+  margin-top: 10px;
+  font-size: 150%;
 }
-.toggle:hover{
-    transform: scale(1.005);
-    cursor: pointer;
-}
-.mode{
-    margin-bottom: 5px;
+.actual_temperature::after {
+  content: "°C";
 }
 
-
-
-
-.btn{
-    display: flex;
-    flex-direction: row;
+.toggle {
+  border-radius: 5px;
+  background-color: white;
+  border: none;
+  height: 3.25vh;
+  color: black;
+  font-size: 0.7vw;
+  font-weight: 600;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  color: #c9a330;
+}
+.toggle:hover {
+  transform: scale(1.005);
+  cursor: pointer;
+}
+.mode {
+  margin-bottom: 5px;
 }
 
-.up{
-    width: 4vw;
-    margin-right: 5px;
-    margin-top: 10px;
-    font-size: 1.0vw;
-    border-radius: 5px;
-    background-color:#EFB509;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    outline: none;
-    border: none;
+.btn {
+  display: flex;
+  flex-direction: row;
 }
 
+.up {
+  width: 4vw;
+  margin-right: 5px;
+  margin-top: 10px;
+  font-size: 1vw;
+  border-radius: 5px;
+  background-color: #efb509;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  outline: none;
+  border: none;
+}
 
-.up:hover{
-    cursor: pointer;
-    transform: scale(1.015);
-    background-color: #ffcc32;
+.up:hover {
+  cursor: pointer;
+  transform: scale(1.015);
+  background-color: #ffcc32;
 }
-.down{
-    width: 4vw;
-    margin-top: 10px;
-    font-size: 1.0vw;
-    border-radius: 5px;
-    background-color:#EFB509;
-    border: none;
-    outline: none;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+.down {
+  width: 4vw;
+  margin-top: 10px;
+  font-size: 1vw;
+  border-radius: 5px;
+  background-color: #efb509;
+  border: none;
+  outline: none;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
-.down:hover{
-    cursor: pointer;
-    transform: scale(1.01);
-    background-color: #ffcc32;
+.down:hover {
+  cursor: pointer;
+  transform: scale(1.01);
+  background-color: #ffcc32;
 }
 
 /*Styling of Current Weather Elements*/
 
-.icon{
-    font-size: 4vw;
-    margin-top: 50px;
-    text-align: center;
+.icon {
+  font-size: 4vw;
+  margin-top: 50px;
+  text-align: center;
 }
-.temperature{
-    margin-top: 20px;
-    text-align: center;
-    font-size: 2vw;
-}
-
-.temperature::after{
-    content: "°C";
+.temperature {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 2vw;
 }
 
+.temperature::after {
+  content: "°C";
+}
 
 button.active {
-    background-color: aliceblue;
+  background-color: aliceblue;
 }
 
 /*Styling of the Blinds Elements*/
 
-input[type=range]{
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    appearance: none;
-    width: 12vh;
-    height: 0.25vw;
-    outline: none;
-    border-radius: 5px;
-    background-color:#8b96ad;
-    box-shadow: 0 1px 0px rgba(255,255,255,0.25),
-    inset 0 0 4px rgba(0,0,0,0.9);
+input[type="range"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  width: 12vh;
+  height: 0.25vw;
+  outline: none;
+  border-radius: 5px;
+  background-color: #8b96ad;
+  box-shadow: 0 1px 0px rgba(255, 255, 255, 0.25),
+    inset 0 0 4px rgba(0, 0, 0, 0.9);
 }
 
-input[type=range]::-webkit-slider-thumb{
-    appearance: none;
+input[type="range"]::-webkit-slider-thumb {
+  appearance: none;
   border: 1px solid black;
   width: 0.75vw;
   max-width: 80px;
   height: 1.5vh;
   border-radius: 50%;
   bottom: 11px;
-  background-color: #EFB509;
+  background-color: #efb509;
   opacity: 0.9;
   cursor: -webkit-grab;
 }
 
-
-
-.sldContainer{
-    flex-direction: column;
-    margin-left: -50px;
-    font-size: 1.3vw;
-    font-weight: 100;
+.sldContainer {
+  flex-direction: column;
+  margin-left: -50px;
+  font-size: 1.3vw;
+  font-weight: 100;
 }
 
-#valBathroom::after, #valKitchen::after, #valBedroom::after, #valLivingroom::after{
-    content: "%";
+#valBathroom::after,
+#valKitchen::after,
+#valBedroom::after,
+#valLivingroom::after {
+  content: "%";
 }
-
 
 /*Styling of SystemStatus Elements*/
 
-.sysHeadline{
-    margin-top: 20px;
-    margin-left: 20px;
-    font-size: 1.3vw;
+.sysHeadline {
+  margin-top: 20px;
+  margin-left: 20px;
+  font-size: 1.3vw;
 }
 
-.simSpeed{
-    display: flex;
-    flex-direction: row;
-    margin-top: 20px;
-    margin-left: 20px;
+.simSpeed {
+  display: flex;
+  flex-direction: row;
+  margin-top: 20px;
+  margin-left: 20px;
 }
 
-.speed{
-    width: 2.75vw;
-    margin-right: 5px;
-    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-    margin-top: 10px;
-    font-size: 0.7vw;
-    border-radius: 5px;
-    background-color:#EFB509;
-    box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-    outline: none;
-    border: none;
+.speed {
+  width: 2.75vw;
+  margin-right: 5px;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  margin-top: 10px;
+  font-size: 0.7vw;
+  border-radius: 5px;
+  background-color: #efb509;
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+  outline: none;
+  border: none;
 }
 
-.lblSimSpeed{
-    font-size: 0.9vw;
+.lblSimSpeed {
+  font-size: 0.9vw;
 }
-
-
-
