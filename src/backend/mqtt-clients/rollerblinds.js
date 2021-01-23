@@ -1,9 +1,7 @@
 const mqtt = require("mqtt");
 const config = require("./../../config.json");
 const paths = config.paths;
-const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
-  clientId: "rollerblinds",
-});
+const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {clientId: "rollerblinds",});
 
 var sunrise;
 var sunset;
