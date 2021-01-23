@@ -2,7 +2,7 @@
   "name": "iot-project",
   "version": "1.0.0",
   "description": "IoT-Project",
-  "main": "src/app.js",
+  "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node ./src/backend/central-server.js"
@@ -23,7 +23,7 @@
     "mqtt": "^4.2.6",
     "node-fetch": "^2.6.1",
     "pug": "^3.0.0",
-    "socketio": "^1.0.0"
+    "socket.io": "^1.0.0"
   },
   "devDependencies": {
     "jquery": "^3.5.1",
