@@ -88,5 +88,5 @@ var roller_blinds = {
     roller_blinds[key].status = 0;
   }
   }
+  }
 }
-
