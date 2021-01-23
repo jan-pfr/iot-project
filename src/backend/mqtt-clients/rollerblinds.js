@@ -1,21 +1,14 @@
 const mqtt = require("mqtt");
-const paths = config.paths;
 const config = require("./../../config.json");
+const paths = config.paths;
 const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
   clientId: "rollerblinds",
 });
 
-
-
-
 var sunrise;
 var sunset;
+var outside_temperature;
 var simulation_interval = 33.33;
-const weather_topic = "local/temperature";
-const blinds_topic = "appliances/blinds";
-const blinds_inbound = blinds_topic + "/inbound";
-const blinds_outbound = blinds_topic + "/outbound";
-
 
 const isAutomatic = true;
 const hot_temperature = 28;
@@ -44,19 +37,17 @@ var roller_blinds = {
     },
   };
 
-
   mqtt_client.on("connect", () => {
     subscribe(paths.weather);
     subscribe(paths.blinds + "/in");
     subscribe(paths.simulation_speed);
   });
- 
 
   mqtt_client.on("message", function (topic, message) {
     message = JSON.parse(message);
   
-    if (topic == paths.weather) {
-      outside_temperature = message.temperature;
+    if (topic === paths.weather) {
+       outside_temperature = message.temperature;
       sunrise = convertUnixTimestamp(message.sunrise);
       sunset = convertUnixTimestamp(message.sunset);
       
@@ -74,11 +65,8 @@ var roller_blinds = {
   });
 
   function convertUnixTimestamp(unix_timestamp){
-    
     var date = new Date(unix_timestamp * 1000);
     var hours = date.getHours();
-   
-  
     return hours ;
   }
   function simulateBlinds() {
@@ -90,7 +78,7 @@ var roller_blinds = {
         for(; i > roller_blinds[room].target ; i++){
           roller_blinds[room].status++;
             }
-        }else{
+        }else if(roller_blinds[room].target < roller_blinds[room].target){
           var i = roller_blinds[room].status
           for(; i < roller_blinds[room].target ; i--){
             roller_blinds[room].status--;
@@ -98,8 +86,7 @@ var roller_blinds = {
           
         }}
     }
-
-      function initialise() {
+    function initialise() {
         
       
         initialised = true;
@@ -110,18 +97,14 @@ var roller_blinds = {
         }, simulation_interval);
       }
 
-
   function publishData() {
-    mqtt_client.publish(blinds_outbound, JSON.stringify(roller_blinds));
+    mqtt_client.publish(paths.blinds, JSON.stringify(roller_blinds));
   }
-
-
-
 
   for (const key in roller_blinds) {
     var currentdate = new Date(); 
     var hours = currentdate.getHours();
-    if(roller_blinds[key].mode=isAutomatic)
+    if(roller_blinds[key].mode===isAutomatic)
 {
     let isHotOutside = hot_temperature < outside_temperature;
    
@@ -129,8 +112,7 @@ var roller_blinds = {
       roller_blinds[key].status = 100;
       
       }
-    
-  
+
   let isDarkOutside = sunset = hours ;
   let isntDarkOutside = sunrise = hours;
   if(isDarkOutside){
@@ -140,4 +122,9 @@ var roller_blinds = {
     roller_blinds[key].status = 0;
   }
   }
+}
+function subscribe(topic) {
+  mqtt_client.subscribe(topic, () => {
+    console.log("Subscribed on %s", topic);
+  });
 }

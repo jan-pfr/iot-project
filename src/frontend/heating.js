@@ -33,12 +33,14 @@ $(() => {
     }
     if(hasLocationChanged || hasEventChanged || !hasAlertBeenShown){
       currentEvent = message.event;
-      alert("Neue Warnung für deinen Standort!" +
-          "\n" + "Sender: " + message.sender_name +
-          "\n" + "Event: " + message.event +
-          "\n" + "Start: " + convertUnixTimestamp(message.start) +
-          "\n" + "Ende: " + convertUnixTimestamp(message.end) +
-          "\n"+ "Message: " + message.description);
+      $(`.alert-overlay .alert-content .event`).html(message.event);
+      $(`.alert-overlay .alert-content .sender`).html(message.sender_name);
+      $(`.alert-overlay .alert-content .period`).html(convertUnixTimestamp(message.start) +" - "+convertUnixTimestamp(message.end));
+      $(`.alert-overlay .alert-content .description`).html(message.description);
+      $(".alert-overlay, .alert-content").addClass("active");
+      $(".close").on("click", function() {
+        $(".alert-overlay, .alert-content").removeClass("active");
+      });
       hasAlertBeenShown = true;
       //currently this boolean is set manually. later it will be changed automatically.
       hasLocationChanged = false;

@@ -1,7 +1,7 @@
 const fetch = require("node-fetch");
 const config = {
   apikey: "df85738b893855278d6f48eb35250501",
-  lang: "de",
+  lang: "en",
   city:"Furtwangen",
   unit: "metric",
   test_id: 3384868,
