@@ -9,9 +9,11 @@ $(() => {
     socket.on(blinds_topic, (message) => {
       for (const room in message) {
         updateBlindsValues(room, message[room]);
+        
       }
       if (!initialised) {
         for (const room in message) {
+          initToggles(room, blinds_topic);
           sliderChange(room, blinds_topic);
         }
         initialised = !initialised;
@@ -19,6 +21,24 @@ $(() => {
     });
       
     });
+
+
+    function initToggles(room, topic) {
+      $(`.heating .${room} button.toggle`).on("click", (event) => {
+        let $toggle = $(event.target);
+        let value = $toggle.attr("data-value") == "true";
+        toggle(topic, room, value);
+      });
+    }
+    
+    function toggle(topic, room, value) {
+      let message = {};
+      message[room] = {};
+      message[room]["mode"] = !value;
+    
+      console.log("Emitting %s", JSON.stringify(message));
+      socket.emit(topic, message);
+    }
 
 
 function sliderChange(room, topic){
