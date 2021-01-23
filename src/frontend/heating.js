@@ -1,10 +1,12 @@
 // import io from "socket.io-client";
 var socket = io("ws://localhost:3000");
 // import $ from "jquery";
+var hasLocationChanged = true;
 
 $(() => {
   const heating_topic = "heating";
   const simulation_speed_topic = "speed";
+  const alert_topic = "alert";
   var initialised = false;
 
   socket.on(heating_topic, (message) => {
@@ -21,7 +23,26 @@ $(() => {
       initialised = !initialised;
     }
   });
+  socket.on(alert_topic, (message) => {
+    alert("Neue Warnung für deinen Standort!" +
+        "\n" + "Sender: " + message.sender_name +
+        "\n" + "Event: " + message.event +
+        "\n" + "Start: " + convertUnixTimestamp(message.start) +
+        "\n" + "Ende: " + convertUnixTimestamp(message.end) +
+        "\n"+ "Message: " + message.description);
+  });
 });
+
+function convertUnixTimestamp(unix_timestamp){
+  var months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+  var date = new Date(unix_timestamp * 1000);
+  var hours = date.getHours();
+  var minutes = "0" + date.getMinutes();
+  var day = date.getDate();
+  var month = months[date.getMonth()];
+
+  return hours + ':' + minutes.substr(-2) + ", " + day + ". " + month;
+}
 
 function initToggles(room, topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
