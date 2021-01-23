@@ -1,17 +1,17 @@
 const mqtt = require("mqtt");
+const paths = config.paths;
+const config = require("./../../config.json");
 const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
   clientId: "rollerblinds",
 });
 
 
 let initialised = false;
-var simulation_speed = 1;
-var blinds_speed = 1;
 
 
 var sunrise;
 var sunset;
-var publish_interval = 33.33;
+var simulation_interval = 33.33;
 const weather_topic = "local/temperature";
 const blinds_topic = "appliances/blinds";
 const blinds_inbound = blinds_topic + "/inbound";
@@ -46,14 +46,7 @@ var roller_blinds = {
     },
   };
 
-  mqtt_client.on("connect", () => {
-    mqtt_client.subscribe(weather_topic, () => {
-      console.log("Subscribed on %s", weather_topic);
-    });
-    mqtt_client.subscribe(blinds_inbound, () => {
-      console.log("Subscribed on %s", blinds_inbound);
-    });
-  });
+
   mqtt_client.on("connect", () => {
     subscribe(paths.weather);
     subscribe(paths.blinds + "/in");
@@ -66,8 +59,8 @@ var roller_blinds = {
   
     if (topic == paths.weather) {
       outside_temperature = message.temperature;
-      unixsunrise = convertUnixTimestamp(message.sunrise);
-      unixsunset = convertUnixTimestamp(message.sunset);
+      sunrise = convertUnixTimestamp(message.sunrise);
+      sunset = convertUnixTimestamp(message.sunset);
       
       // Initialise heating_elements at first message from weather station
       !initialised ? initialise() : undefined;
@@ -83,14 +76,12 @@ var roller_blinds = {
   });
 
   function convertUnixTimestamp(unix_timestamp){
-    var months = ["Januar", "Februar", "März", "April", "Mai", "Juni", "Juli", "August", "September", "Oktober", "November", "Dezember"];
+    
     var date = new Date(unix_timestamp * 1000);
     var hours = date.getHours();
-    var minutes = "0" + date.getMinutes();
-    var day = date.getDate();
-    var month = months[date.getMonth()];
+   
   
-    return hours + ':' + minutes.substr(-2) + ", " + day + ". " + month;
+    return hours ;
   }
   function simulateBlinds() {
 
@@ -118,7 +109,7 @@ var roller_blinds = {
         setInterval(() => {
           publishData();
           simulateBlinds();
-        }, publish_interval);
+        }, simulation_interval);
       }
 
 
