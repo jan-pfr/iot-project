@@ -13,28 +13,24 @@ var alert;
 //Initialize with current data then publish
 owm.getWeatherData().then((data) => {
   weatherData = data;
-  // owm.getAlerts(weatherData.lat, weatherData.lon).then((data) =>{
-  //   alert = data;
-  //   try{
-  //     mqtt_client.publish(paths.alert, JSON.stringify(alert));
-  //   }catch (e) {
-  //     console.log("No alerts in this region: ", e)
-  //   }
-  // });
+  owm.getAlerts(weatherData.lat, weatherData.lon).then((data) =>{
+    alert = data;
+    if (typeof alert === "object"){
+      mqtt_client.publish(paths.alert, JSON.stringify(alert));
+    }else{mqtt_client.publish(paths.alert, "null")}
+  });
   mqtt_client.publish(paths.weather, JSON.stringify(weatherData));
 });
 
 //Update weather data every 10 minutes and looking for alerts in the selected region (= OW API refresh cycle)
 setInterval(() => {
   owm.getWeatherData().then((data) => (weatherData = data));
-  // owm.getAlerts(weatherData.lat, weatherData.lon).then((data) =>{
-  //   alert = data;
-  //   try{
-  //     mqtt_client.publish(paths.alert, JSON.stringify(alert));
-  //   }catch (e) {
-  //     console.log("No alerts in this region: ", e)
-  //   }
-  // });
+   owm.getAlerts(weatherData.lat, weatherData.lon).then((data) =>{
+     alert = data;
+     if (typeof alert === "object"){
+       mqtt_client.publish(paths.alert, JSON.stringify(alert));
+     }else{mqtt_client.publish(paths.alert, "null")}
+   });
 }, 600000);
 
 //Publish current weather data every 2 seconds

@@ -91,6 +91,7 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
+
 // Main functions
 function simulateCycle() {
   // Update heating element on/off state based on mode (auto/manual)
@@ -98,15 +99,15 @@ function simulateCycle() {
     // If heating element has not reached target temperature and its colder outside => turn on
     // Else => turn off
     // But only if heating element is automatic
-    if (heating_elements[room].mode) {
-      shouldBeOn =
-        heating_elements[room].actual_temperature <=
-          heating_elements[room].target_temperature &&
-        outside_temperature < heating_elements[room].target_temperature;
-      shouldBeOn
-        ? (heating_elements[room].power = true)
-        : (heating_elements[room].power = false);
-    }
+      if (heating_elements[room].mode) {
+        shouldBeOn =
+            heating_elements[room].actual_temperature <=
+            heating_elements[room].target_temperature &&
+            outside_temperature < heating_elements[room].target_temperature
+        shouldBeOn
+            ? (heating_elements[room].power = true)
+            : (heating_elements[room].power = false);
+      }
   }
 
   // Update temperature based on heating element on/off state and outside temperature
@@ -174,17 +175,15 @@ function setSimulationVariables() {
 }
 
 //function buffertank (){
-//   //main cycle
-//   if(heating_elements[key].actual_temperature >= heating_elements[key].target_temperature){
-//     buffertank.actual_temperature += temperature_decay * 2;
-//     console.log("Buffertank: ", buffertank.actual_temperature);
-//   }
+//    if (heating_elements[room].mode) {
+//       if (heating_elements[room].actual_temperature <=
+//           heating_elements[room].target_temperature &&
+//           outside_temperature < heating_elements[room].target_temperature) {
 //
-//   //check if buffer is full or not
-// // && buffertank.actual_temperature < buffertank.max_temperature;
+//         heating_elements[room].power = true;
+//       } else {
+//         while(heating_elements[room].actual_temperature >= heating_elements[room].target_temperature * 0.95) {heating_elements[room].power = false;}
 //
-//   //use heating or buffertank
-//   if (heating_elements[key].power || buffertank.actual_temperature >=  40) {
-//     delta_temperature += heating_increase;
-//   }
+//       }
+//     }
 // }

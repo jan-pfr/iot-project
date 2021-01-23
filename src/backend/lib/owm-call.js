@@ -7,7 +7,7 @@ const config = {
   test_id: 3384868,
 };
 
-const hotLocation = false;
+const hotLocation = true;
 
 const URL = getURL();
 
@@ -59,8 +59,8 @@ function getAlerts(lat, lon){
             description: data.alerts[0].description
           }
         }catch (e) {
-          console.log(e);
-          return;
+          console.log("No alert found. Error -> ", e);
+          return ;
         }
         console.log(alertData);
         return alertData;
