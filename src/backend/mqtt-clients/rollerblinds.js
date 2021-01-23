@@ -61,7 +61,7 @@ var roller_blinds = {
 
 
   function publishData() {
-    mqtt_client.publish(heating_outbound, JSON.stringify(heating_elements));
+    mqtt_client.publish(blinds_outbound, JSON.stringify(roller_blinds));
   }
 
 
