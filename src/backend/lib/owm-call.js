@@ -59,7 +59,7 @@ function getAlerts(lat, lon){
             description: data.alerts[0].description
           }
         }catch (e) {
-          console.log("No alert found. Error -> ", e);
+          console.log("No alert found.");
           return ;
         }
         console.log(alertData);

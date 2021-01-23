@@ -17,7 +17,7 @@ owm.getWeatherData().then((data) => {
     alert = data;
     if (typeof alert === "object"){
       mqtt_client.publish(paths.alert, JSON.stringify(alert));
-    }else{mqtt_client.publish(paths.alert, "null")}
+    }
   });
   mqtt_client.publish(paths.weather, JSON.stringify(weatherData));
 });
@@ -29,7 +29,7 @@ setInterval(() => {
      alert = data;
      if (typeof alert === "object"){
        mqtt_client.publish(paths.alert, JSON.stringify(alert));
-     }else{mqtt_client.publish(paths.alert, "null")}
+     }
    });
 }, 600000);
 
