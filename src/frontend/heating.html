@@ -24,67 +24,62 @@
                 <label>Heating System</label>
             </div>
             <div class="controlsHeating">
-                <!-- <div class="centralHeating">
+                <div class="centralHeating">
                     <button class="toggle mode" data-value=""></button>
                     <button class="toggle power" data-value=""></button>
                     <div class="title"></div>
-                    <div class="target_temperature"></div>
-                    <div class="actual_temperature"></div>
-                    <button value class="up">+</button>
-                    <button value class="down">-</button>
-                </div> -->
+                    <div class="actual_temperature" title="Aktuelle Raumtemperatur"></div>
+                    <div class="target_temperature" title="SOLL-Raumtemperatur"></div>
+                    <div class="btn">
+                        <button value class="up">+</button>
+                        <button value class="down">-</button>
+                    </div>
+                </div> 
                 <div class="bathroom">
                     <button class="toggle mode" data-value=""></button>
                     <button class="toggle power" data-value=""></button>
                     <div class="title"></div>
-                    <div class="target_temperature"></div>
-                    <div class="actual_temperature"></div>
+                    <div class="actual_temperature" title="Aktuelle Raumtemperatur"></div>
+                    <div class="target_temperature" title="SOLL-Raumtemperatur"></div>
                     <div class="btn">
                         <button value class="up">+</button>
                         <button value class="down">-</button>
                     </div>
                 </div>
                 <div class="kitchen">
-                    <button class="toggle mode" value="">-</button>
-                    <button class="toggle power" value="">-</button>
+                    <button class="toggle mode" data-value=""></button>
+                    <button class="toggle power" data-value=""></button>
                     <div class="title"></div>
-                    <div class="target_temperature"></div>
-                    <div class="actual_temperature"></div>
+                    <div class="actual_temperature" title="Aktuelle Raumtemperatur"></div>
+                    <div class="target_temperature" title="SOLL-Raumtemperatur"></div>
                     <div class="btn">
                         <button value class="up">+</button>
                         <button value class="down">-</button>
                     </div>
                 </div>
                 <div class="bedroom">
-                    <button class="toggle mode" value="">-</button>
-                    <button class="toggle power" value="">-</button>
+                    <button class="toggle mode" data-value=""></button>
+                    <button class="toggle power" data-value=""></button>
                     <div class="title"></div>
-                    <div class="target_temperature"></div>
-                    <div class="actual_temperature"></div>
+                    <div class="actual_temperature" title="Aktuelle Raumtemperatur"></div>
+                    <div class="target_temperature" title="SOLL-Raumtemperatur"></div>
                     <div class="btn">
                         <button value class="up">+</button>
                         <button value class="down">-</button>
                     </div>
                 </div>
                 <div class="livingroom">
-                    <button class="toggle mode" value="">-</button>
-                    <button class="toggle power" value="">-</button>
+                    <button class="toggle mode" data-value=""></button>
+                    <button class="toggle power" data-value=""></button>
                     <div class="title"></div>
-                    <div class="target_temperature"></div>
-                    <div class="actual_temperature"></div>
+                    <div class="actual_temperature" title="Aktuelle Raumtemperatur"></div>
+                    <div class="target_temperature" title="SOLL-Raumtemperatur"></div>
                     <div class="btn">
                         <button value class="up">+</button>
                         <button value class="down">-</button>
                     </div>
                 </div>
-                <div>
-                    <div> Simulation Speed </div>
-                    <button class="speed" data-value=0.25>0,25x</button>
-                    <button class="speed" data-value=0.5>0,5x</button>
-                    <button class="speed active" data-value=1>1x</button>
-                    <button class="speed" data-value=2>2x</button>
-                    <button class="speed" data-value=5>5x</button>
-                </div>
+                
 
             </div>
         </div>
@@ -103,7 +98,7 @@
                 Blinds
             </div>
             <div class="controlBlinds">
-                <div class="blndBathroom">
+                <div class="bathroom">
                     <button class="toggle mode" data-value=""></button>
                     <br><br><br>
                     <div class="sldContainer">
@@ -146,7 +141,15 @@
             </div>
         </div>
         <div class="systemStatus">
-            Working
+            <div class="sysHeadline">System Status</div>
+            <div class="simSpeed">
+                <div class="lblSimSpeed"> Simulation Speed </div>
+                <button class="speed" data-value=0.25>0,25x</button>
+                <button class="speed" data-value=0.5>0,5x</button>
+                <button class="speed active" data-value=1>1x</button>
+                <button class="speed" data-value=2>2x</button>
+                <button class="speed" data-value=5>5x</button>
+            </div>
         </div>
     </div>
 

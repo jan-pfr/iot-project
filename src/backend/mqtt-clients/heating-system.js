@@ -85,6 +85,7 @@ mqtt_client.on("message", function (topic, message) {
   }
 });
 
+
 // Main functions
 function simulateCycle() {
   // Update heating element on/off state based on mode (auto/manual)
@@ -96,8 +97,7 @@ function simulateCycle() {
         shouldBeOn =
             heating_elements[room].actual_temperature <=
             heating_elements[room].target_temperature &&
-            outside_temperature < heating_elements[room].target_temperature &&
-            buffertank.actual_temperature < buffertank.max_temperature;
+            outside_temperature < heating_elements[room].target_temperature
         shouldBeOn
             ? (heating_elements[room].power = true)
             : (heating_elements[room].power = false);
@@ -108,7 +108,7 @@ function simulateCycle() {
   for (const key in heating_elements) {
     let delta_temperature = 0;
 
-    if (heating_elements[key].power || buffertank.actual_temperature >=  40) {
+    if (heating_elements[key].power) {
       delta_temperature += heating_increase;
     }
 
@@ -126,10 +126,6 @@ function simulateCycle() {
       }
     }
     heating_elements[key].actual_temperature += delta_temperature;
-    if(heating_elements[key].actual_temperature >= heating_elements[key].target_temperature){
-      buffertank.actual_temperature += delta_temperature + temperature_decay;
-      console.log("Buffertank: ", buffertank.actual_temperature);
-    }
   }
 }
 
@@ -171,3 +167,19 @@ function setSimulationVariables() {
     ((0.005 * heating_power) / simulation_interval) * simulation_speed;
   temperature_decay = (0.00125 / simulation_interval) * simulation_speed;
 }
+
+//function buffertank (){
+//   //main cycle
+//   if(heating_elements[key].actual_temperature >= heating_elements[key].target_temperature){
+//     buffertank.actual_temperature += temperature_decay * 2;
+//     console.log("Buffertank: ", buffertank.actual_temperature);
+//   }
+//
+//   //check if buffer is full or not
+// // && buffertank.actual_temperature < buffertank.max_temperature;
+//
+//   //use heating or buffertank
+//   if (heating_elements[key].power || buffertank.actual_temperature >=  40) {
+//     delta_temperature += heating_increase;
+//   }
+// }
