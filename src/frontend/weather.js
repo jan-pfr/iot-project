@@ -5,7 +5,7 @@ $(() => {
     type: "GET",
     success: (weather) => {
       $("div.temperature").html(weather.temperature);
-      $("span.city").html(
+      $(".location").html(
         weather.city + ` (${weather.description.toLowerCase()})`
       );
 

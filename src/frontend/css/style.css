@@ -1,27 +1,31 @@
 body {
   display: flex;
-  flex-direction: column;
-  min-width: 1100px;
-  justify-content: space-around;
+  justify-content: center;
+  margin: 10px;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   font-weight: 300;
-  font-size: 100%;
   background-color: #8b96ad;
   color: white;
 }
 
-.header {
-  background-color: #002c54;
-  color: white;
-  height: 50px;
-  align-items: center;
-  font-size: 1.8vw;
-  padding: 10px 10px 10px 10px;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+.element {
+  border-radius: 10px;
 }
 
-div {
-  border-radius: 10px;
+.button {
+  outline: none;
+  border: none;
+  border-radius: 5px;
+}
+
+.button:hover {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
+}
+
+.button:click {
+  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
+    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
 
 .headline {
@@ -41,9 +45,37 @@ input[type="range"] {
 
 /* Layout der unteren beiden Reihen */
 
+.wrapper {
+  min-width: 1400px;
+  width: 1400px;
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  justify-self: center;
+}
+
 .row {
   display: flex;
   margin-top: 20px;
+}
+
+.header {
+  margin-top: 10px;
+  color: white;
+  height: 50px;
+  align-items: center;
+  font-size: 30px;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  background-color: #002c54;
+  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
+  padding: 15px 20px;
+  border-radius: 10px;
 }
 
 /*Obere Hierarchieebene*/
@@ -52,80 +84,67 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   height: 350px;
-  background-color: #002c54;
   vertical-align: middle;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  padding: 10px;
   margin-right: 11px;
   flex: 1;
 }
 
-.sectionHeadline {
-  padding-left: 10px;
+.container-header {
+  border-radius: 10px;
+  text-align: center;
+  font-size: 30px;
+}
+
+.container-body {
+  margin-top: 25px;
+}
+
+.control-panel {
+  display: flex;
+  justify-content: space-around;
+}
+
+.container-room {
+  display: flex;
+  flex-direction: column;
+  width: 15%;
+  background-color: #e2e8e4;
+  color: black;
+  border: none;
+  padding: 15px;
+  font-weight: 100;
+  border-radius: 10px;
+}
+
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  flex: 0.25;
+  margin-left: 10px;
 }
 
 .currWeather {
-  padding-left: 30px;
-  background-color: #002c54;
-
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   margin-left: 10px;
   flex: 0.245;
 }
 
 .blinds {
-  display: flex;
-  flex-direction: column;
   height: 350px;
-  vertical-align: middle;
-  background-color: #002c54;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
-  padding: 10px;
   margin-right: 11px;
   flex: 1;
 }
 
 .systemStatus {
-  background-color: #002c54;
-  box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   margin-left: 10px;
   flex: 0.265;
 }
 
 .controlsHeating {
   display: flex;
-  flex-direction: row;
-  margin-top: 30px;
-  justify-content: space-around;
-}
-.controlBlinds {
-  display: flex;
-  flex-direction: row;
-  margin-top: 30px;
   justify-content: space-around;
 }
 
 /*Styling of the Room-Containers*/
-
-.centralHeating,
-.bathroom,
-.kitchen,
-.bedroom,
-.livingroom {
-  display: flex;
-  flex-direction: column;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  width: 9vw;
-  height: 22vh;
-  background-color: #e2e8e4;
-  color: black;
-  border: none;
-  padding: 15px 15px 5px 15px;
-  font-size: 0.8vw;
-  font-weight: 100;
-  border-radius: 10px;
-}
 
 /*Styling of the Heating Elements*/
 
@@ -154,7 +173,6 @@ input[type="range"] {
 }
 
 .toggle {
-  border-radius: 5px;
   background-color: white;
   border: none;
   height: 3.25vh;
@@ -166,7 +184,7 @@ input[type="range"] {
   color: #c9a330;
 }
 .toggle:hover {
-  transform: scale(1.005);
+  background-color: rgb(245, 245, 245);
   cursor: pointer;
 }
 .mode {
@@ -183,7 +201,6 @@ input[type="range"] {
   margin-right: 5px;
   margin-top: 10px;
   font-size: 1vw;
-  border-radius: 5px;
   background-color: #efb509;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -196,11 +213,16 @@ input[type="range"] {
   transform: scale(1.015);
   background-color: #ffcc32;
 }
+
+.up:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
+}
+
 .down {
   width: 4vw;
   margin-top: 10px;
   font-size: 1vw;
-  border-radius: 5px;
   background-color: #efb509;
   border: none;
   outline: none;
@@ -231,7 +253,9 @@ input[type="range"] {
 }
 
 button.active {
-  background-color: aliceblue;
+  background-color: rgb(206, 202, 202);
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
 
 /*Styling of the Blinds Elements*/
@@ -284,25 +308,25 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 1.3vw;
 }
 
-.simSpeed {
+.simulationSpeed {
   display: flex;
-  flex-direction: row;
-  margin-top: 20px;
-  margin-left: 20px;
+  color: black;
+  background-color: rgb(245, 245, 245);
+  padding: 10px;
+  border-radius: 5px;
 }
 
 .speed {
-  width: 2.75vw;
+  width: 3rem;
+  height: 2rem;
   margin-right: 5px;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
-  margin-top: 10px;
-  font-size: 0.7vw;
-  border-radius: 5px;
   background-color: #efb509;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-  outline: none;
-  border: none;
+}
+
+.speed:active {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
+    rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
 
 .lblSimSpeed {
