@@ -7,6 +7,7 @@ $(() => {
   const heating_topic = "heating";
   const simulation_speed_topic = "speed";
   const alert_topic = "alert";
+  var currentEvent = undefined;
   var initialised = false;
 
   socket.on(heating_topic, (message) => {
@@ -24,12 +25,24 @@ $(() => {
     }
   });
   socket.on(alert_topic, (message) => {
-    alert("Neue Warnung für deinen Standort!" +
-        "\n" + "Sender: " + message.sender_name +
-        "\n" + "Event: " + message.event +
-        "\n" + "Start: " + convertUnixTimestamp(message.start) +
-        "\n" + "Ende: " + convertUnixTimestamp(message.end) +
-        "\n"+ "Message: " + message.description);
+    if(currentEvent === message.event){
+      hasEventChanged = false;
+    } else {
+      hasEventChanged = true;
+      hasAlertBeenShown = false;
+    }
+    if(hasLocationChanged || hasEventChanged || !hasAlertBeenShown){
+      currentEvent = message.event;
+      alert("Neue Warnung für deinen Standort!" +
+          "\n" + "Sender: " + message.sender_name +
+          "\n" + "Event: " + message.event +
+          "\n" + "Start: " + convertUnixTimestamp(message.start) +
+          "\n" + "Ende: " + convertUnixTimestamp(message.end) +
+          "\n"+ "Message: " + message.description);
+      hasAlertBeenShown = true;
+      //currently this boolean is set manually. later it will be changed automatically.
+      hasLocationChanged = false;
+    }
   });
 });
 
@@ -41,7 +54,7 @@ function convertUnixTimestamp(unix_timestamp){
   var day = date.getDate();
   var month = months[date.getMonth()];
 
-  return hours + ':' + minutes.substr(-2) + ", " + day + ". " + month;
+  return hours + ':' + minutes + ", " + day + ". " + month;
 }
 
 function initToggles(room, topic) {
