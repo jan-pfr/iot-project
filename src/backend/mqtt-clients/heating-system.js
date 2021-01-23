@@ -1,6 +1,6 @@
 const mqtt = require("mqtt");
 const config = require("./../../config.json");
-
+const paths = config.paths;
 
 const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
   clientId: "heating-system",
@@ -72,13 +72,13 @@ mqtt_client.on("connect", () => {
 mqtt_client.on("message", function (topic, message) {
   message = JSON.parse(message);
 
-  if (topic == paths.weather) {
+  if (topic === paths.weather) {
     outside_temperature = message.temperature;
 
     // Initialise heating_elements at first message from weather station
     !initialised ? initialise() : undefined;
   }
-  if (topic == paths.heating + "/in" && initialised) {
+  if (topic === paths.heating + "/in" && initialised) {
     for (const room in message) {
       for (const property in message[room]) {
         heating_elements[room][property] = message[room][property];

@@ -161,7 +161,7 @@ input[type="range"] {
 }
 
 .target_temperature::after {
-  content: "°C";
+  content: " °C";
 }
 
 .actual_temperature {
@@ -169,7 +169,7 @@ input[type="range"] {
   font-size: 150%;
 }
 .actual_temperature::after {
-  content: "°C";
+  content: " °C";
 }
 
 .toggle {
@@ -249,7 +249,7 @@ input[type="range"] {
 }
 
 .temperature::after {
-  content: "°C";
+  content: " °C";
 }
 
 button.active {
@@ -297,7 +297,7 @@ input[type="range"]::-webkit-slider-thumb {
 #valKitchen::after,
 #valBedroom::after,
 #valLivingroom::after {
-  content: "%";
+  content: " %";
 }
 
 /*Styling of SystemStatus Elements*/
@@ -328,7 +328,37 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
+.close {
+  margin-right: 3px;
+  font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+  margin-top: 5px;
+  font-size: 0.6vw;
+  border-radius: 5px;
+  background-color: #efb509;
+  outline: none;
+  border: none;
+}
 
 .lblSimSpeed {
   font-size: 0.9vw;
+}
+
+/*Style of the Alerts*/
+.alert-overlay{
+  visibility: hidden;
+  text-align: center;
+
+}
+.alert-content{
+  visibility: hidden;
+  font-size: 0.7vw;
+  background-color: #AE3030;
+
+}
+.alert-overlay.active{
+  visibility:visible;
+}
+
+.alert-content.active {
+  visibility:visible;
 }
