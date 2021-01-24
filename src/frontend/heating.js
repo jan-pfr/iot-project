@@ -33,11 +33,10 @@ $(() => {
     }
     if (!initialisedBlinds) {
       for (const room in message) {
-        initTogglesBlinds(room, blinds_topic);
-        sliderChange(room, blinds_topic);
+        initToggleBlinds(room, blinds_topic);
+        initBlindsChangeSlider(room, blinds_topic);
       }
       initialisedBlinds = !initialisedBlinds;
-      console.log("InitialBlinds ", initialisedBlinds);
     }
   });
   socket.on(alert_topic, (message) => {
@@ -74,13 +73,13 @@ function convertUnixTimestamp(unix_timestamp){
 
   return hours + ':' + minutes + ", " + day + ". " + month;
 }
-
+//init all Buttons
 function initToggles(room, topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
-    let property = $toggle.attr("class").replace("toggle ", "");
-    let value = $toggle.attr("data-value") == "true";
-    toggle(topic, room, property, value);
+    let property = $toggle.attr("class").replace("toggle button ", "");
+    let value = $toggle.attr("data-value") === "true";
+    toggleHeating(topic, room, property, value);
   });
 }
 
@@ -89,7 +88,7 @@ function initTempChangeButtons(room, topic) {
     let $button = $(event.target);
     let target_temperature = +$(`.heating .${room} .target_temperature`).html();
     target_temperature =
-      $button.attr("class") == "button up"
+      $button.attr("class") === "button up"
         ? target_temperature + 1
         : target_temperature - 1;
     changeTargetTemperature(
@@ -101,21 +100,37 @@ function initTempChangeButtons(room, topic) {
   });
 }
 
-function initSpeedButtons(topic) {
-  $(`button.speed`).on("click", (event) => {
-    let $button = $(event.target);
-    $button.addClass("active");
-    $button.siblings().removeClass("active");
-    let value = $button.data("value");
-    socket.emit(topic, value);
+function initToggleBlinds(room, topic) {
+  $(`.blinds .${room} button.toggle`).on("click", (event) => {
+    let $toggle = $(event.target);
+    let value = $toggle.attr("data-value") === "true";
+    toggleBlinds(topic, room, value);
   });
 }
 
-function toggle(topic, room, property, value) {
+function initBlindsChangeSlider(room, topic) {
+  $(`.blinds .${room} .sld`).on('change', function () {
+
+    let target = $(this).val();
+    changeBlinds(
+        topic,
+        room,
+        "target",
+        target
+    );
+  });
+}
+
+
+
+
+
+//if something changes
+function toggleHeating(topic, room, property, value) {
   let message = {};
   message[room] = {};
   message[room][property] = !value;
-  if (property == "power") {
+  if (property === "power") {
     message[room]["mode"] = false;
   }
   console.log("Emitting %s", JSON.stringify(message));
@@ -128,7 +143,24 @@ function changeTargetTemperature(topic, room, property, value) {
   message[room][property] = value;
   socket.emit(topic, message);
 }
+function toggleBlinds(topic, room, value) {
+  let message = {};
+  message[room] = {};
+  message[room]["mode"] = !value;
 
+  console.log("Emitting %s", JSON.stringify(message));
+  socket.emit(topic, message);
+}
+
+function changeBlinds(topic, room, property, value) {
+  let message = {};
+  message[room] = {};
+  message[room][property] = value;
+  socket.emit(topic, message);
+}
+
+
+//update stuff in the overlay
 function updateHeatingValues(room, properties) {
   $(`.heating .${room} .title`).html(room);
   $(`.heating .${room} .mode`).attr("data-value", properties.mode);
@@ -143,48 +175,25 @@ function updateHeatingValues(room, properties) {
   );
 }
 
-function initTogglesBlinds(room, topic) {
-  $(`.blinds .${room} button.toggle`).on("click", (event) => {
-    let $toggle = $(event.target);
-    let value = $toggle.attr("data-value") == "true";
-    toggleBlinds(topic, room, value);
-  });
-}
-
-function toggleBlinds(topic, room, value) {
-  let message = {};
-  message[room] = {};
-  message[room]["mode"] = !value;
-
-  console.log("Emitting %s", JSON.stringify(message));
-  socket.emit(topic, message);
-}
-
-function sliderChange(room, topic){
-  $(`.blinds .${room} .sld`).on('change', function() {
-    let target = $(this).val();
-    changeBlinds(
-      topic,
-      room,
-      "target",
-      target
-  );
-});
-
-
-}
-function changeBlinds(topic, room, property, value) {
-  let message = {};
-  message[room] = {};
-  message[room][property] = value;
-  socket.emit(topic, message);
-}
-
 function updateBlindsValues(room, properties) {
   $(`.blinds .${room} .title`).html(room);
   $(`.blinds .${room} .mode`).attr("data-value", properties.mode);
   $(`.blinds .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
-  $(`.blinds .${room} .sld`).attr("value", properties.target);
+  $(`.blinds .${room} .sld`).attr("value", properties.status);
+  //change, das immer der tatsächliche wert und nicht target angezeigt wird.
   $(`.blinds .${room} .val`).html(properties.target);
+  $(`.blinds .${room} .soll`).html(Math.round(properties.status));
 
+}
+
+
+//lonely Speedy Buttons
+function initSpeedButtons(topic) {
+  $(`button.speed`).on("click", (event) => {
+    let $button = $(event.target);
+    $button.addClass("active");
+    $button.siblings().removeClass("active");
+    let value = $button.data("value");
+    socket.emit(topic, value);
+  });
 }

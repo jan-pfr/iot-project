@@ -8,7 +8,7 @@ const mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
 var sunrise = 0;
 var sunset = 0;
 var outside_temperature;
-var simulation_interval = 66.66;
+var simulation_interval = 33.33;
 
 const isAutomatic = true;
 const hot_temperature = 28;
@@ -55,10 +55,10 @@ mqtt_client.on("message", function (topic, message) {
     !initialisedBlinds ? initialise() : undefined;
   }
   if (topic == paths.blinds + "/in" && initialisedBlinds) {
-    console.log("Ich bin in rollerblinds");
     for (const room in message) {
       for (const property in message[room]) {
         roller_blinds[room][property] = message[room][property];
+        console.log("ich bin in rollerblinds",roller_blinds[room][property]);
       }
     }
   }
@@ -71,27 +71,28 @@ function convertUnixTimestamp(unix_timestamp) {
 }
 function simulateBlinds() {
   for (const room in roller_blinds) {
-    if (roller_blinds[room].status < roller_blinds[room].target) {
-      for (var x = roller_blinds[room].status; x >= roller_blinds[room].target; x+5) {
-        roller_blinds[room].status += 5;
-      }
-    } else if (roller_blinds[room].status > roller_blinds[room].target) {
-      for ( var y = roller_blinds[room].status; y <= roller_blinds[room].target; y-5) {
-        roller_blinds[room].status -= 5;
-      }
-    }
-  }
-
-  for (const key in roller_blinds) {
-    var currentHours = new Date();
-    if (roller_blinds[key].mode) {
+    var currentHours = new Date().getHours();
+    if (roller_blinds[room].mode) {
       if(currentHours >= sunset || currentHours <= sunrise){
-        roller_blinds[key].target = 100;
+        roller_blinds[room].target = 100;
       }else {
-        roller_blinds[key].target = 0;
+        roller_blinds[room].target = 0;
       }
       if (outside_temperature >= hot_temperature) {
-        roller_blinds[key].target = 100;
+        roller_blinds[room].target = 100;
+      }
+    }
+    if (roller_blinds[room].status <= roller_blinds[room].target) {
+      for (let x = roller_blinds[room].status; x <= roller_blinds[room].target-0.5; x++) {
+        roller_blinds[room].status = roller_blinds[room].status + 0.05;
+        console.log("1 ",roller_blinds[room], roller_blinds[room].status, " %")
+      }
+    }
+    if (roller_blinds[room].status >= roller_blinds[room].target) {
+      console.log("bla");
+      for (let y = roller_blinds[room].target; y <= roller_blinds[room].status+0.5; y++) {
+        roller_blinds[room].status = roller_blinds[room].status - 0.05;
+        console.log("2 ", roller_blinds[room], roller_blinds[room].status, " %")
       }
     }
   }
@@ -107,6 +108,7 @@ function initialise() {
 
 function publishData() {
   mqtt_client.publish(paths.blinds, JSON.stringify(roller_blinds));
+  console.log("3 ",roller_blinds.bathroom);
 }
 
 function subscribe(topic) {
