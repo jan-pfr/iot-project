@@ -16,7 +16,6 @@ $(() => {
     for (const room in message) {
       updateHeatingValues(room, message[room]);
     }
-
     if (!initialised) {
       for (const room in message) {
         initToggles(room, heating_topic);
@@ -38,6 +37,7 @@ $(() => {
         sliderChange(room, blinds_topic);
       }
       initialisedBlinds = !initialisedBlinds;
+      console.log("InitialBlinds ", initialisedBlinds);
     }
   });
   socket.on(alert_topic, (message) => {
@@ -144,7 +144,7 @@ function updateHeatingValues(room, properties) {
 }
 
 function initTogglesBlinds(room, topic) {
-  $(`.heating .${room} button.toggle`).on("click", (event) => {
+  $(`.blinds .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
     let value = $toggle.attr("data-value") == "true";
     toggleBlinds(topic, room, value);
@@ -164,8 +164,6 @@ function sliderChange(room, topic){
   $(`.blinds .${room} .sld`).on('change', function() {
     let target = $(this).val();
 });
-  
-
   changeBlinds(
       topic,
       room,

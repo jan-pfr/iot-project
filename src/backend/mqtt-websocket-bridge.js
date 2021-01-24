@@ -20,6 +20,10 @@ class MQTTWebSocketBridge {
         var message = JSON.stringify(message);
         this.mqtt_client.publish(paths.heating + "/in", message);
       });
+      socket.on(paths.blinds, (message) => {
+        var message = JSON.stringify(message);
+        this.mqtt_client.publish(paths.blinds+ "/in", message);
+      });
       socket.on(paths.simulation_speed, (message) => {
         var message = message.toString();
         this.mqtt_client.publish(paths.simulation_speed, message);
