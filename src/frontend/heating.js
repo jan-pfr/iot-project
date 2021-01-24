@@ -152,7 +152,6 @@ function changeBlinds(topic, room, property, value) {
 
 function updateHeatingValues(room, properties) {
   $(`.heating .${room} .title`).html(room);
-  // noinspection JSJQueryEfficiency
   $(`.heating .${room} .mode`).attr("data-value", properties.mode);
   $(`.heating .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
   $(`.heating .${room} .power`).attr("data-value", properties.power);
