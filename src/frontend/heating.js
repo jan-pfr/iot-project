@@ -182,6 +182,7 @@ function updateBlindsValues(room, properties) {
   $(`.blinds .${room} .title`).html(room);
   $(`.blinds .${room} .mode`).attr("data-value", properties.mode);
   $(`.blinds .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
-  $(`.blinds .${room} .target`).html(properties.target)
+  $(`.blinds .${room} .sld`).html(properties.target)
+  $(`.blinds .${room} .val`).html(properties.target)
 
 }
