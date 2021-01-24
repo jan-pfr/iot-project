@@ -1,5 +1,4 @@
 $(() => {
-  setInterval(()=>{
   const url = "http://localhost:3000/status/weather";
   $.ajax({
     url,
@@ -19,5 +18,4 @@ $(() => {
       $("#weather-icon").addClass(`wi wi-owm-${timeOfDay}-${weather.id}`);
     },
   });
-},600042);
 });
