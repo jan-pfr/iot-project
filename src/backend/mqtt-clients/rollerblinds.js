@@ -70,12 +70,12 @@ function convertUnixTimestamp(unix_timestamp) {
 }
 function simulateBlinds() {
   for (const room in roller_blinds) {
-    if (roller_blinds[room].target > roller_blinds[room].target) {
+    if (roller_blinds[room].status > roller_blinds[room].target) {
       var i = roller_blinds[room].status;
       for (; i > roller_blinds[room].target; i++) {
         roller_blinds[room].status++;
       }
-    } else if (roller_blinds[room].target < roller_blinds[room].target) {
+    } else if (roller_blinds[room].status < roller_blinds[room].target) {
       var i = roller_blinds[room].status;
       for (; i < roller_blinds[room].target; i--) {
         roller_blinds[room].status--;
