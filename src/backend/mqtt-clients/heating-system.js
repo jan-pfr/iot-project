@@ -174,16 +174,17 @@ function setSimulationVariables() {
   temperature_decay = (0.00125 / simulation_interval) * simulation_speed;
 }
 
-//function buffertank (){
-//    if (heating_elements[room].mode) {
-//       if (heating_elements[room].actual_temperature <=
-//           heating_elements[room].target_temperature &&
-//           outside_temperature < heating_elements[room].target_temperature) {
-//
-//         heating_elements[room].power = true;
-//       } else {
-//         while(heating_elements[room].actual_temperature >= heating_elements[room].target_temperature * 0.95) {heating_elements[room].power = false;}
-//
-//       }
-//     }
-// }
+/*function buffertank (){
+    if (heating_elements[room].mode) {
+       if (heating_elements[room].actual_temperature <=
+           heating_elements[room].target_temperature &&
+           outside_temperature < heating_elements[room].target_temperature) {
+
+         heating_elements[room].power = true;
+       } else {
+         while(heating_elements[room].actual_temperature >= heating_elements[room].target_temperature * 0.95) {heating_elements[room].power = false;}
+
+    }
+     }
+ }
+ */

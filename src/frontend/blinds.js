@@ -8,7 +8,7 @@ $(() => {
   
     socket.on(blinds_topic, (message) => {
       for (const room in message) {
-        updateblindsValues(room, message[room]);
+        updateBlindsValues(room, message[room]);
         
       }
       if (!initialised) {
@@ -42,7 +42,6 @@ $(() => {
 
 
 function sliderChange(room, topic){
-
   var target = $(`.blinds .${room} .target`).html(properties.sldContainer.value)
   
 changeBlinds(
@@ -64,7 +63,7 @@ function changeBlinds(topic, room, property, value) {
   socket.emit(topic, message);
 }
 
-function updateblindsValues(room, properties) {
+function updateBlindsValues(room, properties) {
     $(`.blinds .${room} .title`).html(room);
     $(`.blinds .${room} .mode`).attr("data-value", properties.mode);
     $(`.blinds .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
