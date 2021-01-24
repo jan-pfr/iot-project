@@ -12,7 +12,7 @@ var simulation_interval = 33.33;
 
 const isAutomatic = true;
 const hot_temperature = 28;
-var initialised;
+var initialisedBlinds;
 
 var roller_blinds = {
   bathroom: {
@@ -50,10 +50,9 @@ mqtt_client.on("message", function (topic, message) {
     outside_temperature = message.temperature;
     sunrise = convertUnixTimestamp(message.sunrise);
     sunset = convertUnixTimestamp(message.sunset);
-
-    !initialised ? initialise() : undefined;
+    !initialisedBlinds ? initialise() : undefined;
   }
-  if (topic == paths.blinds + "/in" && initialised) {
+  if (topic == paths.blinds + "/in" && initialisedBlinds) {
     for (const room in message) {
       for (const property in message[room]) {
         roller_blinds[room][property] = message[room][property];
@@ -83,7 +82,7 @@ function simulateBlinds() {
   }
 }
 function initialise() {
-  initialised = true;
+  initialisedBlinds = true;
 
   setInterval(() => {
     publishData();
