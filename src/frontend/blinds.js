@@ -45,7 +45,7 @@ function sliderChange(room, topic){
 
   var target = $(`.blinds .${room} .target`).html(properties.sldContainer.value)
   
-changeTargetTemperature(
+changeBlinds(
   topic,
   room,
   "target",
