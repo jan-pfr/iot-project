@@ -11,6 +11,7 @@ class HTTPServerWrapper {
     // Setting up the router and paths
     this.router = express.Router();
 
+    //http routes
     this.router.get("/status/all", (req, res) => {
       res.status(200).send(cache);
     });
