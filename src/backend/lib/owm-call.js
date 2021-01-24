@@ -7,7 +7,7 @@ const config = {
   test_id: 3384868,
 };
 
-const hotLocation = false;
+const hotLocation = true;
 
 const URL = getURL();
 
