@@ -4,7 +4,7 @@
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/085c2e40529043ef876ae3e79517df45)](https://www.codacy.com/gh/jan-pfr/iot-project/dashboard?utm_source=github.com&utm_medium=referral&utm_content=jan-pfr/iot-project&utm_campaign=Badge_Grade) [![LICENSE](https://img.shields.io/github/license/jan-pfr/iot-project.svg)](https://github.com/jan-pfr/iot-project/blob/master/LICENSE)
 
 This repository contains the final project for the elective course 'Internet of Things' lectured by Prof. Dr. Edgar Seemann at the Furtwangen University (HFU) in Germany.
-The goal of this project is to create a virtual smart home automation system simulating a complete MQTT network. The (partially simulated) MQTT data is being cached by an HTTP server and made available via HTTP. The UI is implemented in HTML/CSS with frameworks such as Font Awesome, jQuery and more. Everything runs locally and requires no further changes to run.
+The goal of this project is to create a virtual smart home automation system simulating a complete MQTT network. The (partially simulated) MQTT data is being cached by an HTTP server and made available via HTTP as well as via WebSockets to allow for real time updates in the dashboard. The UI is implemented in HTML/CSS with frameworks such as Font Awesome, jQuery and more. Everything runs locally and requires no further changes to run (Check the UML diagram for a detailed view of the application architecture).
 
 ### How to run the application
 
@@ -17,7 +17,7 @@ Then follow these steps:
 4. Run `node src\backend\mqtt-clients\weather-station.js`
 5. Run `node src\backend\mqtt-clients\heating-system.js`
 6. Run `node src\backend\mqtt-clients\rollerblinds.js`
-7. Open src\frontend\index.html
+7. Open src\frontend\index.html in the browser of your choice (IE not recommended)
 8. Have fun :)
 
 ### How to use the dashboard
