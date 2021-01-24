@@ -35,6 +35,9 @@ class MQTTWebSocketBridge {
       this.mqtt_client.subscribe(paths.alert, () => {
         console.log("Subscribed on %s", paths.alert);
       });
+      this.mqtt_client.subscribe(paths.blinds, () => {
+        console.log("Subscribed on %s", paths.blinds);
+      });
     });
 
     this.mqtt_client.on("message", (topic, message) => {
