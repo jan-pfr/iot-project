@@ -108,6 +108,7 @@ input[type="range"] {
   display: flex;
   flex-direction: column;
   width: 15%;
+  height: 225px;
   background-color: #e2e8e4;
   color: black;
   border: none;
@@ -266,6 +267,7 @@ input[type="range"] {
   appearance: none;
   width: 12vh;
   height: 0.25vw;
+  margin-top: 80px;
   outline: none;
   border-radius: 5px;
   background-color: #8b96ad;
@@ -289,8 +291,13 @@ input[type="range"]::-webkit-slider-thumb {
 .sldContainer {
   flex-direction: column;
   margin-left: -50px;
+  margin-bottom: 50px;
   font-size: 1.3vw;
   font-weight: 100;
+}
+
+.val{
+  font-size: 80%;
 }
 
 .val::after{
@@ -330,10 +337,12 @@ input[type="range"]::-webkit-slider-thumb {
     rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
 .close {
+  height: 25px;
+  width: 40px;
   margin-right: 3px;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   margin-top: 5px;
-  font-size: 5px;
+  font-size: 10px;
   border-radius: 5px;
   background-color: #efb509;
   outline: none;
@@ -345,13 +354,10 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 /*Style of the Alerts*/
-.alert-overlay{
-  visibility: hidden;
-  text-align: center;
 
-}
 .alert-content{
   visibility: hidden;
+  text-align: center;
   font-size: 10px;
   background-color: #AE3030;
   border-radius: 5px;
