@@ -17,7 +17,7 @@ function firstZero(num) {
   return num;
 }
 
-setInterval(() => {
+/*setInterval(() => {
   document.getElementById("valBathroom").value = document.getElementById(
     "sldBathroom"
   ).value;
@@ -30,4 +30,4 @@ setInterval(() => {
   document.getElementById("valLivingroom").value = document.getElementById(
     "sldLivingroom"
   ).value;
-}, 100);
+}, 100);*/
