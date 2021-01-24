@@ -73,7 +73,7 @@ function initTempChangeButtons(room, topic) {
     let $button = $(event.target);
     let target_temperature = +$(`.heating .${room} .target_temperature`).html();
     target_temperature =
-      $button.attr("class") == "up"
+      $button.attr("class") == "button up"
         ? target_temperature + 1
         : target_temperature - 1;
     changeTargetTemperature(
