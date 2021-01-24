@@ -47,13 +47,13 @@ $(() => {
     }
     if(hasEventChanged || !hasAlertBeenShown){
       currentEvent = message.event;
-      $(`.alert-overlay .alert-content .event`).html(message.event);
-      $(`.alert-overlay .alert-content .sender`).html(message.sender_name);
-      $(`.alert-overlay .alert-content .period`).html(convertUnixTimestamp(message.start) +" - "+convertUnixTimestamp(message.end));
-      $(`.alert-overlay .alert-content .description`).html(message.description);
-      $(".alert-overlay, .alert-content").addClass("active");
+      $(`.alert-content .event`).html(message.event);
+      $(`.alert-content .sender`).html(message.sender_name);
+      $(`.alert-content .period`).html(convertUnixTimestamp(message.start) +" - "+convertUnixTimestamp(message.end));
+      $(`.alert-content .description`).html(message.description);
+      $(".alert-content").addClass("active");
       $(".close").on("click", function() {
-        $(".alert-overlay, .alert-content").removeClass("active");
+        $(".alert-content").removeClass("active");
       });
       hasAlertBeenShown = true;
     }
