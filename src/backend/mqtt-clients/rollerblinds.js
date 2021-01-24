@@ -13,7 +13,7 @@ var simulation_interval = 33.33;
 const isAutomatic = true;
 const hot_temperature = 28;
 var initialisedBlinds;
-
+//Rolläden
 var roller_blinds = {
   bathroom: {
     status: 0,
@@ -51,7 +51,7 @@ mqtt_client.on("message", function (topic, message) {
     sunrise = convertUnixTimestamp(message.sunrise);
     sunset = convertUnixTimestamp(message.sunset);
 
-    // Initialise heating_elements at first message from weather station
+    // Initialise blinds at first message from weather station
     !initialisedBlinds ? initialise() : undefined;
   }
   if (topic == paths.blinds + "/in" && initialisedBlinds) {
@@ -62,25 +62,30 @@ mqtt_client.on("message", function (topic, message) {
     }
   }
 });
-
+//Converting Unix Timestamps
 function convertUnixTimestamp(unix_timestamp) {
   var date = new Date(unix_timestamp * 1000);
   var hours = date.getHours();
   return hours;
 }
+//Rollladen Simulation
 function simulateBlinds() {
   for (const room in roller_blinds) {
     var currentHours = new Date().getHours();
+    //Bei automatischen Rollläden 
     if (roller_blinds[room].mode) {
+     // Rollladen Steuerung Sonnenabhängig
       if(currentHours >= sunset || currentHours <= sunrise){
         roller_blinds[room].target = 100;
       }else {
         roller_blinds[room].target = 0;
       }
+      // Temperaturabhängig
       if (outside_temperature >= hot_temperature) {
         roller_blinds[room].target = 100;
       }
     }
+    //Simulation realer Rollläden
     if (roller_blinds[room].status <= roller_blinds[room].target) {
       for (let x = roller_blinds[room].status; x <= roller_blinds[room].target-0.5; x++) {
         roller_blinds[room].status += 0.05;
@@ -95,13 +100,13 @@ function simulateBlinds() {
 }
 function initialise() {
   initialisedBlinds = true;
-
+  // Publish once and set intervals for publishing and simulation
   setInterval(() => {
     publishData();
     simulateBlinds();
   }, simulation_interval);
 }
-
+// Helper functions
 function publishData() {
   mqtt_client.publish(paths.blinds, JSON.stringify(roller_blinds));
 }
