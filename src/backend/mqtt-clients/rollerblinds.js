@@ -51,7 +51,6 @@ mqtt_client.on("message", function (topic, message) {
     sunrise = convertUnixTimestamp(message.sunrise);
     sunset = convertUnixTimestamp(message.sunset);
 
-    // Initialise heating_elements at first message from weather station
     !initialised ? initialise() : undefined;
   }
   if (topic == paths.blinds + "/in" && initialised) {
@@ -72,13 +71,13 @@ function simulateBlinds() {
   for (const room in roller_blinds) {
     if (roller_blinds[room].status < roller_blinds[room].target) {
       var i = roller_blinds[room].status;
-      for (; i > roller_blinds[room].target; i++) {
-        roller_blinds[room].status++;
+      for (; i > roller_blinds[room].target; i+5) {
+        roller_blinds[room].status + 5;
       }
     } else if (roller_blinds[room].status > roller_blinds[room].target) {
       var i = roller_blinds[room].status;
-      for (; i < roller_blinds[room].target; i--) {
-        roller_blinds[room].status--;
+      for (; i < roller_blinds[room].target; i-5) {
+        roller_blinds[room].status - 5;
       }
     }
   }
