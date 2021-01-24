@@ -11,6 +11,7 @@ $(() => {
   var initialised = false;
   var initialisedBlinds = false;
 
+//Listeners for information from the backend
   socket.on(heating_topic, (message) => {
     for (const room in message) {
       updateHeatingValues(room, message[room]);
@@ -71,6 +72,7 @@ function convertUnixTimestamp(unix_timestamp){
   return hours + ':' + minutes + ", " + day + ". " + month;
 }
 
+//Initialising the Buttons
 function initToggles(room, topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
@@ -118,6 +120,7 @@ function initBlindsChangeSlider(room, topic) {
   });
 }
 
+//functionalities of all buttons
 function toggleHeating(topic, room, property, value) {
   let message = {};
   message[room] = {};
@@ -150,6 +153,7 @@ function changeBlinds(topic, room, property, value) {
   socket.emit(topic, message);
 }
 
+//Updating all values of the frontend
 function updateHeatingValues(room, properties) {
   $(`.heating .${room} .title`).html(room);
   $(`.heating .${room} .mode`).attr("data-value", properties.mode);
@@ -174,6 +178,7 @@ function updateBlindsValues(room, properties) {
 
 }
 
+//Init Buttons for manipulating the speed from the heating
 function initSpeedButtons(topic) {
   $(`button.speed`).on("click", (event) => {
     let $button = $(event.target);

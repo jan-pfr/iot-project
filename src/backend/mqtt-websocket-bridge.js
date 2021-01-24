@@ -12,7 +12,7 @@ class MQTTWebSocketBridge {
     this.setupWebSocketServer();
     this.setupMQTTClient();
   }
-
+//setup WebSocket, forwarding information form the frontend
   setupWebSocketServer() {
     this.io.on("connection", (socket) => {
       console.log("WebSocket client connected");
@@ -31,6 +31,7 @@ class MQTTWebSocketBridge {
     });
   }
 
+  //setup MQTTClient forwarding information from the backend
   setupMQTTClient() {
     this.mqtt_client.on("connect", () => {
       this.mqtt_client.subscribe(paths.heating, () => {

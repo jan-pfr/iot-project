@@ -13,7 +13,7 @@ var simulation_interval = 33.33;
 const isAutomatic = true;
 const hot_temperature = 28;
 var initialisedBlinds;
-//Rolläden
+//roller blinds
 var roller_blinds = {
   bathroom: {
     status: 0,
@@ -62,13 +62,15 @@ mqtt_client.on("message", function (topic, message) {
     }
   }
 });
+
 //Converting Unix Timestamps
 function convertUnixTimestamp(unix_timestamp) {
   var date = new Date(unix_timestamp * 1000);
   var hours = date.getHours();
   return hours;
+
 }
-//Rollladen Simulation
+//roller binds cycle Simulation
 function simulateBlinds() {
   for (const room in roller_blinds) {
     var currentHours = new Date().getHours();
@@ -80,12 +82,14 @@ function simulateBlinds() {
       }else {
         roller_blinds[room].target = 0;
       }
-      // Temperaturabhängig
+
+      // depends on outside temperature
       if (outside_temperature >= hot_temperature) {
         roller_blinds[room].target = 100;
       }
     }
-    //Simulation realer Rollläden
+
+    //simulation of the going up and down of the roller binds
     if (roller_blinds[room].status <= roller_blinds[room].target) {
       for (let x = roller_blinds[room].status; x <= roller_blinds[room].target-0.5; x++) {
         roller_blinds[room].status += 0.05;
@@ -106,6 +110,7 @@ function initialise() {
     simulateBlinds();
   }, simulation_interval);
 }
+
 // Helper functions
 function publishData() {
   mqtt_client.publish(paths.blinds, JSON.stringify(roller_blinds));

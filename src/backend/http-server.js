@@ -46,7 +46,7 @@ class HTTPServerWrapper {
   // isSet checks whether cache has been initialized with the requested resource
   isSet(of) {
     for (const [device, value] of Object.entries(this.cache)) {
-      if (device == of) {
+      if (device === of) {
         return value != null;
       }
     }

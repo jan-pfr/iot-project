@@ -11,6 +11,7 @@ const hotLocation = false;
 
 const URL = getURL();
 
+//Get current weather data
 function getWeatherData() {
   console.log("Getting weather data from: " + URL);
 
@@ -35,7 +36,7 @@ function getWeatherData() {
     });
 }
 
-//Get allerts of the current location
+//Get alerts of the current location
 function getAlerts(lat, lon){
   let alertUrl = "https://api.openweathermap.org/data/2.5/onecall?&lat=" +
       lat + "&lon=" +
@@ -88,8 +89,3 @@ function getURL() {
   );
 }
 module.exports = { getWeatherData, getAlerts };
-
-// fuwa_lon: 8.2,
-//   fuwa_lat: 48.05,
-//   braz_lon: -35.6833,
-//   braz_lat: -7.1,
