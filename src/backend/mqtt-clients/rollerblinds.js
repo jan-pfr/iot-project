@@ -58,7 +58,6 @@ mqtt_client.on("message", function (topic, message) {
     for (const room in message) {
       for (const property in message[room]) {
         roller_blinds[room][property] = message[room][property];
-        console.log("ich bin in rollerblinds",roller_blinds[room][property]);
       }
     }
   }
@@ -84,15 +83,12 @@ function simulateBlinds() {
     }
     if (roller_blinds[room].status <= roller_blinds[room].target) {
       for (let x = roller_blinds[room].status; x <= roller_blinds[room].target-0.5; x++) {
-        roller_blinds[room].status = roller_blinds[room].status + 0.05;
-        console.log("1 ",roller_blinds[room], roller_blinds[room].status, " %")
+        roller_blinds[room].status += 0.05;
       }
     }
     if (roller_blinds[room].status >= roller_blinds[room].target) {
-      console.log("bla");
       for (let y = roller_blinds[room].target; y <= roller_blinds[room].status+0.5; y++) {
-        roller_blinds[room].status = roller_blinds[room].status - 0.05;
-        console.log("2 ", roller_blinds[room], roller_blinds[room].status, " %")
+        roller_blinds[room].status -= 0.05;
       }
     }
   }
@@ -108,7 +104,6 @@ function initialise() {
 
 function publishData() {
   mqtt_client.publish(paths.blinds, JSON.stringify(roller_blinds));
-  console.log("3 ",roller_blinds.bathroom);
 }
 
 function subscribe(topic) {

@@ -1,7 +1,6 @@
 // import io from "socket.io-client";
 var socket = io("ws://localhost:3000");
 // import $ from "jquery";
-var hasLocationChanged = true;
 
 $(() => {
   const heating_topic = "heating";
@@ -46,7 +45,7 @@ $(() => {
       hasEventChanged = true;
       hasAlertBeenShown = false;
     }
-    if(hasLocationChanged || hasEventChanged || !hasAlertBeenShown){
+    if(hasEventChanged || !hasAlertBeenShown){
       currentEvent = message.event;
       $(`.alert-overlay .alert-content .event`).html(message.event);
       $(`.alert-overlay .alert-content .sender`).html(message.sender_name);
@@ -57,8 +56,6 @@ $(() => {
         $(".alert-overlay, .alert-content").removeClass("active");
       });
       hasAlertBeenShown = true;
-      //currently this boolean is set manually. later it will be changed automatically.
-      hasLocationChanged = false;
     }
   });
 });
@@ -73,7 +70,7 @@ function convertUnixTimestamp(unix_timestamp){
 
   return hours + ':' + minutes + ", " + day + ". " + month;
 }
-//init all Buttons
+
 function initToggles(room, topic) {
   $(`.heating .${room} button.toggle`).on("click", (event) => {
     let $toggle = $(event.target);
@@ -121,11 +118,6 @@ function initBlindsChangeSlider(room, topic) {
   });
 }
 
-
-
-
-
-//if something changes
 function toggleHeating(topic, room, property, value) {
   let message = {};
   message[room] = {};
@@ -147,7 +139,6 @@ function toggleBlinds(topic, room, value) {
   let message = {};
   message[room] = {};
   message[room]["mode"] = !value;
-
   console.log("Emitting %s", JSON.stringify(message));
   socket.emit(topic, message);
 }
@@ -159,10 +150,9 @@ function changeBlinds(topic, room, property, value) {
   socket.emit(topic, message);
 }
 
-
-//update stuff in the overlay
 function updateHeatingValues(room, properties) {
   $(`.heating .${room} .title`).html(room);
+  // noinspection JSJQueryEfficiency
   $(`.heating .${room} .mode`).attr("data-value", properties.mode);
   $(`.heating .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
   $(`.heating .${room} .power`).attr("data-value", properties.power);
@@ -179,15 +169,12 @@ function updateBlindsValues(room, properties) {
   $(`.blinds .${room} .title`).html(room);
   $(`.blinds .${room} .mode`).attr("data-value", properties.mode);
   $(`.blinds .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
-  $(`.blinds .${room} .sld`).attr("value", properties.status);
-  //change, das immer der tatsächliche wert und nicht target angezeigt wird.
+  $(`.blinds .${room} .sld`).attr("value", properties.target);
   $(`.blinds .${room} .val`).html(properties.target);
-  $(`.blinds .${room} .soll`).html(Math.round(properties.status));
+  $(`.blinds .${room} .soll`).html("current " + Math.round(properties.status)+ " %");
 
 }
 
-
-//lonely Speedy Buttons
 function initSpeedButtons(topic) {
   $(`button.speed`).on("click", (event) => {
     let $button = $(event.target);
