@@ -4,11 +4,11 @@ const config = require("./../config.json");
 const paths = config.paths;
 
 class MQTTWebSocketBridge {
-  constructor(http_server) {
+  constructor(httpServer) {
     this.mqtt_client = mqtt.connect(`mqtt://localhost:${config.mqtt_port}`, {
       clientId: "websocket-server",
     });
-    this.io = socketio(http_server);
+    this.io = socketio(httpServer);
     this.setupWebSocketServer();
     this.setupMQTTClient();
   }
@@ -24,9 +24,9 @@ class MQTTWebSocketBridge {
         var message = JSON.stringify(message);
         this.mqtt_client.publish(paths.blinds+ "/in", message);
       });
-      socket.on(paths.simulation_speed, (message) => {
+      socket.on(paths.simulationSpeed, (message) => {
         var message = message.toString();
-        this.mqtt_client.publish(paths.simulation_speed, message);
+        this.mqtt_client.publish(paths.simulationSpeed, message);
       });
     });
   }

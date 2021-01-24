@@ -1,6 +1,6 @@
 {
     "paths": {
-        "simulation_speed": "speed",
+        "simulationSpeed": "speed",
         "weather": "weather",
         "heating": "heating",
         "blinds": "blinds",

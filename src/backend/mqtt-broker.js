@@ -4,12 +4,12 @@ const net = require("net");
 class MQTTBrokerWrapper {
   constructor(cache, port) {
     this.cache = cache;
-    this.mqtt_port = port;
+    this.mqttPort = port;
     this.aedes = aedes();
     this.server = net.createServer(this.aedes.handle);
 
-    this.server.listen(this.mqtt_port, () => {
-      console.log("MQTT Server is running on port ", this.mqtt_port);
+    this.server.listen(this.mqttPort, () => {
+      console.log("MQTT Server is running on port ", this.mqttPort);
     });
 
     // Printing all published messages

@@ -18,11 +18,6 @@ body {
   border-radius: 5px;
 }
 
-/*.button:hover {
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
-    rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-}*/
-
 .button:click {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -43,7 +38,7 @@ input[type="range"] {
   transform: rotate(-90deg);
 }
 
-/* Layout der unteren beiden Reihen */
+/* Layout of the second and third level */
 
 .wrapper {
   min-width: 1400px;
@@ -78,7 +73,7 @@ input[type="range"] {
   border-radius: 10px;
 }
 
-/*Obere Hierarchieebene*/
+/* First Level */
 
 .heating {
   display: flex;
@@ -152,10 +147,12 @@ input[type="range"] {
 .sectionHeadline {
   font-size: 1.7vw;
 }
+
 .title {
   margin-top: 10px;
   font-size: 150%;
 }
+
 .target_temperature {
   margin-top: 10px;
   font-size: 150%;
@@ -169,6 +166,7 @@ input[type="range"] {
   margin-top: 10px;
   font-size: 150%;
 }
+
 .actual_temperature::after {
   content: " °C";
 }
@@ -184,10 +182,12 @@ input[type="range"] {
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
   color: #c9a330;
 }
+
 .toggle:hover {
   background-color: rgb(245, 245, 245);
   cursor: pointer;
 }
+
 .mode {
   margin-bottom: 5px;
 }
@@ -230,19 +230,21 @@ input[type="range"] {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
 }
+
 .down:hover {
   cursor: pointer;
   transform: scale(1.01);
   background-color: #ffcc32;
 }
 
-/*Styling of Current Weather Elements*/
+/* Styling of Current Weather Elements */
 
 .icon {
   font-size: 4vw;
   margin-top: 50px;
   text-align: center;
 }
+
 .temperature {
   margin-top: 20px;
   text-align: center;
@@ -259,7 +261,7 @@ button.active {
     rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
 
-/*Styling of the Blinds Elements*/
+/* Styling of the Blinds Elements */
 
 input[type="range"] {
   -webkit-appearance: none;
@@ -304,7 +306,7 @@ input[type="range"]::-webkit-slider-thumb {
   content: " %";
 }
 
-/*Styling of SystemStatus Elements*/
+/* Styling of SystemStatus Elements */
 
 .sysHeadline {
   margin-top: 20px;
@@ -336,6 +338,7 @@ input[type="range"]::-webkit-slider-thumb {
   box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset,
     rgba(0, 0, 0, 0.541) 0px 18px 36px -18px inset;
 }
+
 .close {
   height: 25px;
   width: 40px;
@@ -353,7 +356,7 @@ input[type="range"]::-webkit-slider-thumb {
   font-size: 13px;
 }
 
-/*Style of the Alerts*/
+/* Style of the Alerts */
 
 .alert-content{
   visibility: hidden;
@@ -364,6 +367,7 @@ input[type="range"]::-webkit-slider-thumb {
   list-style: none;
   padding-left: 0;
 }
+
 .alert-overlay.active{
   visibility:visible;
 }

@@ -58,7 +58,7 @@ function getAlerts(lat, lon){
             start: data.alerts[0].start,
             end: data.alerts[0].end,
             description: data.alerts[0].description
-          }
+          };
         }catch (e) {
           console.log("No alert found.");
           return ;

@@ -3,43 +3,43 @@ var socket = io("ws://localhost:3000");
 // import $ from "jquery";
 
 $(() => {
-  const heating_topic = "heating";
-  const simulation_speed_topic = "speed";
-  const alert_topic = "alert";
-  const blinds_topic = "blinds";
+  const heatingTopic = "heating";
+  const simulationSpeedTopic = "speed";
+  const alertTopic = "alert";
+  const blindsTopic = "blinds";
   var currentEvent = undefined;
   var initialised = false;
   var initialisedBlinds = false;
 
 //Listeners for information from the backend
-  socket.on(heating_topic, (message) => {
+  socket.on(heatingTopic, (message) => {
     for (const room in message) {
       updateHeatingValues(room, message[room]);
     }
     if (!initialised) {
       for (const room in message) {
-        initToggles(room, heating_topic);
-        initTempChangeButtons(room, heating_topic);
+        initToggles(room, heatingTopic);
+        initTempChangeButtons(room, heatingTopic);
       }
-      initSpeedButtons(simulation_speed_topic);
+      initSpeedButtons(simulationSpeedTopic);
       initialised = !initialised;
     }
   });
 
-  socket.on(blinds_topic, (message) => {
+  socket.on(blindsTopic, (message) => {
     for (const room in message) {
       updateBlindsValues(room, message[room]);
 
     }
     if (!initialisedBlinds) {
       for (const room in message) {
-        initToggleBlinds(room, blinds_topic);
-        initBlindsChangeSlider(room, blinds_topic);
+        initToggleBlinds(room, blindsTopic);
+        initBlindsChangeSlider(room, blindsTopic);
       }
       initialisedBlinds = !initialisedBlinds;
     }
   });
-  socket.on(alert_topic, (message) => {
+  socket.on(alertTopic, (message) => {
     if(currentEvent === message.event){
       hasEventChanged = false;
     } else {
@@ -61,9 +61,9 @@ $(() => {
   });
 });
 
-function convertUnixTimestamp(unix_timestamp){
+function convertUnixTimestamp(unixTimestamp){
   var months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "Dezember"];
-  var date = new Date(unix_timestamp * 1000);
+  var date = new Date(unixTimestamp * 1000);
   var hours = date.getHours();
   var minutes = "0" + date.getMinutes();
   var day = date.getDate();
@@ -85,16 +85,16 @@ function initToggles(room, topic) {
 function initTempChangeButtons(room, topic) {
   $(`.heating .${room} button:not(.toggle)`).on("click", (event) => {
     let $button = $(event.target);
-    let target_temperature = +$(`.heating .${room} .target_temperature`).html();
-    target_temperature =
+    let targetTemperature = +$(`.heating .${room} .target_temperature`).html();
+    targetTemperature =
       $button.attr("class") === "button up"
-        ? target_temperature + 1
-        : target_temperature - 1;
+        ? targetTemperature + 1
+        : targetTemperature - 1;
     changeTargetTemperature(
       topic,
       room,
-      "target_temperature",
-      target_temperature
+      "targetTemperature",
+      targetTemperature
     );
   });
 }
@@ -128,7 +128,6 @@ function toggleHeating(topic, room, property, value) {
   if (property === "power") {
     message[room]["mode"] = false;
   }
-  console.log("Emitting %s", JSON.stringify(message));
   socket.emit(topic, message);
 }
 
@@ -142,7 +141,6 @@ function toggleBlinds(topic, room, value) {
   let message = {};
   message[room] = {};
   message[room]["mode"] = !value;
-  console.log("Emitting %s", JSON.stringify(message));
   socket.emit(topic, message);
 }
 
@@ -161,10 +159,10 @@ function updateHeatingValues(room, properties) {
   $(`.heating .${room} .power`).attr("data-value", properties.power);
   $(`.heating .${room} .power`).html(properties.power ? "On" : "Off");
   $(`.heating .${room} .actual_temperature`).html(
-    properties.actual_temperature.toFixed(2)
+    properties.actualTemperature.toFixed(2)
   );
   $(`.heating .${room} .target_temperature`).html(
-    properties.target_temperature
+    properties.targetTemperature
   );
 }
 

@@ -18,7 +18,7 @@ class HTTPServerWrapper {
     this.router.get("/status/:device/", (req, res) => {
       var device = req.params.device;
 
-      if (device == paths.weather) {
+      if (device === paths.weather) {
         if (this.isSet(paths.weather)) {
           res.status(200).send(cache[paths.weather]);
         } else {
