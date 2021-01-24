@@ -72,5 +72,4 @@ class HTTPServerWrapper {
     return res.status(404).json();
   }
 }
-
 module.exports = HTTPServerWrapper;
