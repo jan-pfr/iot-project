@@ -23,12 +23,6 @@ const isAutomatic = true;
 
 // Data
 var heatingElements = {
-  centralHeating: {
-    targetTemperature: idealTemperature,
-    actualTemperature: undefined,
-    power: false,
-    mode: isAutomatic,
-  },
   bathroom: {
     targetTemperature: idealTemperature,
     actualTemperature: undefined,
@@ -85,7 +79,6 @@ mqttClient.on("message", function (topic, message) {
   }
 });
 
-
 // Main functions
 function simulateCycle() {
   // Update heating element on/off state based on mode (auto/manual)
@@ -93,15 +86,15 @@ function simulateCycle() {
     // If heating element has not reached target temperature and its colder outside => turn on
     // Else => turn off
     // But only if heating element is automatic
-      if (heatingElements[room].mode) {
-        shouldBeOn =
-            heatingElements[room].actualTemperature <=
-            heatingElements[room].targetTemperature &&
-            outsideTemperature < heatingElements[room].targetTemperature
-        shouldBeOn
-            ? (heatingElements[room].power = true)
-            : (heatingElements[room].power = false);
-      }
+    if (heatingElements[room].mode) {
+      shouldBeOn =
+        heatingElements[room].actualTemperature <=
+          heatingElements[room].targetTemperature &&
+        outsideTemperature < heatingElements[room].targetTemperature;
+      shouldBeOn
+        ? (heatingElements[room].power = true)
+        : (heatingElements[room].power = false);
+    }
   }
 
   // Update temperature based on heating element on/off state and outside temperature

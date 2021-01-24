@@ -149,8 +149,9 @@ input[type="range"] {
 }
 
 .title {
+  text-align: center;
   margin-top: 10px;
-  font-size: 150%;
+  font-size: 20px;
 }
 
 .target_temperature {
@@ -174,9 +175,9 @@ input[type="range"] {
 .toggle {
   background-color: white;
   border: none;
-  height: 3.25vh;
+  height: 40px;
   color: black;
-  font-size: 0.7vw;
+  font-size: 14px;
   font-weight: 600;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -198,10 +199,10 @@ input[type="range"] {
 }
 
 .up {
-  width: 4vw;
+  width: 100%;
   margin-right: 5px;
   margin-top: 10px;
-  font-size: 1vw;
+  font-size: 15px;
   background-color: #efb509;
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
@@ -221,9 +222,9 @@ input[type="range"] {
 }
 
 .down {
-  width: 4vw;
+  width: 100%;
   margin-top: 10px;
-  font-size: 1vw;
+  font-size: 15px;
   background-color: #efb509;
   border: none;
   outline: none;
@@ -240,7 +241,7 @@ input[type="range"] {
 /* Styling of Current Weather Elements */
 
 .icon {
-  font-size: 4vw;
+  font-size: 70px;
   margin-top: 50px;
   text-align: center;
 }
@@ -248,7 +249,7 @@ input[type="range"] {
 .temperature {
   margin-top: 20px;
   text-align: center;
-  font-size: 2vw;
+  font-size: 30px;
 }
 
 .temperature::after {
@@ -292,18 +293,21 @@ input[type="range"]::-webkit-slider-thumb {
 
 .sldContainer {
   flex-direction: column;
-  margin-left: -50px;
-  margin-bottom: 50px;
-  font-size: 1.3vw;
+  margin-bottom: 45px;
+  font-size: 20px;
   font-weight: 100;
 }
 
-.val{
+.val {
   font-size: 80%;
 }
 
-.val::after{
+.val::after {
   content: " %";
+}
+
+.soll {
+  text-align: center;
 }
 
 /* Styling of SystemStatus Elements */
@@ -330,7 +334,7 @@ input[type="range"]::-webkit-slider-thumb {
   background-color: #efb509;
 }
 
-.speed:hover{
+.speed:hover {
   cursor: pointer;
 }
 
@@ -358,20 +362,20 @@ input[type="range"]::-webkit-slider-thumb {
 
 /* Style of the Alerts */
 
-.alert-content{
+.alert-content {
   visibility: hidden;
   text-align: center;
   font-size: 10px;
-  background-color: #AE3030;
+  background-color: #ae3030;
   border-radius: 5px;
   list-style: none;
   padding-left: 0;
 }
 
-.alert-overlay.active{
-  visibility:visible;
+.alert-overlay.active {
+  visibility: visible;
 }
 
 .alert-content.active {
-  visibility:visible;
+  visibility: visible;
 }
