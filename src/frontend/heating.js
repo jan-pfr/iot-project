@@ -163,13 +163,14 @@ function toggleBlinds(topic, room, value) {
 function sliderChange(room, topic){
   $(`.blinds .${room} .sld`).on('change', function() {
     let target = $(this).val();
-});
-  changeBlinds(
+    changeBlinds(
       topic,
       room,
       "target",
       target
   );
+});
+
 
 }
 function changeBlinds(topic, room, property, value) {
