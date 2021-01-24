@@ -161,8 +161,8 @@ function toggleBlinds(topic, room, value) {
 }
 
 function sliderChange(room, topic){
-  $('#.blinds .${room} .sld').on('slide', function(event, ui) {
-    var target = ui.value;
+  $('#.blinds .${room} .sld').on('change', function() {
+    let target = $(this).val();
 });
   
 
