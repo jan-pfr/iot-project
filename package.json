@@ -5,7 +5,7 @@
   "main": "",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "concurrently -n Central-Server,Weather-Station,Heating-System,Rollerblind-System -c green,blue,yellow,cyan \"node ./src/backend/central-server.js\" \"node ./src/backend/mqtt-clients/weather-station.js\" \"node ./src/backend/mqtt-clients/heating-system.js\" \"node ./src/backend/mqtt-clients/rollerblinds.js\""
+    "start": ""
   },
   "repository": {
     "type": "git",

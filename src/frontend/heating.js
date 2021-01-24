@@ -7,8 +7,10 @@ $(() => {
   const heating_topic = "heating";
   const simulation_speed_topic = "speed";
   const alert_topic = "alert";
+  const blinds_topic = "blinds";
   var currentEvent = undefined;
   var initialised = false;
+  var initialisedBlinds = false;
 
   socket.on(heating_topic, (message) => {
     for (const room in message) {
@@ -22,6 +24,20 @@ $(() => {
       }
       initSpeedButtons(simulation_speed_topic);
       initialised = !initialised;
+    }
+  });
+
+  socket.on(blinds_topic, (message) => {
+    for (const room in message) {
+      updateBlindsValues(room, message[room]);
+
+    }
+    if (!initialisedBlinds) {
+      for (const room in message) {
+        initTogglesBlinds(room, blinds_topic);
+        sliderChange(room, blinds_topic);
+      }
+      initialisedBlinds = !initialisedBlinds;
     }
   });
   socket.on(alert_topic, (message) => {
@@ -125,4 +141,47 @@ function updateHeatingValues(room, properties) {
   $(`.heating .${room} .target_temperature`).html(
     properties.target_temperature
   );
+}
+
+function initTogglesBlinds(room, topic) {
+  $(`.heating .${room} button.toggle`).on("click", (event) => {
+    let $toggle = $(event.target);
+    let value = $toggle.attr("data-value") == "true";
+    toggleBlinds(topic, room, value);
+  });
+}
+
+function toggleBlinds(topic, room, value) {
+  let message = {};
+  message[room] = {};
+  message[room]["mode"] = !value;
+
+  console.log("Emitting %s", JSON.stringify(message));
+  socket.emit(topic, message);
+}
+
+function sliderChange(room, topic){
+  var target = $(`.blinds .${room} .target`).html(properties.sldContainer.value)
+
+  changeBlinds(
+      topic,
+      room,
+      "target",
+      target
+  );
+
+}
+function changeBlinds(topic, room, property, value) {
+  let message = {};
+  message[room] = {};
+  message[room][property] = value;
+  socket.emit(topic, message);
+}
+
+function updateBlindsValues(room, properties) {
+  $(`.blinds .${room} .title`).html(room);
+  $(`.blinds .${room} .mode`).attr("data-value", properties.mode);
+  $(`.blinds .${room} .mode`).html(properties.mode ? "Automatic" : "Manual");
+  $(`.blinds .${room} .target`).html(properties.target)
+
 }
