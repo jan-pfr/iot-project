@@ -19,3 +19,6 @@ The following students have worked on this project:
 - [Trello](https://trello.com/b/pqIZ0MPW/features)
 - [jQuery](https://jquery.com/)
 - [Weather Icons](https://erikflowers.github.io/weather-icons//)
+
+#### UML Diagramm
+![UML Diagramm](https://raw.githubusercontent.com/jan-pfr/iot-project/main/sha-uml.svg)
