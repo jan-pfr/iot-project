@@ -18,10 +18,10 @@ body {
   border-radius: 5px;
 }
 
-.button:hover {
+/*.button:hover {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
     rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;
-}
+}*/
 
 .button:click {
   box-shadow: rgba(0, 0, 0, 0.05) 0px 6px 24px 0px,
@@ -353,7 +353,9 @@ input[type="range"]::-webkit-slider-thumb {
   visibility: hidden;
   font-size: 0.7vw;
   background-color: #AE3030;
-
+  border-radius: 5px;
+  list-style: none;
+  padding-left: 0;
 }
 .alert-overlay.active{
   visibility:visible;
