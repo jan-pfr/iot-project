@@ -332,7 +332,7 @@ input[type="range"]::-webkit-slider-thumb {
   margin-right: 3px;
   font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
   margin-top: 5px;
-  font-size: 0.6vw;
+  font-size: 5px;
   border-radius: 5px;
   background-color: #efb509;
   outline: none;
@@ -340,7 +340,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 
 .lblSimSpeed {
-  font-size: 0.9vw;
+  font-size: 13px;
 }
 
 /*Style of the Alerts*/
@@ -351,7 +351,7 @@ input[type="range"]::-webkit-slider-thumb {
 }
 .alert-content{
   visibility: hidden;
-  font-size: 0.7vw;
+  font-size: 10px;
   background-color: #AE3030;
   border-radius: 5px;
   list-style: none;
