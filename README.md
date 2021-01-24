@@ -40,6 +40,7 @@ You can set the mode of the blinds to manual and change the value of how "open" 
 
 #### Weather station
 
+The weather station displays the current temperature and a description of the weather on initial load (data is fetched via HTTP GET). Additionally, alerts are displayed if they apply for the location (See screenshot).
 The weather icons change depending on the weather status (over hundred different icons available).
 Changing the location for the weather station in src\backend\lib\owm-call.js by changing the constant `hotLocation` in line 10 to true will allow you to experiment with the behavior of the heating system in a hot climate.
 
