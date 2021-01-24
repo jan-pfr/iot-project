@@ -25,6 +25,20 @@ class HTTPServerWrapper {
           this.send404(res);
         }
       }
+      if (device === paths.blinds) {
+        if (this.isSet(paths.blinds)) {
+          res.status(200).send(cache[paths.blinds]);
+        } else {
+          this.send404(res);
+        }
+      }
+      if (device === paths.heating) {
+        if (this.isSet(paths.heating)) {
+          res.status(200).send(cache[paths.heating]);
+        } else {
+          this.send404(res);
+        }
+      }
     });
 
     // Setting CORS headers
