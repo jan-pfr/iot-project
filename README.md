@@ -6,6 +6,8 @@
 This repository contains the final project for the elective course 'Internet of Things' lectured by Prof. Dr. Edgar Seemann at the Furtwangen University (HFU) in Germany.
 The goal of this project is to create a virtual smart home automation system simulating a complete MQTT network. The (partially simulated) MQTT data is being cached by an HTTP server and made available via HTTP as well as via WebSockets to allow for real time updates in the dashboard. The UI is implemented in HTML/CSS with frameworks such as Font Awesome, jQuery and more. Everything runs locally and requires no further changes to run (Check the UML diagram for a detailed view of the application architecture).
 
+The project is expected to continue after the deadline.
+
 ### How to run the application
 
 In order to run the application you need to download Node and install it (along with npm).
